@@ -1,0 +1,4 @@
+﻿  main.cpp
+main.obj : error LNK2019: unresolved external symbol glfwInit referenced in function main
+U:\Project Engineering\Engine\Pixel\Dependencies\GLFW\lib-vc2015\glfw3.lib : warning LNK4272: library machine type 'x86' conflicts with target machine type 'x64'
+U:\Project Engineering\Engine\Pixel\x64\Debug\Pixel-core.exe : fatal error LNK1120: 1 unresolved externals
