@@ -11,6 +11,10 @@ int main() {
 	glClearColor(1.0f, 0.0f, 1.0f, 1.0f);
 
 	while(!window.closed()) {
+		if (window.keyPressed(GLFW_KEY_A)) {
+			std::cout << "PRESSED!" << std::endl;
+		}
+
 		window.clear();
 		glBegin(GL_QUADS);
 		glVertex2f(-0.5f, -0.5f);

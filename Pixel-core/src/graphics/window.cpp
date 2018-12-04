@@ -3,6 +3,11 @@
 
 namespace pixel {
 	namespace graphics {
+
+		bool Window::_keys[NUM_KEYS];
+		bool Window::_buttons[NUM_BUTTONS];
+		double Window::mouseX, Window::mouseY;
+
 		Window::Window(const char *title, int width, int height) {
 			_title = title;
 			_width = width;
@@ -10,6 +15,14 @@ namespace pixel {
 
 			if (!init()) {
 				glfwTerminate();
+			}
+
+			for (int key = 0; key < NUM_KEYS; key++) {
+				_keys[key] = false;
+			}
+
+			for (int button = 0; button < NUM_BUTTONS; button++) {
+				_buttons[button] = false;
 			}
 		}
 
@@ -31,7 +44,9 @@ namespace pixel {
 			}
 
 			glfwMakeContextCurrent(_window);
+			glfwSetWindowUserPointer(_window, this);
 			glfwSetWindowSizeCallback(_window, windowResize);
+			//glfwSetKeyCallback(_window, keyCallback);
 
 			if(glewInit() != GLEW_OK) {
 				std::cout << "Failed to initialise GLEW" << std::endl;
@@ -58,6 +73,11 @@ namespace pixel {
 
 		void windowResize(GLFWwindow *window, int width, int height) {
 			glViewport(0, 0, width, height);
+		}
+
+		void keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods) {
+			Window* win = (Window*) glfwGetWindowUserPointer(window);
+			win->_keys[key] = (action != GLFW_RELEASE);
 		}
 	}
 }

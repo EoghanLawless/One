@@ -6,15 +6,23 @@
 namespace pixel {
 	namespace graphics {
 
+#define NUM_KEYS 104
+#define NUM_BUTTONS 16
+
 		void windowResize(GLFWwindow*, int, int);
 
 		class Window {
 		private:
-			const char *_title;
+			GLFWwindow* _window;
+			const char* _title;
 			int _width, _height;
-			GLFWwindow *_window;
+
+			static bool _keys[NUM_KEYS];
+			static bool _buttons[NUM_BUTTONS];
+			static double mouseX, mouseY;
 
 			bool init();
+			friend static void keyCallback(GLFWwindow*, int, int, int, int);
 
 		public:
 			Window(const char *title, int width, int height);
@@ -26,6 +34,8 @@ namespace pixel {
 
 			inline int getWidth() const { return _width;  }
 			inline int getHeight() const { return _height;  }
+
+			static inline bool keyPressed(unsigned int key) { return (key < 0 || key > NUM_KEYS) ? false : _keys[key]; }
 		};
 	}
 }
