@@ -4,10 +4,6 @@
 namespace pixel {
 	namespace graphics {
 
-		bool Window::_keys[NUM_KEYS];
-		bool Window::_buttons[NUM_BUTTONS];
-		double Window::mouseX, Window::mouseY;
-
 		Window::Window(const char *title, int width, int height) {
 			_title = title;
 			_width = width;
@@ -18,11 +14,11 @@ namespace pixel {
 			}
 
 			for (int key = 0; key < NUM_KEYS; key++) {
-				_keys[key] = false;
+				keys[key] = false;
 			}
 
 			for (int button = 0; button < NUM_BUTTONS; button++) {
-				_buttons[button] = false;
+				mouseButtons[button] = false;
 			}
 		}
 
@@ -45,8 +41,10 @@ namespace pixel {
 
 			glfwMakeContextCurrent(_window);
 			glfwSetWindowUserPointer(_window, this);
-			glfwSetWindowSizeCallback(_window, windowResize);
-			//glfwSetKeyCallback(_window, keyCallback);
+			glfwSetWindowSizeCallback(_window, windowResizeCallback);
+			glfwSetKeyCallback(_window, keyCallback);
+			glfwSetMouseButtonCallback(_window, mouseButtonCallback);
+			glfwSetCursorPosCallback(_window, mousePositionCallback);
 
 			if(glewInit() != GLEW_OK) {
 				std::cout << "Failed to initialise GLEW" << std::endl;
@@ -71,13 +69,29 @@ namespace pixel {
 			return glfwWindowShouldClose(_window);
 		}
 
-		void windowResize(GLFWwindow *window, int width, int height) {
+		void windowResizeCallback(GLFWwindow *window, int width, int height) {
 			glViewport(0, 0, width, height);
 		}
 
 		void keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods) {
 			Window* win = (Window*) glfwGetWindowUserPointer(window);
-			win->_keys[key] = (action != GLFW_RELEASE);
+			win->keys[key] = (action != GLFW_RELEASE);
+		}
+
+		void mouseButtonCallback(GLFWwindow* window, int button, int action, int mods) {
+			Window* win = (Window*) glfwGetWindowUserPointer(window);
+			win->mouseButtons[button] = (action != GLFW_RELEASE);
+		}
+
+		void mousePositionCallback(GLFWwindow* window, double xpos, double ypos) {
+			Window* win = (Window*)glfwGetWindowUserPointer(window);
+			win->mouseX = xpos;
+			win->mouseY = ypos;
+		}
+
+		void Window::getMousePos(double& xpos, double& ypos) {
+			xpos = mouseX;
+			ypos = mouseY;
 		}
 	}
 }

@@ -9,7 +9,11 @@ namespace pixel {
 #define NUM_KEYS 104
 #define NUM_BUTTONS 16
 
-		void windowResize(GLFWwindow*, int, int);
+		static void windowResizeCallback(GLFWwindow*, int, int);
+
+		static void keyCallback(GLFWwindow*, int, int, int, int);
+		static void mouseButtonCallback(GLFWwindow*, int, int, int);
+		static void mousePositionCallback(GLFWwindow*, double, double);
 
 		class Window {
 		private:
@@ -17,16 +21,15 @@ namespace pixel {
 			const char* _title;
 			int _width, _height;
 
-			static bool _keys[NUM_KEYS];
-			static bool _buttons[NUM_BUTTONS];
-			static double mouseX, mouseY;
-
 			bool init();
-			friend static void keyCallback(GLFWwindow*, int, int, int, int);
 
 		public:
 			Window(const char *title, int width, int height);
 			~Window();
+
+			bool keys[NUM_KEYS];
+			bool mouseButtons[NUM_BUTTONS];
+			double mouseX, mouseY;
 
 			void update();
 			void clear() const;
@@ -35,7 +38,9 @@ namespace pixel {
 			inline int getWidth() const { return _width;  }
 			inline int getHeight() const { return _height;  }
 
-			static inline bool keyPressed(unsigned int key) { return (key < 0 || key > NUM_KEYS) ? false : _keys[key]; }
+			inline bool keyPressed(unsigned int key) { return (key < 0 || key > NUM_KEYS) ? false : keys[key]; }
+			inline bool mousePressed(unsigned int button) { return (button < 0 || button > NUM_BUTTONS) ? false : mouseButtons[button]; }
+			void getMousePos(double& xpos, double& ypos);
 		};
 	}
 }

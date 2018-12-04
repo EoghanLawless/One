@@ -11,8 +11,10 @@ int main() {
 	glClearColor(1.0f, 0.0f, 1.0f, 1.0f);
 
 	while(!window.closed()) {
-		if (window.keyPressed(GLFW_KEY_A)) {
-			std::cout << "PRESSED!" << std::endl;
+		double x, y;
+		window.getMousePos(x, y);
+		if (window.mousePressed(GLFW_MOUSE_BUTTON_LEFT)) {
+			std::cout << x << ", " << y << std::endl;
 		}
 
 		window.clear();
