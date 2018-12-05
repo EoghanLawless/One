@@ -3,13 +3,6 @@
 namespace pixel {
 	namespace maths {
 
-		vec4d::vec4d() {
-			x = 0.0f;
-			y = 0.0f;
-			z = 0.0f;
-			w = 0.0f;
-		}
-
 		vec4d::vec4d(const float& x, const float& y, const float& z, const float& w) {
 			this->x = x;
 			this->y = y;

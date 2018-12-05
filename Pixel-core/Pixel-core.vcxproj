@@ -95,7 +95,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <PreprocessorDefinitions>GLEW_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>GLEW_STATIC;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <AdditionalDependencies>glfw3.lib;opengl32.lib;glew32s.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -120,7 +120,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <PreprocessorDefinitions>GLEW_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>GLEW_STATIC;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -145,16 +145,27 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="src\graphics\shader.cpp" />
     <ClCompile Include="src\graphics\window.cpp" />
+    <ClCompile Include="src\maths\mat4.cpp" />
+    <ClCompile Include="src\maths\maths.cpp" />
     <ClCompile Include="src\maths\vec2d.cpp" />
     <ClCompile Include="src\maths\vec3d.cpp" />
     <ClCompile Include="src\maths\vec4d.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\graphics\shader.h" />
     <ClInclude Include="src\graphics\window.h" />
+    <ClInclude Include="src\maths\mat4.h" />
+    <ClInclude Include="src\maths\maths.h" />
     <ClInclude Include="src\maths\vec2d.h" />
     <ClInclude Include="src\maths\vec3d.h" />
     <ClInclude Include="src\maths\vec4d.h" />
+    <ClInclude Include="src\utils\fileutils.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="src\shaders\basic.frag" />
+    <None Include="src\shaders\basic.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -7,7 +7,7 @@ namespace pixel {
 		struct vec4d {
 			float x, y, z, w;
 
-			vec4d();
+			vec4d() = default;
 			vec4d(const float& x, const float& y, const float& z, const float& w);
 
 			vec4d& add(const vec4d& other);
