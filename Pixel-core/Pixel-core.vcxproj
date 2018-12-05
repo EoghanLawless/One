@@ -148,11 +148,13 @@
     <ClCompile Include="src\graphics\window.cpp" />
     <ClCompile Include="src\maths\vec2d.cpp" />
     <ClCompile Include="src\maths\vec3d.cpp" />
+    <ClCompile Include="src\maths\vec4d.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\graphics\window.h" />
     <ClInclude Include="src\maths\vec2d.h" />
     <ClInclude Include="src\maths\vec3d.h" />
+    <ClInclude Include="src\maths\vec4d.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
