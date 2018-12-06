@@ -1,4 +1,4 @@
 ﻿  main.cpp
-  shader.cpp
-  Generating Code...
+c:\dev\pixel-engine\pixel-core\main.cpp(29): warning C4305: 'initializing': truncation from 'double' to 'GLfloat'
+c:\dev\pixel-engine\pixel-core\main.cpp(36): warning C4305: 'initializing': truncation from 'double' to 'GLfloat'
   Pixel-core.vcxproj -> C:\dev\Pixel-Engine\bin\Debug\Pixel-core.exe
