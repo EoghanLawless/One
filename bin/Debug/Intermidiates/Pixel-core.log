@@ -1,10 +1,4 @@
 ﻿  main.cpp
-  batchrenderer2d.cpp
-  renderable2d.cpp
-  simplerenderer2d.cpp
-  Generating Code...
-LINK : warning LNK4098: defaultlib 'MSVCRT' conflicts with use of other libs; use /NODEFAULTLIB:library
-LINK : warning LNK4098: defaultlib 'LIBCMT' conflicts with use of other libs; use /NODEFAULTLIB:library
-batchrenderer2d.obj : error LNK2001: unresolved external symbol "public: virtual void __thiscall pixel::graphics::BatchRenderer2D::submit(class pixel::graphics::Renderable2D const *)" (?submit@BatchRenderer2D@graphics@pixel@@UAEXPBVRenderable2D@23@@Z)
-batchrenderer2d.obj : error LNK2001: unresolved external symbol "public: virtual void __thiscall pixel::graphics::BatchRenderer2D::flush(void)" (?flush@BatchRenderer2D@graphics@pixel@@UAEXXZ)
-C:\dev\Pixel-Engine\bin\Debug\Pixel-core.exe : fatal error LNK1120: 2 unresolved externals
+c:\dev\pixel-engine\pixel-core\main.cpp(22): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+c:\dev\pixel-engine\pixel-core\main.cpp(67): warning C4018: '<': signed/unsigned mismatch
+  Pixel-core.vcxproj -> C:\dev\Pixel-Engine\bin\Debug\Pixel-core.exe

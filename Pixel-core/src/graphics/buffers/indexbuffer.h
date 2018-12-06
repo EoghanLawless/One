@@ -12,6 +12,7 @@ namespace pixel {
 
 		public:
 			IndexBuffer(GLushort* data, GLsizei count);
+			IndexBuffer(GLuint* data, GLsizei count);
 			~IndexBuffer();
 
 			void bind() const;

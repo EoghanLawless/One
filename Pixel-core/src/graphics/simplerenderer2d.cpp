@@ -4,20 +4,20 @@ namespace pixel {
 	namespace graphics {
 
 		void SimpleRenderer2D::submit(const Renderable2D* renderable) {
-			_renderQueue.push_back(renderable);
+			_renderQueue.push_back((StaticSprite*) renderable);
 		}
 		void SimpleRenderer2D::flush() {
 			while (!_renderQueue.empty()) {
-				const Renderable2D* renderable = _renderQueue.front();
+				const StaticSprite* sprite = _renderQueue.front();
 
-				renderable->getVAO()->bind();
-				renderable->getIBO()->bind();
+				sprite->getVertexArray()->bind();
+				sprite->getIndexBuffer()->bind();
 
-				renderable->getShader().setUniformMat4("ml_matrix", maths::mat4::translation(renderable->getPosition()));
-				glDrawElements(GL_TRIANGLES, renderable->getIBO()->getCount(), GL_UNSIGNED_SHORT, 0);
+				sprite->getShader().setUniformMat4("ml_matrix", maths::mat4::translation(sprite->getPosition()));
+				glDrawElements(GL_TRIANGLES, sprite->getIndexBuffer()->getCount(), GL_UNSIGNED_SHORT, 0);
 
-				renderable->getIBO()->unbind();
-				renderable->getVAO()->unbind();
+				sprite->getIndexBuffer()->unbind();
+				sprite->getVertexArray()->unbind();
 
 				_renderQueue.pop_front();
 			}
