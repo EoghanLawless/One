@@ -35,7 +35,7 @@ namespace pixel {
 			}
 			return *this;
 		}
-		mat4& operator*(mat4 left, mat4 right) {
+		mat4& operator*(mat4& left, mat4& right) {
 			return left.mult(right);
 		}
 		mat4& mat4::operator*=(const mat4& other) {
@@ -68,7 +68,7 @@ namespace pixel {
 			return result;
 		}
 
-		mat4 mat4::translation(const vec3d& translation) {
+		mat4 mat4::translation(const vec3f& translation) {
 			mat4 result(1.0f);
 
 			result.elements[0 + (3 * 4)] = translation.x;
@@ -77,7 +77,7 @@ namespace pixel {
 
 			return result;
 		}
-		mat4 mat4::rotation(float angle, const vec3d& axis) {
+		mat4 mat4::rotation(float angle, const vec3f& axis) {
 			mat4 result(1.0f);
 
 			float r = radians(angle);
@@ -103,7 +103,7 @@ namespace pixel {
 
 			return result;
 		}
-		mat4 mat4::scale(const vec3d& scale) {
+		mat4 mat4::scale(const vec3f& scale) {
 			mat4 result(1.0f);
 
 			result.elements[0 + (0 * 4)] = scale.x;

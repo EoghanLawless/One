@@ -145,28 +145,35 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="src\graphics\batchrenderer2d.cpp" />
     <ClCompile Include="src\graphics\buffers\buffer.cpp" />
     <ClCompile Include="src\graphics\buffers\indexbuffer.cpp" />
     <ClCompile Include="src\graphics\buffers\vertexarray.cpp" />
+    <ClCompile Include="src\graphics\renderable2d.cpp" />
+    <ClCompile Include="src\graphics\simplerenderer2d.cpp" />
     <ClCompile Include="src\graphics\shader.cpp" />
     <ClCompile Include="src\graphics\window.cpp" />
     <ClCompile Include="src\maths\mat4.cpp" />
     <ClCompile Include="src\maths\maths.cpp" />
-    <ClCompile Include="src\maths\vec2d.cpp" />
-    <ClCompile Include="src\maths\vec3d.cpp" />
-    <ClCompile Include="src\maths\vec4d.cpp" />
+    <ClCompile Include="src\maths\vec2f.cpp" />
+    <ClCompile Include="src\maths\vec3f.cpp" />
+    <ClCompile Include="src\maths\vec4f.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\graphics\batchrenderer2d.h" />
     <ClInclude Include="src\graphics\buffers\buffer.h" />
     <ClInclude Include="src\graphics\buffers\indexbuffer.h" />
     <ClInclude Include="src\graphics\buffers\vertexarray.h" />
+    <ClInclude Include="src\graphics\renderable2d.h" />
+    <ClInclude Include="src\graphics\renderer2d.h" />
     <ClInclude Include="src\graphics\shader.h" />
+    <ClInclude Include="src\graphics\simplerenderer2d.h" />
     <ClInclude Include="src\graphics\window.h" />
     <ClInclude Include="src\maths\mat4.h" />
     <ClInclude Include="src\maths\maths.h" />
-    <ClInclude Include="src\maths\vec2d.h" />
-    <ClInclude Include="src\maths\vec3d.h" />
-    <ClInclude Include="src\maths\vec4d.h" />
+    <ClInclude Include="src\maths\vec2f.h" />
+    <ClInclude Include="src\maths\vec3f.h" />
+    <ClInclude Include="src\maths\vec4f.h" />
     <ClInclude Include="src\utils\fileutils.h" />
   </ItemGroup>
   <ItemGroup>

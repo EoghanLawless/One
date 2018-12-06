@@ -7,7 +7,7 @@ namespace pixel {
 		struct mat4 {
 			union {
 				float elements[4 * 4];
-				vec4d columns[4 * 4];
+				vec4f columns[4];
 			};
 
 			mat4();
@@ -22,9 +22,9 @@ namespace pixel {
 			static mat4 orthographic(float left, float right, float bottom, float top, float near, float far);
 			static mat4 perspective(float fov, float aratio, float near, float far);
 
-			static mat4 translation(const vec3d& translation);
-			static mat4 rotation(float angle, const vec3d& axis);
-			static mat4 scale(const vec3d& scale);
+			static mat4 translation(const vec3f& translation);
+			static mat4 rotation(float angle, const vec3f& axis);
+			static mat4 scale(const vec3f& scale);
 		};
 	}
 }

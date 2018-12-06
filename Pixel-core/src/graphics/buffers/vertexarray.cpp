@@ -10,6 +10,8 @@ namespace pixel {
 			for (int index = 0; index < _buffers.size(); index++) {
 				delete _buffers[index];
 			}
+
+			glDeleteVertexArrays(1, &_arrayId);
 		}
 
 		void VertexArray::addBuffer(Buffer* buffer, GLuint index) {

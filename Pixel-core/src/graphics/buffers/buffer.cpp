@@ -8,6 +8,9 @@ namespace pixel {
 			glBindBuffer(GL_ARRAY_BUFFER, _bufferId);
 			glBufferData(GL_ARRAY_BUFFER, count * sizeof(GLfloat), data, GL_STATIC_DRAW);
 		}
+		Buffer::~Buffer() {
+			glDeleteBuffers(1, &_bufferId);
+		}
 
 		void Buffer::bind() const {
 			glBindBuffer(GL_ARRAY_BUFFER, _bufferId);

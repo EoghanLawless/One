@@ -19,15 +19,16 @@ namespace pixel {
 
 			GLuint load();
 			GLint getUniformLocation(const GLchar* name);
+
 		public:
 			Shader(const char* vertexPath, const char* fragmentShader);
 			~Shader();
 
 			void setUniform1f(const GLchar* name, float value);
 			void setUniform1i(const GLchar* name, int value);
-			void setUniform2f(const GLchar* name, const maths::vec2d& vector);
-			void setUniform3f(const GLchar* name, const maths::vec3d& vector);
-			void setUniform4f(const GLchar* name, const maths::vec4d& vector);
+			void setUniform2f(const GLchar* name, const maths::vec2f& vector);
+			void setUniform3f(const GLchar* name, const maths::vec3f& vector);
+			void setUniform4f(const GLchar* name, const maths::vec4f& vector);
 			void setUniformMat4(const GLchar* name, const maths::mat4& matrix);
 
 			void enable() const;

@@ -2,9 +2,9 @@
 
 #define _USE_MATH_DEFINES
 #include <math.h>
-#include "vec2d.h"
-#include "vec3d.h"
-#include "vec4d.h"
+#include "vec2f.h"
+#include "vec3f.h"
+#include "vec4f.h"
 #include "mat4.h"
 
 float radians(float degrees);

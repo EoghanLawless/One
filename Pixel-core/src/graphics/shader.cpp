@@ -79,13 +79,13 @@ namespace pixel {
 		void Shader::setUniform1i(const GLchar* name, int value) {
 			glUniform1i(getUniformLocation(name), value);
 		}
-		void Shader::setUniform2f(const GLchar* name, const maths::vec2d& vector) {
+		void Shader::setUniform2f(const GLchar* name, const maths::vec2f& vector) {
 			glUniform2f(getUniformLocation(name), vector.x, vector.y);
 		}
-		void Shader::setUniform3f(const GLchar* name, const maths::vec3d& vector) {
+		void Shader::setUniform3f(const GLchar* name, const maths::vec3f& vector) {
 			glUniform3f(getUniformLocation(name), vector.x, vector.y, vector.z);
 		}
-		void Shader::setUniform4f(const GLchar* name, const maths::vec4d& vector) {
+		void Shader::setUniform4f(const GLchar* name, const maths::vec4f& vector) {
 			glUniform4f(getUniformLocation(name), vector.x, vector.y, vector.z, vector.w);
 		}
 		void Shader::setUniformMat4(const GLchar* name, const maths::mat4& matrix) {

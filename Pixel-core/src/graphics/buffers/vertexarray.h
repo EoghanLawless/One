@@ -17,7 +17,7 @@ namespace pixel {
 			VertexArray();
 			~VertexArray();
 
-			void addBuffer(Buffer* buffer, GLuint indes);
+			void addBuffer(Buffer* buffer, GLuint index);
 
 			void bind() const;
 			void unbind() const;
