@@ -1,4 +1,23 @@
 ﻿  main.cpp
-c:\dev\pixel-engine\pixel-core\main.cpp(22): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-c:\dev\pixel-engine\pixel-core\main.cpp(67): warning C4018: '<': signed/unsigned mismatch
+c:\program files (x86)\windows kits\10\include\10.0.17134.0\shared\minwindef.h(130): warning C4005: 'APIENTRY': macro redefinition
+  c:\dev\pixel-engine\dependencies\glfw\include\glfw\glfw3.h(98): note: see previous definition of 'APIENTRY'
+c:\dev\pixel-engine\pixel-core\main.cpp(20): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+c:\dev\pixel-engine\pixel-core\main.cpp(68): warning C4018: '<': signed/unsigned mismatch
+  batchrenderer2d.cpp
+  buffer.cpp
+  indexbuffer.cpp
+  vertexarray.cpp
+c:\dev\pixel-engine\pixel-core\src\graphics\buffers\vertexarray.cpp(10): warning C4018: '<': signed/unsigned mismatch
+  simplerenderer2d.cpp
+  shader.cpp
+  sprite.cpp
+  staticsprite.cpp
+  window.cpp
+  mat4.cpp
+  maths.cpp
+c:\dev\pixel-engine\pixel-core\src\maths\maths.cpp(4): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
+  vec2f.cpp
+  vec3f.cpp
+  vec4f.cpp
+  Generating Code...
   Pixel-core.vcxproj -> C:\dev\Pixel-Engine\bin\Debug\Pixel-core.exe

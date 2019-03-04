@@ -35,8 +35,8 @@ namespace pixel {
 			void clear() const;
 			bool closed() const;
 
-			inline int getWidth() const { return _width;  }
-			inline int getHeight() const { return _height;  }
+			inline int getWidth() const { return _width; }
+			inline int getHeight() const { return _height; }
 
 			inline bool keyPressed(unsigned int key) { return (key < 0 || key > NUM_KEYS) ? false : keys[key]; }
 			inline bool mousePressed(unsigned int button) { return (button < 0 || button > NUM_BUTTONS) ? false : mouseButtons[button]; }

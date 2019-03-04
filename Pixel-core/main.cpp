@@ -1,25 +1,22 @@
 #include "src/graphics/window.h"
 #include "src/graphics/shader.h"
-#include "src/graphics/buffers/buffer.h"
-#include "src/graphics/buffers/indexbuffer.h"
-#include "src/graphics/buffers/vertexarray.h"
-#include "src/graphics/batchrenderer2d.h"
 #include "src/graphics/simplerenderer2d.h"
-#include "src/graphics/sprite.h"
+#include "src/graphics/batchrenderer2d.h"
 #include "src/graphics/staticsprite.h"
-#include "src/maths/mat4.h"
+#include "src/graphics/sprite.h"
+#include "src/maths/maths.h"
+#include "src/utils/timer.h"
+
+#include "src/graphics/layers/flatlayer.h"
 
 #include <time.h>
 
 #define USE_BATCH_RENDERER 1
 
 int main() {
-
 	using namespace pixel;
 	using namespace graphics;
 	using namespace maths;
-
-	srand(time(NULL));
 
 	Window window("Pixel", 1600, 900);
 	glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
@@ -27,56 +24,37 @@ int main() {
 	Shader shader("src/shaders/basic.vert", "src/shaders/basic.frag");
 	shader.enable();
 
-	mat4 ortho = mat4::orthographic(0.0f, 16.0f, 0.0f, 9.0f, -1.0f, 1.0f);
-	shader.setUniformMat4("pr_matrix", ortho);
+	FlatLayer layer(&shader);
 
-	std::vector<Renderable2D*> sprites;
-
-#if USE_BATCH_RENDERER
-	BatchRenderer2D renderer;
-#else
-	SimpleRenderer2D renderer;
-#endif
-
-	float d = 0.095f;
-	float s = d - 0.01f;
-
-	for (float y = 0; y < 9.0f; y += d) {
-		for (float x = 0; x < 16.0f; x += d) {
-			float random = 0.2f + rand() % 1000 / 1000.0f;
-#if USE_BATCH_RENDERER
-			sprites.push_back(new Sprite(x, y, s, s, maths::vec4f(random, 0.2f, random, 1.0f)));
-#else
-			sprites.push_back(new StaticSprite(x, y, s, s, maths::vec4f(rand() % 1000 / 1000.0f, 0.0f, 0.8f, 1.0f), shader));
-#endif
+	for (float y = -8.0f; y < 8.0f; y += 0.5) {
+		for (float x = -15.0f; x < 15.0f; x += 0.5) {
+			layer.add(new Sprite(x, y, 0.45f, 0.45f, maths::vec4f(1.0f, 0.0f, 0.0f, 1.0f)));
 		}
 	}
 
-	std::cout << sprites.size() << std::endl;
+	std::cout << "Sprite count: " << layer.count() << std::endl;
 
 	double mx, my;
+
+	Timer time;
+	float timer = 0;
+	int frames = 0;
 
 	while(!window.closed()) {
 		window.clear();
 		window.getMousePos(mx, my);
-		shader.setUniform2f("light_pos", vec2f((float)(mx * 16.0f / 1600.0f), (float)(9.0f - my * 9.0f / 900.0f)));
+		shader.setUniform2f("light_pos", vec2f((float)((mx - 800.0f) * 16.0f / 800.0f), (float)(9.0f - my * 9.0f / 450.0f)));
 
-
-#if USE_BATCH_RENDERER
-		renderer.begin();
-		for (int index = 0; index < sprites.size(); index++) {
-			renderer.submit(sprites[index]);
-		}
-		renderer.end();
-		renderer.flush();
-#else
-		for (int index = 0; index < sprites.size(); index++) {
-			renderer.submit(sprites[index]);
-		}
-		renderer.flush();
-#endif
+		layer.render();
 
 		window.update();
+
+		frames++;
+		if (time.elapsed() - timer > 1.0f) {
+			printf("%d fps\n", frames);
+			timer = time.elapsed();
+			frames = 0;
+		}
 	}
 
 	return 0;

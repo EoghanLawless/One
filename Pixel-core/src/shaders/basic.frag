@@ -10,6 +10,6 @@ in DATA {
 } fs_in;
 
 void main() {
-	float intensity = 1.0 / length(fs_in.position.xy - light_pos);
-	colour = vec4(0.1, 0.1, 0.1, 1.0) + (fs_in.colour * intensity) * 0.5;
+	float intensity = 4.0 / length(fs_in.position.xy - light_pos);
+	colour = vec4(0.1, 0.1, 0.1, 1.0) + (fs_in.colour * intensity) * 0.1;
 }

@@ -45,6 +45,7 @@ namespace pixel {
 			glfwSetKeyCallback(_window, keyCallback);
 			glfwSetMouseButtonCallback(_window, mouseButtonCallback);
 			glfwSetCursorPosCallback(_window, mousePositionCallback);
+			glfwSwapInterval(0);
 
 			if(glewInit() != GLEW_OK) {
 				std::cout << "Failed to initialise GLEW" << std::endl;
