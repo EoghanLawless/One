@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../maths/maths.h"
+#include "renderer2d.h"
 #include "shader.h"
 #include "buffers/buffer.h"
 #include "buffers/indexbuffer.h"
@@ -20,9 +21,15 @@ namespace pixel {
 			maths::vec2f _size;
 			maths::vec4f _colour;
 
+			Renderable2D() {}
+
 		public:
 			Renderable2D(maths::vec3f position, maths::vec2f size, maths::vec4f colour) : _position(position), _size(size), _colour(colour) { }
 			virtual ~Renderable2D() { }
+
+			virtual void submit(Renderer2D* renderer) const {
+				renderer->submit(this);
+			}
 
 			inline const maths::vec3f& getPosition() const { return _position; }
 			inline const maths::vec2f& getSize() const { return _size; }

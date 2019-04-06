@@ -49,9 +49,9 @@ namespace pixel {
 
 		vec3f mat4::mult(const vec3f& other) const {
 			return vec3f(
-				columns[0].x * other.x + columns[1].x * other.y + columns[2].x * other.z + columns[3].x * 1,
-				columns[0].y * other.x + columns[1].y * other.y + columns[2].y * other.z + columns[3].y * 1,
-				columns[0].z * other.x + columns[1].z * other.y + columns[2].z * other.z + columns[3].z * 1
+				columns[0].x * other.x + columns[1].x * other.y + columns[2].x * other.z + columns[3].x,
+				columns[0].y * other.x + columns[1].y * other.y + columns[2].y * other.z + columns[3].y,
+				columns[0].z * other.x + columns[1].z * other.y + columns[2].z * other.z + columns[3].z
 			);
 		}
 		vec3f operator*(const mat4& left, const vec3f& right) {

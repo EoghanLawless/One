@@ -28,7 +28,7 @@ namespace pixel {
 			_renderer->begin();
 
 			for (const Renderable2D* renderable : _renderables)
-				_renderer->submit(renderable);
+				renderable->submit(_renderer);
 
 			_renderer->end();
 			_renderer->flush();

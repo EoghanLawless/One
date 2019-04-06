@@ -6,6 +6,7 @@
 #include "src/utils/timer.h"
 
 #include "src/graphics/layers/flatlayer.h"
+#include "src/graphics/layers/group.h"
 
 #include <time.h>
 
@@ -31,7 +32,10 @@ int main() {
 	Shader* shader2 = new Shader("src/shaders/basic.vert", "src/shaders/basic.frag");
 
 	FlatLayer layer2(shader2);
-	layer2.add(new Sprite(-2, -2, 4, 4, maths::vec4f(1, 0, 1, 1)));
+	Group* group = new Group(maths::mat4::translation(maths::vec3f(-5, -5, 0)));
+	group->add(new Sprite(0, 0, 5, 5, maths::vec4f(1, 0, 1, 1)));
+	group->add(new Sprite(0.5, 0.5, 4, 4, maths::vec4f(0, 1, 1, 1)));
+	layer2.add(group);
 
 
 	double mx, my;

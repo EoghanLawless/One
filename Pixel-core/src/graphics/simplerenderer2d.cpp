@@ -1,4 +1,5 @@
 #include "simplerenderer2d.h"
+#include "renderable2d.h"
 
 namespace pixel {
 	namespace graphics {
