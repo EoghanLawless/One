@@ -23,11 +23,11 @@ namespace pixel {
 			glEnableVertexAttribArray(SHADER_COLOUR_INDEX);
 
 			glVertexAttribPointer(SHADER_VERTEX_INDEX, 3, GL_FLOAT, GL_FALSE, RENDERER_VERTEX_SIZE, (const GLvoid*) 0);
-			glVertexAttribPointer(SHADER_COLOUR_INDEX, 4, GL_FLOAT, GL_FALSE, RENDERER_VERTEX_SIZE, (const GLvoid*) (3 * sizeof(GLfloat)));
+			glVertexAttribPointer(SHADER_COLOUR_INDEX, 4, GL_UNSIGNED_BYTE, GL_TRUE, RENDERER_VERTEX_SIZE, (const GLvoid*) (offsetof(VertexData, VertexData::colour)));
 
 			glBindBuffer(GL_ARRAY_BUFFER, 0);
 
-			GLushort indices[RENDERER_INDICES_SIZE];
+			GLuint* indices = new GLuint[RENDERER_INDICES_SIZE];
 
 			int offset = 0;
 			for (int index = 0; index < RENDERER_INDICES_SIZE; index += 6) {
@@ -57,22 +57,27 @@ namespace pixel {
 			const maths::vec2f& size = renderable->getSize();
 			const maths::vec4f& colour = renderable->getColour();
 
-			//std::cout << position << ", " << size << ", " << colour << std::endl;
+			int r = colour.x * 255.0f;
+			int g = colour.y * 255.0f;
+			int b = colour.z * 255.0f;
+			int a = colour.w * 255.0f;
 
-			_dataBuffer->vertex = position;
-			_dataBuffer->colour = colour;
+			unsigned int c = a << 24 | b << 16 | g << 8 | r;
+
+			_dataBuffer->vertex = *_currentTransformation * position;
+			_dataBuffer->colour = c;
 			_dataBuffer++;
 
-			_dataBuffer->vertex = maths::vec3f(position.x, position.y + size.y, position.z);
-			_dataBuffer->colour = colour;
+			_dataBuffer->vertex = *_currentTransformation * maths::vec3f(position.x, position.y + size.y, position.z);
+			_dataBuffer->colour = c;
 			_dataBuffer++;
 
-			_dataBuffer->vertex = maths::vec3f(position.x + size.x, position.y + size.y, position.z);
-			_dataBuffer->colour = colour;
+			_dataBuffer->vertex = *_currentTransformation * maths::vec3f(position.x + size.x, position.y + size.y, position.z);
+			_dataBuffer->colour = c;
 			_dataBuffer++;
 
-			_dataBuffer->vertex = maths::vec3f(position.x + size.x, position.y, position.z);
-			_dataBuffer->colour = colour;
+			_dataBuffer->vertex = *_currentTransformation * maths::vec3f(position.x + size.x, position.y, position.z);
+			_dataBuffer->colour = c;
 			_dataBuffer++;
 
 			_indexCount += 6;
@@ -87,7 +92,7 @@ namespace pixel {
 			glBindVertexArray(_vertexArray);
 			_indexBuffer->bind();
 
-			glDrawElements(GL_TRIANGLES, _indexCount, GL_UNSIGNED_SHORT, NULL);
+			glDrawElements(GL_TRIANGLES, _indexCount, GL_UNSIGNED_INT, NULL);
 
 			_indexBuffer->unbind();
 			glBindVertexArray(0);

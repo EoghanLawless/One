@@ -1,8 +1,6 @@
 #include "src/graphics/window.h"
 #include "src/graphics/shader.h"
-#include "src/graphics/simplerenderer2d.h"
 #include "src/graphics/batchrenderer2d.h"
-#include "src/graphics/staticsprite.h"
 #include "src/graphics/sprite.h"
 #include "src/maths/maths.h"
 #include "src/utils/timer.h"
@@ -11,48 +9,61 @@
 
 #include <time.h>
 
-#define USE_BATCH_RENDERER 1
-
 int main() {
 	using namespace pixel;
 	using namespace graphics;
 	using namespace maths;
 
 	Window window("Pixel", 1600, 900);
-	glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
+	// glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
 
-	Shader shader("src/shaders/basic.vert", "src/shaders/basic.frag");
-	shader.enable();
+	// mat4 ortho = mat4::orthographic(0.0f, 16.0f, 0.0f, 9.0f, -1.0f, 1.0f);
 
-	FlatLayer layer(&shader);
+	Shader* shader1 = new Shader("src/shaders/basic.vert", "src/shaders/basic.frag");
 
-	for (float y = -8.0f; y < 8.0f; y += 0.5) {
-		for (float x = -15.0f; x < 15.0f; x += 0.5) {
-			layer.add(new Sprite(x, y, 0.45f, 0.45f, maths::vec4f(1.0f, 0.0f, 0.0f, 1.0f)));
+	FlatLayer layer1(shader1);
+	for (float y = -9.0f; y < 9.0f; y += 0.5) {
+		for (float x = -16.0f; x < 16.0f; x += 0.5) {
+			layer1.add(new Sprite(x, y, 0.45f, 0.45f, maths::vec4f(rand() % 1000 / 1000.0f, 0, 1, 1)));
 		}
 	}
 
-	std::cout << "Sprite count: " << layer.count() << std::endl;
+	Shader* shader2 = new Shader("src/shaders/basic.vert", "src/shaders/basic.frag");
+
+	FlatLayer layer2(shader2);
+	layer2.add(new Sprite(-2, -2, 4, 4, maths::vec4f(1, 0, 1, 1)));
+
 
 	double mx, my;
 
 	Timer time;
 	float timer = 0;
-	int frames = 0;
+	unsigned int frames = 0;
 
-	while(!window.closed()) {
+	while (!window.closed()) {
 		window.clear();
 		window.getMousePos(mx, my);
-		shader.setUniform2f("light_pos", vec2f((float)((mx - 800.0f) * 16.0f / 800.0f), (float)(9.0f - my * 9.0f / 450.0f)));
 
-		layer.render();
+		//mat4 mat = mat4::translation(vec3f((float)((mx - 800.0f) * 16.0f / 800.0f), (float)(9.0f - my * 9.0f / 450.0f), 0));
+		//mat *= mat4::rotation(time.elapsed() * 100.0f, vec3f(0, 0, 1));
+		//mat *= mat4::translation(vec3f(-(float)((mx - 800.0f) * 16.0f / 800.0f), -(float)(9.0f - my * 9.0f / 450.0f), 0));
+
+		shader1->enable();
+		//shader1->setUniformMat4("ml_matrix", mat);
+		shader1->setUniform2f("light_pos", vec2f((float)((mx - 800.0f) * 16.0f / 800.0f), (float)(9.0f - my * 9.0f / 450.0f)));
+		layer1.render();
+
+		shader2->enable();
+		shader2->setUniform2f("light_pos", vec2f(0, -2));
+		layer2.render();
 
 		window.update();
 
 		frames++;
-		if (time.elapsed() - timer > 1.0f) {
+		if (time.elapsed() - timer > 1.0f)
+		{
+			timer += 1.0f;
 			printf("%d fps\n", frames);
-			timer = time.elapsed();
 			frames = 0;
 		}
 	}

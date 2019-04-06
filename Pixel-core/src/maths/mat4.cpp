@@ -24,22 +24,50 @@ namespace pixel {
 		}
 
 		mat4& mat4::mult(const mat4& other) {
+			float data[16];
+
 			for (int y = 0; y < 4; y++) {
 				for (int x = 0; x < 4; x++) {
 					float sum = 0.0f;	
 					for (int e = 0; e < 4; e++) {
 						sum += elements[x + (e * 4)] * other.elements[e + (y * 4)];
 					}
-					elements[x + (y * 4)] = sum;
+					data[x + (y * 4)] = sum;
 				}
 			}
+
+			memcpy(elements, data, 16 * 4);
+
 			return *this;
 		}
-		mat4& operator*(mat4& left, mat4& right) {
+		mat4 operator*(mat4 left, const mat4& right) {
 			return left.mult(right);
 		}
 		mat4& mat4::operator*=(const mat4& other) {
 			return mult(other);
+		}
+
+		vec3f mat4::mult(const vec3f& other) const {
+			return vec3f(
+				columns[0].x * other.x + columns[1].x * other.y + columns[2].x * other.z + columns[3].x * 1,
+				columns[0].y * other.x + columns[1].y * other.y + columns[2].y * other.z + columns[3].y * 1,
+				columns[0].z * other.x + columns[1].z * other.y + columns[2].z * other.z + columns[3].z * 1
+			);
+		}
+		vec3f operator*(const mat4& left, const vec3f& right) {
+			return left.mult(right);
+		}
+
+		vec4f mat4::mult(const vec4f& other) const {
+			return vec4f(
+				columns[0].x * other.x + columns[1].x * other.y + columns[2].x * other.z + columns[3].x * other.w,
+				columns[0].y * other.x + columns[1].y * other.y + columns[2].y * other.z + columns[3].y * other.w,
+				columns[0].z * other.x + columns[1].z * other.y + columns[2].z * other.z + columns[3].z * other.w,
+				columns[0].w * other.x + columns[1].w * other.y + columns[2].w * other.z + columns[3].w * other.w
+			);
+		}
+		vec4f operator*(const mat4& left, const vec4f& right) {
+			return left.mult(right);
 		}
 
 		mat4 mat4::orthographic(float left, float right, float bottom, float top, float near, float far) {
@@ -111,6 +139,26 @@ namespace pixel {
 			result.elements[2 + (2 * 4)] = scale.z;
 
 			return result;
+		}
+
+		std::ostream& operator<<(std::ostream& stream, const mat4& matrix) {
+			for (int col = 0; col < 4; col++) {
+				stream << matrix.columns[col].x << " ";
+			}
+			stream << std::endl;
+			for (int col = 0; col < 4; col++) {
+				stream << matrix.columns[col].y << " ";
+			}
+			stream << std::endl;
+			for (int col = 0; col < 4; col++) {
+				stream << matrix.columns[col].z << " ";
+			}
+			stream << std::endl;
+			for (int col = 0; col < 4; col++) {
+				stream << matrix.columns[col].w << " ";
+			}
+			stream << std::endl;
+			return stream;
 		}
 	}
 }

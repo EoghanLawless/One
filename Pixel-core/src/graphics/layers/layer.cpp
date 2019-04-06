@@ -11,7 +11,7 @@ namespace pixel {
 
 		Layer::~Layer() {
 			delete _renderer;
-			//delete _shader;
+			delete _shader;
 
 			for (int i = 0; i < _renderables.size(); i++) {
 				delete _renderables[i];
@@ -27,9 +27,8 @@ namespace pixel {
 
 			_renderer->begin();
 
-			for (Renderable2D* renderable : _renderables) {
+			for (const Renderable2D* renderable : _renderables)
 				_renderer->submit(renderable);
-			}
 
 			_renderer->end();
 			_renderer->flush();

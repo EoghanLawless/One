@@ -11,7 +11,7 @@ namespace pixel {
 
 		struct VertexData {
 			maths::vec3f vertex;
-			maths::vec4f colour;
+			unsigned int colour;
 		};
 
 		class Renderable2D {
