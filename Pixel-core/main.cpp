@@ -12,6 +12,10 @@
 
 #include <time.h>
 
+//#include <ft2build.h>
+//#include "freetype-gl.h"
+
+
 int main() {
 	using namespace pixel;
 	using namespace graphics;
@@ -81,8 +85,6 @@ int main() {
 			frames = 0;
 		}
 	}
-
-	delete[] textures;
 
 	return 0;
 }

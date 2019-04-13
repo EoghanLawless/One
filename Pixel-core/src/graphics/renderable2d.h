@@ -39,7 +39,7 @@ namespace pixel {
 			}
 
 		public:
-			Renderable2D(maths::vec3f position, maths::vec2f size, maths::vec4f colour) : _position(position), _size(size), _colour(colour) {
+			Renderable2D(maths::vec3f position, maths::vec2f size, maths::vec4f colour) : _position(position), _size(size), _colour(colour), _texture(nullptr) {
 				setDefaultTextureCoord();
 			}
 			virtual ~Renderable2D() { }
