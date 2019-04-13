@@ -2,6 +2,7 @@
 
 #include "../maths/maths.h"
 #include "renderer2d.h"
+#include "texture.h"
 #include "shader.h"
 #include "buffers/buffer.h"
 #include "buffers/indexbuffer.h"
@@ -13,6 +14,7 @@ namespace pixel {
 		struct VertexData {
 			maths::vec3f vertex;
 			maths::vec2f textureCoord;
+			float textureId;
 			unsigned int colour;
 		};
 
@@ -30,6 +32,7 @@ namespace pixel {
 			maths::vec2f _size;
 			maths::vec4f _colour;
 			std::vector<maths::vec2f> _textureCoord;
+			Texture* _texture;
 
 			Renderable2D() {
 				setDefaultTextureCoord();
@@ -49,6 +52,7 @@ namespace pixel {
 			inline const maths::vec2f& getSize() const { return _size; }
 			inline const maths::vec4f& getColour() const { return _colour; }
 			inline const std::vector<maths::vec2f>& getTextureCoord() const { return _textureCoord; }
+			inline const GLuint& getTextureId() const { return _texture == nullptr ? 0 : _texture->getId(); }
 		};
 	}
 }

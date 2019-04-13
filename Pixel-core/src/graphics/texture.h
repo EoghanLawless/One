@@ -24,6 +24,7 @@ namespace pixel {
 			void bind() const;
 			void unbind() const;
 
+			inline const unsigned int getId() const { return _textureId; }
 			inline const unsigned int getWidth() const { return _width; }
 			inline const unsigned int getHeight() const { return _height; }
 		};

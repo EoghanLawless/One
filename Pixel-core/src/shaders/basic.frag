@@ -7,13 +7,21 @@ uniform vec2 light_pos;
 in DATA {
 	vec4 position;
 	vec2 textureCoord;
+	float textureId;
 	vec4 colour;
 } fs_in;
 
-uniform sampler2D tex;
+uniform sampler2D textures[32];
 
 void main() {
 	float intensity = 4.0 / length(fs_in.position.xy - light_pos);
-	colour = vec4(0.1, 0.1, 0.1, 1.0) + (fs_in.colour * intensity) * 0.1;
-	colour = texture2D(tex, fs_in.textureCoord) * intensity;
+
+	vec4 textureColour = fs_in.colour;
+
+	if(fs_in.textureId > 0.0) {
+		int textureIndex = int(fs_in.textureId - 0.5);
+		textureColour = texture(textures[textureIndex], fs_in.textureCoord);
+	}
+
+	colour = textureColour * intensity;
 }

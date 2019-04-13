@@ -17,7 +17,8 @@ namespace pixel {
 
 #define SHADER_VERTEX_INDEX		0
 #define SHADER_TEXTURE_COORD_INDEX		1
-#define SHADER_COLOUR_INDEX		2
+#define SHADER_TEXTURE_ID_INDEX		2
+#define SHADER_COLOUR_INDEX		3
 
 		class BatchRenderer2D : public Renderer2D {
 		private:
@@ -25,6 +26,8 @@ namespace pixel {
 			GLuint _buffer;
 			IndexBuffer* _indexBuffer;
 			GLsizei _indexCount;
+
+			std::vector<GLuint> _textures;
 
 			VertexData* _dataBuffer;
 

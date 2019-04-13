@@ -21,11 +21,13 @@ namespace pixel {
 
 			glEnableVertexAttribArray(SHADER_VERTEX_INDEX);
 			glEnableVertexAttribArray(SHADER_TEXTURE_COORD_INDEX);
+			glEnableVertexAttribArray(SHADER_TEXTURE_ID_INDEX);
 			glEnableVertexAttribArray(SHADER_COLOUR_INDEX);
 
-			glVertexAttribPointer(SHADER_VERTEX_INDEX, 3, GL_FLOAT, GL_FALSE, RENDERER_VERTEX_SIZE, (const GLvoid*) 0);
-			glVertexAttribPointer(SHADER_TEXTURE_COORD_INDEX, 2, GL_FLOAT, GL_FALSE, RENDERER_VERTEX_SIZE, (const GLvoid*) (offsetof(VertexData, VertexData::textureCoord)));
-			glVertexAttribPointer(SHADER_COLOUR_INDEX, 4, GL_UNSIGNED_BYTE, GL_TRUE, RENDERER_VERTEX_SIZE, (const GLvoid*) (offsetof(VertexData, VertexData::colour)));
+			glVertexAttribPointer(SHADER_VERTEX_INDEX,			3, GL_FLOAT,			GL_FALSE,	RENDERER_VERTEX_SIZE, (const GLvoid*) 0);
+			glVertexAttribPointer(SHADER_TEXTURE_COORD_INDEX,	2, GL_FLOAT,			GL_FALSE,	RENDERER_VERTEX_SIZE, (const GLvoid*) (offsetof(VertexData, VertexData::textureCoord)));
+			glVertexAttribPointer(SHADER_TEXTURE_ID_INDEX,		1, GL_FLOAT,			GL_FALSE,	RENDERER_VERTEX_SIZE, (const GLvoid*) (offsetof(VertexData, VertexData::textureId)));
+			glVertexAttribPointer(SHADER_COLOUR_INDEX,			4, GL_UNSIGNED_BYTE,	GL_TRUE,	RENDERER_VERTEX_SIZE, (const GLvoid*) (offsetof(VertexData, VertexData::colour)));
 
 			glBindBuffer(GL_ARRAY_BUFFER, 0);
 
@@ -59,31 +61,64 @@ namespace pixel {
 			const maths::vec2f& size = renderable->getSize();
 			const maths::vec4f& colour = renderable->getColour();
 			const std::vector<maths::vec2f>& textureCoord = renderable->getTextureCoord();
+			const GLuint textureId = renderable->getTextureId();
 
-			int r = colour.x * 255.0f;
-			int g = colour.y * 255.0f;
-			int b = colour.z * 255.0f;
-			int a = colour.w * 255.0f;
+			unsigned int c = 0;
+			float samplerIndex = 0.0f;
 
-			unsigned int c = a << 24 | b << 16 | g << 8 | r;
+			if (textureId > 0) {
+
+				bool exists = false;
+
+				for (int index = 0; index < _textures.size(); index++) {
+					if (_textures[index] == textureId) {
+						samplerIndex = (float)(index + 1);
+						exists = true;
+						break;
+					}
+				}
+
+				if (!exists) {
+					if (_textures.size() >= 32) {
+						end();
+						flush();
+						begin();
+					}
+
+					_textures.push_back(textureId);
+					samplerIndex = (float)(_textures.size() - 1);
+				}
+				
+			} else {
+				int r = colour.x * 255.0f;
+				int g = colour.y * 255.0f;
+				int b = colour.z * 255.0f;
+				int a = colour.w * 255.0f;
+
+				c = a << 24 | b << 16 | g << 8 | r;
+			}
 
 			_dataBuffer->vertex = *_currentTransformation * position;
 			_dataBuffer->textureCoord = textureCoord[0];
+			_dataBuffer->textureId = samplerIndex;
 			_dataBuffer->colour = c;
 			_dataBuffer++;
 
 			_dataBuffer->vertex = *_currentTransformation * maths::vec3f(position.x, position.y + size.y, position.z);
 			_dataBuffer->textureCoord = textureCoord[1];
+			_dataBuffer->textureId = samplerIndex;
 			_dataBuffer->colour = c;
 			_dataBuffer++;
 
 			_dataBuffer->vertex = *_currentTransformation * maths::vec3f(position.x + size.x, position.y + size.y, position.z);
 			_dataBuffer->textureCoord = textureCoord[2];
+			_dataBuffer->textureId = samplerIndex;
 			_dataBuffer->colour = c;
 			_dataBuffer++;
 
 			_dataBuffer->vertex = *_currentTransformation * maths::vec3f(position.x + size.x, position.y, position.z);
 			_dataBuffer->textureCoord = textureCoord[3];
+			_dataBuffer->textureId = samplerIndex;
 			_dataBuffer->colour = c;
 			_dataBuffer++;
 
@@ -96,6 +131,12 @@ namespace pixel {
 		}
 
 		void BatchRenderer2D::flush() {
+
+			for (int i = 0; i < _textures.size(); i++) {
+				glActiveTexture(GL_TEXTURE0 + i);
+				glBindTexture(GL_TEXTURE_2D, _textures[i]);
+			}
+
 			glBindVertexArray(_vertexArray);
 			_indexBuffer->bind();
 
