@@ -67,8 +67,15 @@ namespace pixel {
 		
 
 		void Window::update() {
-			GLenum error = glGetError();
+			for (int key = 0; key < NUM_KEYS; key++)
+				_keyTyped[key] = _keys[key] && !_keyState[key];
+			memcpy(_keyState, _keys, NUM_KEYS);
 
+			for (int button = 0; button < NUM_BUTTONS; button++)
+				_mouseClicked[button] = _mouseButtons[button] && !_mouseState[button];
+			memcpy(_mouseState, _mouseButtons, NUM_BUTTONS);
+
+			GLenum error = glGetError();
 			if (error != GL_NO_ERROR) {
 				std::cout << "OpenGL error: " << error << std::endl;
 			}
