@@ -25,5 +25,5 @@ void main() {
 		textureColour = fs_in.colour * texture(textures[textureIndex], fs_in.textureCoord);
 	}
 
-	colour = textureColour * 1;
+	colour = textureColour * intensity;
 }

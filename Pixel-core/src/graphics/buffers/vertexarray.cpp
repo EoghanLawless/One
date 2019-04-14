@@ -23,6 +23,8 @@ namespace pixel {
 
 			buffer->unbind();
 			unbind();
+
+			_buffers.push_back(buffer);
 		}
 
 		void VertexArray::bind() const {

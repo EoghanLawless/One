@@ -199,6 +199,8 @@
     <None Include="src\shaders\basic.vs">
       <Filter>Shaders</Filter>
     </None>
+    <None Include="src\shaders\lighting.fs" />
+    <None Include="src\shaders\lighting.vs" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="portrait_silhouette.png">

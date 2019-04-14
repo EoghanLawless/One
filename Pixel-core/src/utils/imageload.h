@@ -22,10 +22,18 @@ namespace pixel {
 		if (!dib)
 			return nullptr;
 
-		BYTE* result = FreeImage_GetBits(dib);
+		BYTE* pixels = FreeImage_GetBits(dib);
 
 		*width = FreeImage_GetWidth(dib);
 		*height = FreeImage_GetHeight(dib);
+
+		int bits = FreeImage_GetBPP(dib);
+		int size = (*width) * (*height) * bits;
+
+		BYTE* result = new BYTE[size];
+		memcpy(result, pixels, size);
+
+		FreeImage_Unload(dib);
 
 		return result;
 	}

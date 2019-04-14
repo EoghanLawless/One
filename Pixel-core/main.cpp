@@ -1,6 +1,4 @@
 
-#include <time.h>
-
 #include "src/maths/maths.h"
 #include "src/utils/timer.h"
 
@@ -20,22 +18,22 @@ int main() {
 	using namespace maths;
 
 	Window window("Pixel", 1600, 900);
+	glClearColor(0.3f, 0.3f, 0.3f, 1.0f);
 
-	Shader* shader = new Shader("src/shaders/basic.vs", "src/shaders/basic.fs");
-
+	Shader* shader = new Shader("src/shaders/lighting.vs", "src/shaders/lighting.fs");
 	FlatLayer layer(shader);
-
-	float pad = 2.0f;
-	float size = 2.0f;
-	float gap = 0.1f;
 
 	Texture* textures[] = {
 		new Texture("test.png"),
 		new Texture("test_white.png"),
 		new Texture("test_red.png"),
 		new Texture("test_green.png"),
-		new Texture("test_blue.png"),
+		new Texture("test_blue.png")
 	};
+
+	float pad = 2.0f;
+	float size = 0.8f;
+	float gap = 0.0f;
 
 	for (float y = -9.0f + pad; y < 9.0f - pad; y += size) {
 		for (float x = -16.0f + pad; x < 16.0f - pad; x += size) {
@@ -44,12 +42,6 @@ int main() {
 			layer.add(new Sprite(x, y, size - gap, size - gap, textures[rand() % 5]));
 		}
 	}
-
-	Group* group = new Group(maths::mat4::translation(vec3f(-16.0f, 9.0f, 0.0f)));
-	Label* fps = new Label("", 0.5f, -1.0f, 0xFF00FF00);
-	group->add(fps);
-
-	layer.add(group);
 
 	GLint textureIds[] = {
 		0, 1, 2, 3, 4, 5, 6, 7, 8, 9
@@ -60,6 +52,13 @@ int main() {
 	shader->setUniformMat4("pr_matrix", mat4::orthographic(-16.0f, 16.0f, -9.0f, 9.0f, -1.0f, 1.0f));
 
 	std::cout << layer.count() << std::endl;
+
+	Group* textGroup = new Group(maths::mat4::translation(vec3f(-16.0f, 9.0f, 0.0f)));
+	Label* fps = new Label("000 fps", 0.5f, -0.9f, 0xFF00FF00);
+	textGroup->add(new Sprite(0.0f, 0.0f, 3.5f, -1.5f, 0xFF888888));
+	textGroup->add(fps);
+
+	layer.add(textGroup);
 
 
 	double mx, my;
@@ -76,6 +75,7 @@ int main() {
 		//mat4 mat = mat4::rotation(time.elapsed() * 100.0f, vec3f(0, 0, 1));
 		//mat *= mat4::translation(vec3f(-(float)((mx - 800.0f) * 16.0f / 800.0f), -(float)(9.0f - my * 9.0f / 450.0f), 0));
 
+		shader->enable();
 		shader->setUniform2f("light_pos", vec2f((float)(mx * 32.0f / window.getWidth() - 16.0f), (float)(9.0f - my * 18.0f / window.getHeight())));
 		layer.render();
 

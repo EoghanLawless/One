@@ -23,6 +23,8 @@ namespace pixel {
 
 			glBindTexture(GL_TEXTURE_2D, 0);
 
+			delete[] pixels;
+
 			return result;
 		}
 
