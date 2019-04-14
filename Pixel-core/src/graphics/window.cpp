@@ -1,31 +1,36 @@
 #include "window.h"
-#include <iostream>
 
 namespace pixel {
 	namespace graphics {
+
+		void windowResizeCallback(GLFWwindow*, int, int);
+		void keyCallback(GLFWwindow*, int, int, int, int);
+		void mouseButtonCallback(GLFWwindow*, int, int, int);
+		void mousePositionCallback(GLFWwindow*, double, double);
 
 		Window::Window(const char *title, int width, int height) {
 			_title = title;
 			_width = width;
 			_height = height;
 
-			if (!init()) {
+			if (!init()) 
 				glfwTerminate();
-			}
 
 			for (int key = 0; key < NUM_KEYS; key++) {
-				keys[key] = false;
+				_keys[key] = false;
+				_keyState[key] = false;
+				_keyTyped[key] = false;
 			}
 
 			for (int button = 0; button < NUM_BUTTONS; button++) {
-				mouseButtons[button] = false;
+				_mouseButtons[button] = false;
+				_mouseState[button] = false;
+				_mouseClicked[button] = false;
 			}
 		}
-
 		Window::~Window() {
 			glfwTerminate();
 		}
-
 		bool Window::init() {
 			if(!glfwInit()) {
 				std::cout << "Failed to initialise GLFW" << std::endl;
@@ -41,7 +46,7 @@ namespace pixel {
 
 			glfwMakeContextCurrent(_window);
 			glfwSetWindowUserPointer(_window, this);
-			glfwSetWindowSizeCallback(_window, windowResizeCallback);
+			glfwSetFramebufferSizeCallback(_window, windowResizeCallback);
 			glfwSetKeyCallback(_window, keyCallback);
 			glfwSetMouseButtonCallback(_window, mouseButtonCallback);
 			glfwSetCursorPosCallback(_window, mousePositionCallback);
@@ -60,8 +65,8 @@ namespace pixel {
 			return true;
 		}
 		
-		void Window::update() {
 
+		void Window::update() {
 			GLenum error = glGetError();
 
 			if (error != GL_NO_ERROR) {
@@ -71,38 +76,65 @@ namespace pixel {
 			glfwPollEvents();
 			glfwSwapBuffers(_window);
 		}
-
 		void Window::clear() const {
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		}
-
 		bool Window::closed() const {
 			return glfwWindowShouldClose(_window);
 		}
 
+
+
+		bool Window::keyPressed(unsigned int key) const {
+			if (key >= NUM_KEYS)
+				return false;
+
+			return _keys[key];
+		}
+		bool Window::keyTyped(unsigned int key) const {
+			if (key >= NUM_KEYS)
+				return false;
+
+			return _keyTyped[key];
+
+		}
+		bool Window::mousePressed(unsigned int button) const {
+			if (button >= NUM_BUTTONS)
+				return false;
+
+			return _mouseButtons[button];
+		}
+		bool Window::mouseClicked(unsigned int button) const {
+			if (button >= NUM_BUTTONS)
+				return false;
+
+			return _mouseClicked[button];
+		}
+		void Window::getMousePos(double& x, double& y) {
+			x = _mx;
+			y = _my;
+		}
+
+
 		void windowResizeCallback(GLFWwindow *window, int width, int height) {
 			glViewport(0, 0, width, height);
+			
+			Window* win = (Window*)glfwGetWindowUserPointer(window);
+			win->_width = width;
+			win->_height = height;
 		}
-
 		void keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods) {
 			Window* win = (Window*) glfwGetWindowUserPointer(window);
-			win->keys[key] = (action != GLFW_RELEASE);
+			win->_keys[key] = (action != GLFW_RELEASE);
 		}
-
 		void mouseButtonCallback(GLFWwindow* window, int button, int action, int mods) {
 			Window* win = (Window*) glfwGetWindowUserPointer(window);
-			win->mouseButtons[button] = (action != GLFW_RELEASE);
+			win->_mouseButtons[button] = (action != GLFW_RELEASE);
 		}
-
-		void mousePositionCallback(GLFWwindow* window, double xpos, double ypos) {
+		void mousePositionCallback(GLFWwindow* window, double x, double y) {
 			Window* win = (Window*)glfwGetWindowUserPointer(window);
-			win->mouseX = xpos;
-			win->mouseY = ypos;
-		}
-
-		void Window::getMousePos(double& xpos, double& ypos) {
-			xpos = mouseX;
-			ypos = mouseY;
+			win->_mx = x;
+			win->_my = y;
 		}
 	}
 }

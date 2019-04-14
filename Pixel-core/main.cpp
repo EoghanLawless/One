@@ -77,7 +77,7 @@ int main() {
 		//mat *= mat4::translation(vec3f(-(float)((mx - 800.0f) * 16.0f / 800.0f), -(float)(9.0f - my * 9.0f / 450.0f), 0));
 
 		//shader1->setUniformMat4("ml_matrix", mat);
-		shader->setUniform2f("light_pos", vec2f((float)((mx - 800.0f) * 16.0f / 800.0f), (float)(9.0f - my * 9.0f / 450.0f)));
+		shader->setUniform2f("light_pos", vec2f((float)(mx * 32.0f / window.getWidth() - 16.0f), (float)(9.0f - my * 18.0f / window.getHeight())));
 		layer.render();
 
 		window.update();
