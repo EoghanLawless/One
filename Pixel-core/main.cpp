@@ -46,7 +46,7 @@ int main() {
 	}
 
 	Group* group = new Group(maths::mat4::translation(vec3f(-16.0f, 9.0f, 0.0f)));
-	Label* fps = new Label("", 0.5f, -1.0f, vec4f(0, 1, 0, 1));
+	Label* fps = new Label("", 0.5f, -1.0f, 0xFF00FF00);
 	group->add(fps);
 
 	layer.add(group);

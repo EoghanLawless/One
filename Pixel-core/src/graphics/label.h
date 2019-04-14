@@ -11,7 +11,7 @@ namespace pixel {
 			maths::vec3f& position;
 			float x, y;
 
-			Label(std::string text, float x, float y, maths::vec4f colour);
+			Label(std::string text, float x, float y, unsigned int colour);
 
 			void submit(Renderer2D* renderer) const override;
 		};

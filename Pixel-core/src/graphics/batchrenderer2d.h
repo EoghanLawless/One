@@ -43,7 +43,7 @@ namespace pixel {
 
 			void begin() override;
 			void submit(const Renderable2D* renderable) override;
-			void drawString(const std::string& text, const maths::vec3f& position, const maths::vec4f& colour) override;
+			void drawString(const std::string& text, const maths::vec3f& position, const unsigned int colour) override;
 			void end() override;
 			void flush() override;
 		};

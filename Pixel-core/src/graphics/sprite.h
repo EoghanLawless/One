@@ -9,7 +9,7 @@ namespace pixel {
 		private:
 
 		public:
-			Sprite(float x, float y, float w, float h, const maths::vec4f& colour);
+			Sprite(float x, float y, float w, float h, const unsigned int colour);
 			Sprite(float x, float y, float w, float h, Texture* texture);
 		};
 

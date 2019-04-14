@@ -62,11 +62,10 @@ namespace pixel {
 		void BatchRenderer2D::submit(const Renderable2D* renderable) {
 			const maths::vec3f& position = renderable->getPosition();
 			const maths::vec2f& size = renderable->getSize();
-			const maths::vec4f& colour = renderable->getColour();
+			const unsigned int colour = renderable->getColour();
 			const std::vector<maths::vec2f>& textureCoord = renderable->getTextureCoord();
 			const GLuint textureId = renderable->getTextureId();
 
-			unsigned int c = 0;
 			float samplerIndex = 0.0f;
 
 			if (textureId > 0) {
@@ -95,49 +94,34 @@ namespace pixel {
 			}
 
 
-			int r = colour.x * 255.0f;
-			int g = colour.y * 255.0f;
-			int b = colour.z * 255.0f;
-			int a = colour.w * 255.0f;
-
-			c = a << 24 | b << 16 | g << 8 | r;
-
-
 			_dataBuffer->vertex = *_currentTransformation * position;
 			_dataBuffer->textureCoord = textureCoord[0];
 			_dataBuffer->textureId = samplerIndex;
-			_dataBuffer->colour = c;
+			_dataBuffer->colour = colour;
 			_dataBuffer++;
 
 			_dataBuffer->vertex = *_currentTransformation * maths::vec3f(position.x, position.y + size.y, position.z);
 			_dataBuffer->textureCoord = textureCoord[1];
 			_dataBuffer->textureId = samplerIndex;
-			_dataBuffer->colour = c;
+			_dataBuffer->colour = colour;
 			_dataBuffer++;
 
 			_dataBuffer->vertex = *_currentTransformation * maths::vec3f(position.x + size.x, position.y + size.y, position.z);
 			_dataBuffer->textureCoord = textureCoord[2];
 			_dataBuffer->textureId = samplerIndex;
-			_dataBuffer->colour = c;
+			_dataBuffer->colour = colour;
 			_dataBuffer++;
 
 			_dataBuffer->vertex = *_currentTransformation * maths::vec3f(position.x + size.x, position.y, position.z);
 			_dataBuffer->textureCoord = textureCoord[3];
 			_dataBuffer->textureId = samplerIndex;
-			_dataBuffer->colour = c;
+			_dataBuffer->colour = colour;
 			_dataBuffer++;
 
 			_indexCount += 6;
 		}
 
-		void BatchRenderer2D::drawString(const std::string& text, const maths::vec3f& position, const maths::vec4f& colour) {
-
-			int r = colour.x * 255.0f;
-			int g = colour.y * 255.0f;
-			int b = colour.z * 255.0f;
-			int a = colour.w * 255.0f;
-
-			unsigned int c = a << 24 | b << 16 | g << 8 | r;
+		void BatchRenderer2D::drawString(const std::string& text, const maths::vec3f& position, const unsigned int colour) {
 
 			float samplerIndex = 0.0f;
 			bool exists = false;
@@ -190,25 +174,25 @@ namespace pixel {
 					_dataBuffer->vertex = *_currentTransformation * maths::vec3f(x0, y0, 0);
 					_dataBuffer->textureCoord = maths::vec2f(s0, t0);
 					_dataBuffer->textureId = samplerIndex;
-					_dataBuffer->colour = c;
+					_dataBuffer->colour = colour;
 					_dataBuffer++;
 
 					_dataBuffer->vertex = *_currentTransformation * maths::vec3f(x0, y1, 0);
 					_dataBuffer->textureCoord = maths::vec2f(s0, t1);
 					_dataBuffer->textureId = samplerIndex;
-					_dataBuffer->colour = c;
+					_dataBuffer->colour = colour;
 					_dataBuffer++;
 
 					_dataBuffer->vertex = *_currentTransformation * maths::vec3f(x1, y1, 0);
 					_dataBuffer->textureCoord = maths::vec2f(s1, t1);
 					_dataBuffer->textureId = samplerIndex;
-					_dataBuffer->colour = c;
+					_dataBuffer->colour = colour;
 					_dataBuffer++;
 
 					_dataBuffer->vertex = *_currentTransformation * maths::vec3f(x1, y0, 0);
 					_dataBuffer->textureCoord = maths::vec2f(s1, t0);
 					_dataBuffer->textureId = samplerIndex;
-					_dataBuffer->colour = c;
+					_dataBuffer->colour = colour;
 					_dataBuffer++;
 
 					_indexCount += 6;

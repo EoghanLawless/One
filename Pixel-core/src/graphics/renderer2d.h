@@ -39,7 +39,7 @@ namespace pixel {
 
 			virtual void begin() { }
 			virtual void submit(const Renderable2D* renderable) = 0;
-			virtual void drawString(const std::string& text, const maths::vec3f& position, const maths::vec4f& colour) { }
+			virtual void drawString(const std::string& text, const maths::vec3f& position, const unsigned int colour) { }
 			virtual void end() { }
 			virtual void flush() = 0;
 		};
