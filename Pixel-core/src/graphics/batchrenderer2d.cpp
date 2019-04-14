@@ -49,6 +49,9 @@ namespace pixel {
 			_indexBuffer = new IndexBuffer(indices, RENDERER_INDICES_SIZE);
 
 			glBindVertexArray(0);
+
+			_freeTypeAtlas = texture_atlas_new(512, 512, 2);
+			_freeTypeFont = texture_font_new_from_file(_freeTypeAtlas, 20, "Raleway-Medium.ttf");
 		}
 
 		void BatchRenderer2D::begin() {
@@ -89,14 +92,16 @@ namespace pixel {
 					samplerIndex = (float)(_textures.size() - 1);
 				}
 				
-			} else {
-				int r = colour.x * 255.0f;
-				int g = colour.y * 255.0f;
-				int b = colour.z * 255.0f;
-				int a = colour.w * 255.0f;
-
-				c = a << 24 | b << 16 | g << 8 | r;
 			}
+
+
+			int r = colour.x * 255.0f;
+			int g = colour.y * 255.0f;
+			int b = colour.z * 255.0f;
+			int a = colour.w * 255.0f;
+
+			c = a << 24 | b << 16 | g << 8 | r;
+
 
 			_dataBuffer->vertex = *_currentTransformation * position;
 			_dataBuffer->textureCoord = textureCoord[0];
@@ -124,6 +129,95 @@ namespace pixel {
 
 			_indexCount += 6;
 		}
+
+		void BatchRenderer2D::drawString(const std::string& text, const maths::vec3f& position, const maths::vec4f& colour) {
+
+			int r = colour.x * 255.0f;
+			int g = colour.y * 255.0f;
+			int b = colour.z * 255.0f;
+			int a = colour.w * 255.0f;
+
+			unsigned int c = a << 24 | b << 16 | g << 8 | r;
+
+			float samplerIndex = 0.0f;
+			bool exists = false;
+
+			for (int index = 0; index < _textures.size(); index++) {
+				if (_textures[index] == _freeTypeAtlas->id) {
+					samplerIndex = (float)(index + 1);
+					exists = true;
+					break;
+				}
+			}
+
+			if (!exists) {
+				if (_textures.size() >= 32) {
+					end();
+					flush();
+					begin();
+				}
+
+				_textures.push_back(_freeTypeAtlas->id);
+				samplerIndex = (float)(_textures.size() - 1);
+			}
+
+			float scalex = 960.0f / 32.0f;
+			float scaley = 540.0f / 18.0f;
+
+			float x = position.x;
+
+			for (int i = 0; i < text.length(); i++) {
+				char ch = text.at(i);
+				texture_glyph_t* glyph = texture_font_get_glyph(_freeTypeFont, ch);
+
+				if (glyph != NULL) {
+
+					if (i > 0) {
+						float kerning = texture_glyph_get_kerning(glyph, text.at(i - 1));
+						x += kerning / scalex;
+					}
+
+					float x0 = x + glyph->offset_x / scalex;
+					float y0 = position.y + glyph->offset_y / scaley;
+					float x1 = x0 + glyph->width / scalex;
+					float y1 = y0 - glyph->height / scaley;
+
+					float s0 = glyph->s0;
+					float t0 = glyph->t0;
+					float s1 = glyph->s1;
+					float t1 = glyph->t1;
+
+					_dataBuffer->vertex = *_currentTransformation * maths::vec3f(x0, y0, 0);
+					_dataBuffer->textureCoord = maths::vec2f(s0, t0);
+					_dataBuffer->textureId = samplerIndex;
+					_dataBuffer->colour = c;
+					_dataBuffer++;
+
+					_dataBuffer->vertex = *_currentTransformation * maths::vec3f(x0, y1, 0);
+					_dataBuffer->textureCoord = maths::vec2f(s0, t1);
+					_dataBuffer->textureId = samplerIndex;
+					_dataBuffer->colour = c;
+					_dataBuffer++;
+
+					_dataBuffer->vertex = *_currentTransformation * maths::vec3f(x1, y1, 0);
+					_dataBuffer->textureCoord = maths::vec2f(s1, t1);
+					_dataBuffer->textureId = samplerIndex;
+					_dataBuffer->colour = c;
+					_dataBuffer++;
+
+					_dataBuffer->vertex = *_currentTransformation * maths::vec3f(x1, y0, 0);
+					_dataBuffer->textureCoord = maths::vec2f(s1, t0);
+					_dataBuffer->textureId = samplerIndex;
+					_dataBuffer->colour = c;
+					_dataBuffer++;
+
+					_indexCount += 6;
+
+					x += glyph->advance_x / scalex;
+				}
+			}
+		}
+
 
 		void BatchRenderer2D::end() {
 			glUnmapBuffer(GL_ARRAY_BUFFER);

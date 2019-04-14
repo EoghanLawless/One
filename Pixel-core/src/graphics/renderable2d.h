@@ -34,7 +34,7 @@ namespace pixel {
 			std::vector<maths::vec2f> _textureCoord;
 			Texture* _texture;
 
-			Renderable2D() {
+			Renderable2D() : _texture(nullptr) {
 				setDefaultTextureCoord();
 			}
 

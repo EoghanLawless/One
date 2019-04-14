@@ -9,11 +9,9 @@
 #include "src/graphics/layers/group.h"
 
 #include "src/graphics/texture.h"
+#include "src/graphics/label.h"
 
 #include <time.h>
-
-//#include <ft2build.h>
-//#include "freetype-gl.h"
 
 
 int main() {
@@ -46,6 +44,12 @@ int main() {
 			layer.add(new Sprite(x, y, size - gap, size - gap, textures[rand() % 5]));
 		}
 	}
+
+	Group* group = new Group(maths::mat4::translation(vec3f(-16.0f, 9.0f, 0.0f)));
+	Label* fps = new Label("", 0.5f, -1.0f, vec4f(0, 1, 0, 1));
+	group->add(fps);
+
+	layer.add(group);
 
 	GLint textureIds[] = {
 		0, 1, 2, 3, 4, 5, 6, 7, 8, 9
@@ -81,6 +85,7 @@ int main() {
 		frames++;
 		if (time.elapsed() - timer > 1.0f) {
 			timer += 1.0f;
+			fps->text = std::to_string(frames) + " fps";
 			printf("%d fps\n", frames);
 			frames = 0;
 		}

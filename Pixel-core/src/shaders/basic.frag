@@ -20,7 +20,7 @@ void main() {
 
 	if(fs_in.textureId > 0.0) {
 		int textureIndex = int(fs_in.textureId - 0.5);
-		textureColour = texture(textures[textureIndex], fs_in.textureCoord);
+		textureColour = fs_in.colour * texture(textures[textureIndex], fs_in.textureCoord);
 	}
 
 	colour = textureColour * intensity;

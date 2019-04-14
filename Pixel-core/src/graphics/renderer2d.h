@@ -13,7 +13,6 @@ namespace pixel {
 
 		class Renderer2D {
 		protected:
-			// Add const
 			std::vector<maths::mat4> _transformationStack;
 			const maths::mat4* _currentTransformation;
 
@@ -38,9 +37,10 @@ namespace pixel {
 				_currentTransformation = &_transformationStack.back();
 			}
 
-			virtual void begin() {}
+			virtual void begin() { }
 			virtual void submit(const Renderable2D* renderable) = 0;
-			virtual void end() {}
+			virtual void drawString(const std::string& text, const maths::vec3f& position, const maths::vec4f& colour) { }
+			virtual void end() { }
 			virtual void flush() = 0;
 		};
 	}
