@@ -12,6 +12,7 @@ namespace pixel {
 
 		public:
 			Group(const maths::mat4& matrix);
+			~Group();
 
 			void add(Renderable2D* renderable);
 			void submit(Renderer2D* renderer) const override;

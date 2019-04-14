@@ -14,7 +14,9 @@ in DATA {
 uniform sampler2D textures[32];
 
 void main() {
-	float intensity = 4.0 / length(fs_in.position.xy - light_pos);
+
+	float size = 12.0;
+	float intensity = size / (length(fs_in.position.xy - light_pos) + size);
 
 	vec4 textureColour = fs_in.colour;
 

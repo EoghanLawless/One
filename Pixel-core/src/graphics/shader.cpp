@@ -16,8 +16,8 @@ namespace pixel {
 			GLuint vertex = glCreateShader(GL_VERTEX_SHADER);
 			GLuint fragment = glCreateShader(GL_FRAGMENT_SHADER);
 
-			std::string vertexSourceCode = FileUtils::read_file(_vertexPath);
-			std::string fragmentSourceCode = FileUtils::read_file(_fragmentPath);
+			std::string vertexSourceCode = read_file(_vertexPath);
+			std::string fragmentSourceCode = read_file(_fragmentPath);
 
 			const char* vertexSource = vertexSourceCode.c_str();
 			const char* fragmentSource = fragmentSourceCode.c_str();
