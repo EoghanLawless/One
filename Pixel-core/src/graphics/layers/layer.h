@@ -5,6 +5,7 @@
 
 namespace pixel {
 	namespace graphics {
+
 		class Layer {
 		protected:
 			Layer(Renderer2D* renderer, Shader* shader, maths::mat4 projectionMatrix);
@@ -22,5 +23,6 @@ namespace pixel {
 
 			int count() const { return _renderables.size(); }
 		};
+
 	}
 }

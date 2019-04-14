@@ -30,5 +30,6 @@ namespace pixel {
 			delete _vertexArray;
 			delete _indexBuffer;
 		}
+
 	}
 }

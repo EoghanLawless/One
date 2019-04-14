@@ -4,6 +4,7 @@
 
 namespace pixel {
 	namespace graphics {
+
 		class StaticSprite : public Renderable2D {
 		private:
 			maths::vec3f _position;
@@ -22,5 +23,6 @@ namespace pixel {
 			inline const VertexArray* getVertexArray() const { return _vertexArray; }
 			inline const IndexBuffer* getIndexBuffer() const { return _indexBuffer; }
 		};
+
 	}
 }

@@ -23,5 +23,6 @@ namespace pixel {
 				_renderQueue.pop_front();
 			}
 		}
+
 	}
 }

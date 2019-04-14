@@ -136,5 +136,6 @@ namespace pixel {
 			win->_mx = x;
 			win->_my = y;
 		}
+
 	}
 }

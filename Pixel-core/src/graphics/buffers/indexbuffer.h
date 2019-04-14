@@ -1,6 +1,6 @@
 #pragma once
 
-#include <GL/glew.h>
+#include "GL/glew.h"
 
 namespace pixel {
 	namespace graphics {
@@ -20,5 +20,6 @@ namespace pixel {
 
 			inline GLuint getCount() const { return _count; }
 		};
+
 	}
 }

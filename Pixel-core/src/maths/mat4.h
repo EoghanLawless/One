@@ -4,6 +4,7 @@
 
 namespace pixel {
 	namespace maths {
+
 		struct mat4 {
 			union {
 				float elements[4 * 4];
@@ -34,5 +35,6 @@ namespace pixel {
 
 			friend std::ostream& operator<<(std::ostream& stream, const mat4& matrix);
 		};
+
 	}
 }

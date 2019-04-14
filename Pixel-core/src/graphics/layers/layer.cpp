@@ -2,6 +2,7 @@
 
 namespace pixel {
 	namespace graphics {
+
 		Layer::Layer(Renderer2D* renderer, Shader* shader, maths::mat4 projectionMatrix)
 		: _renderer(renderer), _shader(shader), _projectionMatrix(projectionMatrix) {
 			_shader->enable();
@@ -33,5 +34,6 @@ namespace pixel {
 			_renderer->end();
 			_renderer->flush();
 		}
+
 	}
 }

@@ -1,17 +1,17 @@
-#include "src/utils/timer.h"
-#include "src/graphics/window.h"
-#include "src/graphics/shader.h"
-#include "src/graphics/batchrenderer2d.h"
-#include "src/graphics/sprite.h"
-#include "src/maths/maths.h"
-
-#include "src/graphics/layers/flatlayer.h"
-#include "src/graphics/layers/group.h"
-
-#include "src/graphics/texture.h"
-#include "src/graphics/label.h"
 
 #include <time.h>
+
+#include "src/maths/maths.h"
+#include "src/utils/timer.h"
+
+#include "src/graphics/batchrenderer2d.h"
+#include "src/graphics/label.h"
+#include "src/graphics/shader.h"
+#include "src/graphics/sprite.h"
+#include "src/graphics/texture.h"
+#include "src/graphics/window.h"
+#include "src/graphics/layers/flatlayer.h"
+#include "src/graphics/layers/group.h"
 
 
 int main() {
@@ -21,7 +21,7 @@ int main() {
 
 	Window window("Pixel", 1600, 900);
 
-	Shader* shader = new Shader("src/shaders/basic.vert", "src/shaders/basic.frag");
+	Shader* shader = new Shader("src/shaders/basic.vs", "src/shaders/basic.fs");
 
 	FlatLayer layer(shader);
 
@@ -76,7 +76,6 @@ int main() {
 		//mat4 mat = mat4::rotation(time.elapsed() * 100.0f, vec3f(0, 0, 1));
 		//mat *= mat4::translation(vec3f(-(float)((mx - 800.0f) * 16.0f / 800.0f), -(float)(9.0f - my * 9.0f / 450.0f), 0));
 
-		//shader1->setUniformMat4("ml_matrix", mat);
 		shader->setUniform2f("light_pos", vec2f((float)(mx * 32.0f / window.getWidth() - 16.0f), (float)(9.0f - my * 18.0f / window.getHeight())));
 		layer.render();
 

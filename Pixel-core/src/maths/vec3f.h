@@ -4,6 +4,7 @@
 
 namespace pixel {
 	namespace maths {
+
 		struct vec3f {
 			float x, y, z;
 
@@ -30,5 +31,6 @@ namespace pixel {
 
 			friend std::ostream& operator<<(std::ostream& stream, const vec3f& vector);
 		};
+
 	}
 }

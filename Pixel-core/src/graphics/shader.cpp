@@ -106,5 +106,6 @@ namespace pixel {
 		void Shader::disable() const {
 			glUseProgram(0);
 		}
+
 	}
 }

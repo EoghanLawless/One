@@ -83,5 +83,6 @@ namespace pixel {
 			stream << "vec3f(" << vector.x << "," << vector.y << "," << vector.z << ")";
 			return stream;
 		}
-	};
+
+	}
 }

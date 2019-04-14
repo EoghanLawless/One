@@ -43,5 +43,6 @@ namespace pixel {
 			virtual void end() { }
 			virtual void flush() = 0;
 		};
+
 	}
 }

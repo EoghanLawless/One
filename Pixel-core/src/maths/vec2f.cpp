@@ -77,5 +77,6 @@ namespace pixel {
 			stream << "vec2f(" << vector.x << "," << vector.y << ")";
 			return stream;
 		}
-	};
+
+	}
 }

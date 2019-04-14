@@ -160,5 +160,6 @@ namespace pixel {
 			stream << std::endl;
 			return stream;
 		}
+
 	}
 }

@@ -1,12 +1,14 @@
 #pragma once
 
-#include "../maths/maths.h"
 #include "renderer2d.h"
 #include "texture.h"
 #include "shader.h"
+
 #include "buffers/buffer.h"
 #include "buffers/indexbuffer.h"
 #include "buffers/vertexarray.h"
+
+#include "../maths/maths.h"
 
 namespace pixel {
 	namespace graphics {
@@ -54,5 +56,6 @@ namespace pixel {
 			inline const std::vector<maths::vec2f>& getTextureCoord() const { return _textureCoord; }
 			inline const GLuint& getTextureId() const { return _texture == nullptr ? 0 : _texture->getId(); }
 		};
+
 	}
 }

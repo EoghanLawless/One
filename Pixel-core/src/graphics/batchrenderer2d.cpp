@@ -241,5 +241,6 @@ namespace pixel {
 
 			_indexCount = 0;
 		}
+
 	}
 }

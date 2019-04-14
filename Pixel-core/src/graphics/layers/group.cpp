@@ -2,6 +2,7 @@
 
 namespace pixel {
 	namespace graphics {
+
 		Group::Group(const maths::mat4& matrix) : _transformationMatrix(matrix) {}
 
 		void Group::add(Renderable2D* renderable) {
@@ -16,5 +17,6 @@ namespace pixel {
 
 			renderer->pop();
 		}
+
 	}
 }

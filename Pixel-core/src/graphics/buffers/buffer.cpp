@@ -18,5 +18,6 @@ namespace pixel {
 		void Buffer::unbind() const {
 			glBindBuffer(GL_ARRAY_BUFFER, 0);
 		}
+
 	}
 }

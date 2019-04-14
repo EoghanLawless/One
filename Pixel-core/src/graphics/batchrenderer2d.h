@@ -2,10 +2,10 @@
 
 #include <cstddef>
 
-#include <freetype-gl.h>
-
+#include "freetype-gl.h"
 #include "renderer2d.h"
 #include "renderable2d.h"
+
 #include "buffers/indexbuffer.h"
 
 namespace pixel {
@@ -47,5 +47,6 @@ namespace pixel {
 			void end() override;
 			void flush() override;
 		};
+
 	}
 }

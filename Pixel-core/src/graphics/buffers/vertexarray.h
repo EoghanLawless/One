@@ -1,7 +1,8 @@
 #pragma once
 
 #include <vector>
-#include <GL/glew.h>
+
+#include "GL/glew.h"
 
 #include "buffer.h"
 
@@ -22,5 +23,6 @@ namespace pixel {
 			void bind() const;
 			void unbind() const;
 		};
+
 	}
 }

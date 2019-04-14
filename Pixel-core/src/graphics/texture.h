@@ -1,8 +1,9 @@
 #pragma once
 
 #include <string>
-#include <FreeImage.h>
-#include <GL/glew.h>
+
+#include "FreeImage.h"
+#include "GL/glew.h"
 
 #include "../utils/imageload.h"
 

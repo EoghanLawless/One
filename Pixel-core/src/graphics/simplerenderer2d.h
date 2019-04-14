@@ -16,5 +16,6 @@ namespace pixel {
 			virtual void submit(const Renderable2D* renderable) override;
 			virtual void flush() override;
 		};
+
 	}
 }

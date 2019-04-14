@@ -2,8 +2,8 @@
 
 #include <iostream>
 
-#include <GL/glew.h>
-#include <GLFW/glfw3.h>
+#include "GL/glew.h"
+#include "GLFW/glfw3.h"
 
 namespace pixel {
 	namespace graphics {
@@ -51,5 +51,6 @@ namespace pixel {
 			bool mouseClicked(unsigned int button) const;
 			void getMousePos(double& xpos, double& ypos);
 		};
+
 	}
 }

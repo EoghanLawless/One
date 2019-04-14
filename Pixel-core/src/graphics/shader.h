@@ -36,5 +36,6 @@ namespace pixel {
 			void enable() const;
 			void disable() const;
 		};
+
 	}
 }

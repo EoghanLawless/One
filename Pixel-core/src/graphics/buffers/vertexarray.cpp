@@ -31,5 +31,6 @@ namespace pixel {
 		void VertexArray::unbind() const {
 			glBindVertexArray(0);
 		}
+
 	}
 }
