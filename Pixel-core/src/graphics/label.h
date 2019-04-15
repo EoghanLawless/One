@@ -1,6 +1,7 @@
 #pragma once
 
 #include "renderable2d.h"
+#include "fontmanager.h"
 
 namespace pixel {
 	namespace graphics {
@@ -13,8 +14,12 @@ namespace pixel {
 			float x, y;
 
 			Label(std::string text, float x, float y, Font* font, unsigned int colour);
+			Label(std::string text, float x, float y, const std::string& font, unsigned int colour);
+			Label(std::string text, float x, float y, const std::string& font, unsigned int size, unsigned int colour);
 
 			void submit(Renderer2D* renderer) const override;
+
+			void validateFont(std::string alias, unsigned int size = -1);
 		};
 
 	}

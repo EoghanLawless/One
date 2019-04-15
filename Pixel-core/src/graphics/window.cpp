@@ -27,6 +27,8 @@ namespace pixel {
 				_mouseState[button] = false;
 				_mouseClicked[button] = false;
 			}
+
+			FontManager::add(new Font("Courier New", "Courier.ttf", 16));
 		}
 		Window::~Window() {
 			glfwTerminate();

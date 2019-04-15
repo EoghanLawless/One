@@ -11,6 +11,8 @@
 #include "src/graphics/layers/flatlayer.h"
 #include "src/graphics/layers/group.h"
 
+#include "src/graphics/fontmanager.h"
+
 
 int main() {
 	using namespace pixel;
@@ -60,12 +62,12 @@ int main() {
 
 	std::cout << layer.count() << std::endl;
 
-	Font* f1 = new Font("Raleway", "Raleway-Medium.ttf", 32);
-	Font* f2 = new Font("Courier", "Courier.ttf", 32);
+	FontManager::add(new Font("Raleway", "Raleway-Medium.ttf", 32));
+	FontManager::add(new Font("Courier", "Courier.ttf", 16));
 
 	Group* textGroup = new Group(maths::mat4::translation(vec3f(-16.0f, 9.0f, 0.0f)));
-	Label* fps = new Label("000 fps", 0.5f, -0.9f, f2, 0xFF00FF00);
-	textGroup->add(new Sprite(0.0f, 0.0f, 3.5f, -1.5f, 0xFF888888));
+	Label* fps = new Label("000", 0.5f, -0.62f, "Courier", 0xFF00FF00);
+	textGroup->add(new Sprite(0.0f, 0.0f, 2.0f, -1.0f, 0xFF888888));
 	textGroup->add(fps);
 
 	layer.add(textGroup);
@@ -94,11 +96,16 @@ int main() {
 		frames++;
 		if (time.elapsed() - timer > 1.0f) {
 			timer += 1.0f;
-			fps->text = std::to_string(frames) + " fps";
+			fps->text = std::to_string(frames) + "";
 			printf("%d fps\n", frames);
 			frames = 0;
 		}
 	}
+
+	for (int i = 0; i < 5; i++)
+		delete textures[i];
+
+	FontManager::clean();
 
 	return 0;
 }
