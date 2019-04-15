@@ -196,6 +196,7 @@
     <ClCompile Include="src\maths\vec3f.cpp" />
     <ClCompile Include="src\maths\vec4f.cpp" />
     <ClCompile Include="src\graphics\texture.cpp" />
+    <ClCompile Include="src\graphics\font.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\graphics\batchrenderer2d.h" />
@@ -219,6 +220,7 @@
     <ClInclude Include="src\maths\vec3f.h" />
     <ClInclude Include="src\maths\vec4f.h" />
     <ClInclude Include="src\graphics\texture.h" />
+    <ClInclude Include="src\graphics\font.h" />
     <ClInclude Include="src\utils\fileutils.h" />
     <ClInclude Include="src\utils\imageload.h" />
     <ClInclude Include="src\utils\timer.h" />

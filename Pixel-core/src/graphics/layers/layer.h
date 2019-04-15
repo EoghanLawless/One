@@ -21,7 +21,8 @@ namespace pixel {
 			virtual void add(Renderable2D* renderable);
 			virtual void render();
 
-			int count() const { return _renderables.size(); }
+			inline int count() const { return _renderables.size(); }
+			inline const std::vector<Renderable2D*>& getRenderables() const { return _renderables; }
 		};
 
 	}

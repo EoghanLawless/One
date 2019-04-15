@@ -2,7 +2,6 @@
 
 #include <cstddef>
 
-#include "freetype-gl.h"
 #include "renderer2d.h"
 #include "renderable2d.h"
 
@@ -30,8 +29,6 @@ namespace pixel {
 			GLsizei _indexCount;
 
 			std::vector<GLuint> _textures;
-			texture_atlas_t* _freeTypeAtlas;
-			texture_font_t* _freeTypeFont;
 
 			VertexData* _dataBuffer;
 
@@ -43,7 +40,7 @@ namespace pixel {
 
 			void begin() override;
 			void submit(const Renderable2D* renderable) override;
-			void drawString(const std::string& text, const maths::vec3f& position, const unsigned int colour) override;
+			void drawString(const std::string& text, const maths::vec3f& position, const Font& font, const unsigned int colour) override;
 			void end() override;
 			void flush() override;
 		};

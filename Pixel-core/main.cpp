@@ -17,7 +17,14 @@ int main() {
 	using namespace graphics;
 	using namespace maths;
 
-	Window window("Pixel", 1600, 900);
+	float ratio = 16.0f / 9.0f;
+
+	int width = 1200;
+	int height = width / ratio;
+
+	std::cout << width << ", " << height << std::endl;
+
+	Window window("Pixel", width, height);
 	glClearColor(0.3f, 0.3f, 0.3f, 1.0f);
 
 	Shader* shader = new Shader("src/shaders/lighting.vs", "src/shaders/lighting.fs");
@@ -53,8 +60,11 @@ int main() {
 
 	std::cout << layer.count() << std::endl;
 
+	Font* f1 = new Font("Raleway", "Raleway-Medium.ttf", 32);
+	Font* f2 = new Font("Courier", "Courier.ttf", 32);
+
 	Group* textGroup = new Group(maths::mat4::translation(vec3f(-16.0f, 9.0f, 0.0f)));
-	Label* fps = new Label("000 fps", 0.5f, -0.9f, 0xFF00FF00);
+	Label* fps = new Label("000 fps", 0.5f, -0.9f, f2, 0xFF00FF00);
 	textGroup->add(new Sprite(0.0f, 0.0f, 3.5f, -1.5f, 0xFF888888));
 	textGroup->add(fps);
 
@@ -66,7 +76,7 @@ int main() {
 	Timer time;
 	float timer = 0;
 	unsigned int frames = 0;
-
+	 
 	while (!window.closed()) {
 		window.clear();
 		window.getMousePos(mx, my);

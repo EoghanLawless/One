@@ -50,8 +50,6 @@ namespace pixel {
 
 			glBindVertexArray(0);
 
-			_freeTypeAtlas = texture_atlas_new(512, 512, 2);
-			_freeTypeFont = texture_font_new_from_file(_freeTypeAtlas, 20, "Raleway-Medium.ttf");
 		}
 
 		void BatchRenderer2D::begin() {
@@ -121,13 +119,13 @@ namespace pixel {
 			_indexCount += 6;
 		}
 
-		void BatchRenderer2D::drawString(const std::string& text, const maths::vec3f& position, const unsigned int colour) {
+		void BatchRenderer2D::drawString(const std::string& text, const maths::vec3f& position, const Font& font, const unsigned int colour) {
 
 			float samplerIndex = 0.0f;
 			bool exists = false;
 
 			for (int index = 0; index < _textures.size(); index++) {
-				if (_textures[index] == _freeTypeAtlas->id) {
+				if (_textures[index] == font.getId()) {
 					samplerIndex = (float)(index + 1);
 					exists = true;
 					break;
@@ -141,7 +139,7 @@ namespace pixel {
 					begin();
 				}
 
-				_textures.push_back(_freeTypeAtlas->id);
+				_textures.push_back(font.getId());
 				samplerIndex = (float)(_textures.size() - 1);
 			}
 
@@ -152,7 +150,7 @@ namespace pixel {
 
 			for (int i = 0; i < text.length(); i++) {
 				char ch = text.at(i);
-				texture_glyph_t* glyph = texture_font_get_glyph(_freeTypeFont, ch);
+				texture_glyph_t* glyph = texture_font_get_glyph(font.getFont(), ch);
 
 				if (glyph != NULL) {
 
