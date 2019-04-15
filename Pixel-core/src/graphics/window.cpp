@@ -31,6 +31,8 @@ namespace pixel {
 			FontManager::add(new Font("Courier New", "Courier.ttf", 16));
 		}
 		Window::~Window() {
+			FontManager::clean();
+
 			glfwTerminate();
 		}
 		bool Window::init() {

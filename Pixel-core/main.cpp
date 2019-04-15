@@ -24,10 +24,10 @@ int main() {
 	int width = 1200;
 	int height = width / ratio;
 
-	std::cout << width << ", " << height << std::endl;
-
 	Window window("Pixel", width, height);
-	glClearColor(0.3f, 0.3f, 0.3f, 1.0f);
+
+	glClearColor(0.05f, 0.05f, 0.05f, 1.0f);
+
 
 	Shader* shader = new Shader("src/shaders/lighting.vs", "src/shaders/lighting.fs");
 	FlatLayer layer(shader);
@@ -63,10 +63,9 @@ int main() {
 	std::cout << layer.count() << std::endl;
 
 	FontManager::add(new Font("Raleway", "Raleway-Medium.ttf", 32));
-	FontManager::add(new Font("Courier", "Courier.ttf", 16));
 
 	Group* textGroup = new Group(maths::mat4::translation(vec3f(-16.0f, 9.0f, 0.0f)));
-	Label* fps = new Label("000", 0.5f, -0.62f, "Courier", 0xFF00FF00);
+	Label* fps = new Label("000", 0.5f, -0.62f, 0xFF00FF00);
 	textGroup->add(new Sprite(0.0f, 0.0f, 2.0f, -1.0f, 0xFF888888));
 	textGroup->add(fps);
 
@@ -104,8 +103,6 @@ int main() {
 
 	for (int i = 0; i < 5; i++)
 		delete textures[i];
-
-	FontManager::clean();
 
 	return 0;
 }
