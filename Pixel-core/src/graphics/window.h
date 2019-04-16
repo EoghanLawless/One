@@ -1,9 +1,13 @@
 #pragma once
 
+#include <Windows.h>
 #include <iostream>
+
+#define GLFW_EXPOSE_NATIVE_WIN32
 
 #include "GL/glew.h"
 #include "GLFW/glfw3.h"
+#include "GLFW/glfw3native.h"
 
 #include "fontmanager.h"
 
@@ -52,6 +56,8 @@ namespace pixel {
 			bool mousePressed(unsigned int button) const;
 			bool mouseClicked(unsigned int button) const;
 			void getMousePos(double& xpos, double& ypos);
+
+			HWND getHWND() const;
 		};
 
 	}

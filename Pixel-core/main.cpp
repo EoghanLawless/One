@@ -12,11 +12,13 @@
 #include "src/graphics/layers/group.h"
 
 #include "src/graphics/fontmanager.h"
+#include "src/audio/soundmanager.h"
 
 
 int main() {
 	using namespace pixel;
 	using namespace graphics;
+	using namespace audio;
 	using namespace maths;
 
 	float ratio = 16.0f / 9.0f;
@@ -27,6 +29,11 @@ int main() {
 	Window window("Pixel", width, height);
 
 	glClearColor(0.05f, 0.05f, 0.05f, 1.0f);
+
+
+	SoundManager sm(window.getHWND(), 44100, 15, 5, 7);
+	sm.add(new Sound("Wilson", "wilson16.wav"));
+	sm.add(new Sound("Jump", "jump.wav"));
 
 
 	Shader* shader = new Shader("src/shaders/lighting.vs", "src/shaders/lighting.fs");
@@ -51,24 +58,20 @@ int main() {
 			layer.add(new Sprite(x, y, size - gap, size - gap, textures[rand() % 5]));
 		}
 	}
+	std::cout << layer.count() << std::endl;
 
-	GLint textureIds[] = {
-		0, 1, 2, 3, 4, 5, 6, 7, 8, 9
-	};
+	GLint textureIds[] = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
 
 	shader->enable();
 	shader->setUniform1iv("textures", textureIds, 10);
 	shader->setUniformMat4("pr_matrix", mat4::orthographic(-16.0f, 16.0f, -9.0f, 9.0f, -1.0f, 1.0f));
 
-	std::cout << layer.count() << std::endl;
 
 	FontManager::add(new Font("Raleway", "Raleway-Medium.ttf", 32));
-
 	Group* textGroup = new Group(maths::mat4::translation(vec3f(-16.0f, 9.0f, 0.0f)));
-	Label* fps = new Label("000", 0.5f, -0.62f, 0xFF00FF00);
+	Label* fps = new Label("000", 0.5f, -0.62f, "Courier New", 16, 0xFF00FF00);
 	textGroup->add(new Sprite(0.0f, 0.0f, 2.0f, -1.0f, 0xFF888888));
 	textGroup->add(fps);
-
 	layer.add(textGroup);
 
 
@@ -77,6 +80,8 @@ int main() {
 	Timer time;
 	float timer = 0;
 	unsigned int frames = 0;
+
+	cs_playing_sound_t* sound = nullptr;
 	 
 	while (!window.closed()) {
 		window.clear();
@@ -91,6 +96,16 @@ int main() {
 		layer.render();
 
 		window.update();
+
+
+		if (window.keyTyped(GLFW_KEY_W)) {
+			std::cout << "Play 'Wilson'." << std::endl;
+			sm.play("Wilson");
+		}
+		if (window.keyTyped(GLFW_KEY_J)) {
+			std::cout << "Play 'Jump'." << std::endl;
+			sm.play("Jump");
+		}
 
 		frames++;
 		if (time.elapsed() - timer > 1.0f) {

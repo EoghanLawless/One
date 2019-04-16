@@ -126,6 +126,10 @@ namespace pixel {
 			y = _my;
 		}
 
+		HWND Window::getHWND() const {
+			return glfwGetWin32Window(_window);
+		}
+
 
 		void windowResizeCallback(GLFWwindow *window, int width, int height) {
 			glViewport(0, 0, width, height);
