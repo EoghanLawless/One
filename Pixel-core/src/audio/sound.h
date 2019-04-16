@@ -12,6 +12,9 @@ namespace pixel {
 			std::string _alias;
 			std::string _file;
 
+			float _pan;
+			float _volume;
+
 			cs_loaded_sound_t _loaded_sound;
 			cs_play_sound_def_t _sound_def;
 			cs_playing_sound_t* _playing_sound;
@@ -25,6 +28,11 @@ namespace pixel {
 			void resume();
 			void loop();
 			void stop();
+
+			inline float getPan() const { return _pan; }
+			void setPan(float pan);
+			inline float getVolume() const { return _volume; }
+			void setVolume(float volume);
 
 			inline cs_loaded_sound_t getLoadedSound() const { return _loaded_sound; }
 

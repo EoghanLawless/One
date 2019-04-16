@@ -49,6 +49,18 @@ namespace pixel {
 			get(alias)->stop();
 		}
 
+		void SoundManager::setPan(Sound* sound, float pan) const {
+			sound->setPan(pan);
+		}
+		void SoundManager::setPan(const std::string& alias, float pan) const {
+			get(alias)->setPan(pan);
+		}
+		void SoundManager::setVolume(Sound* sound, float volume) const {
+			sound->setVolume(volume);
+		}
+		void SoundManager::setVolume(const std::string& alias, float volume) const {
+			get(alias)->setVolume(volume);
+		}
 
 		void SoundManager::add(Sound* sound) {
 			_sounds.push_back(sound);

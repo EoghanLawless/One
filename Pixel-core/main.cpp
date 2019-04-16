@@ -107,6 +107,24 @@ int main() {
 			sm.play("Jump");
 		}
 
+		if (window.keyTyped(GLFW_KEY_U)) {
+			std::cout << "Increase volume.: ";
+			if (sm.get("Jump")) {
+				sm.setPan("Jump", 1.0f);
+				float volume = sm.get("Jump")->getVolume();
+				sm.setVolume("Jump", volume + 0.5f);
+				std::cout << (volume + 0.5f) << std::endl;
+			}
+		}
+		if (window.keyTyped(GLFW_KEY_D)) {
+			std::cout << "Decrease volume.: ";
+			if (sm.get("Jump")) {
+				float volume = sm.get("Jump")->getVolume();
+				sm.setVolume("Jump", volume - 0.5f);
+				std::cout << (volume - 0.5f) << std::endl;
+			}
+		}
+
 		frames++;
 		if (time.elapsed() - timer > 1.0f) {
 			timer += 1.0f;

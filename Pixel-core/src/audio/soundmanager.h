@@ -27,6 +27,11 @@ namespace pixel {
 			void stop(Sound* sound) const;
 			void stop(const std::string& alias) const;
 
+			void setPan(Sound* sound, float pan) const;
+			void setPan(const std::string& alias, float pan) const;
+			void setVolume(Sound* sound, float volume) const;
+			void setVolume(const std::string& alias, float volume) const;
+
 			void add(Sound* sound);
 			Sound* get(const std::string& alias) const;
 			void clean();
