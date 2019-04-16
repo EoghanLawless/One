@@ -55,6 +55,12 @@
     <Filter Include="Shaders">
       <UniqueIdentifier>{71f93a4e-0c43-4833-bd07-d2f38ce16e8a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\audio">
+      <UniqueIdentifier>{55bcd552-2c95-4359-95b4-d1cbaeae0007}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\audio">
+      <UniqueIdentifier>{5fb64540-5951-4375-bdf9-3b0f11763b86}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\graphics\shader.cpp">
@@ -81,9 +87,6 @@
     <ClCompile Include="src\maths\vec4f.cpp">
       <Filter>Source Files\maths</Filter>
     </ClCompile>
-    <ClCompile Include="src\graphics\label.cpp">
-      <Filter>Source Files\graphics\renderables</Filter>
-    </ClCompile>
     <ClCompile Include="src\graphics\buffers\buffer.cpp">
       <Filter>Source Files\graphics\buffers</Filter>
     </ClCompile>
@@ -102,31 +105,34 @@
     <ClCompile Include="src\graphics\layers\flatlayer.cpp">
       <Filter>Source Files\graphics\layers</Filter>
     </ClCompile>
-    <ClCompile Include="src\graphics\staticsprite.cpp">
-      <Filter>Source Files\graphics\renderables</Filter>
-    </ClCompile>
-    <ClCompile Include="src\graphics\sprite.cpp">
-      <Filter>Source Files\graphics\renderables</Filter>
-    </ClCompile>
-    <ClCompile Include="src\graphics\batchrenderer2d.cpp">
-      <Filter>Source Files\graphics\renderers</Filter>
-    </ClCompile>
-    <ClCompile Include="src\graphics\simplerenderer2d.cpp">
-      <Filter>Source Files\graphics\renderers</Filter>
-    </ClCompile>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\graphics\font.cpp">
       <Filter>Source Files\graphics</Filter>
     </ClCompile>
-    <ClCompile Include="src\graphics\fontmanager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\audio\sound.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\audio</Filter>
     </ClCompile>
     <ClCompile Include="src\audio\soundmanager.cpp">
+      <Filter>Source Files\audio</Filter>
+    </ClCompile>
+    <ClCompile Include="src\graphics\fontmanager.cpp">
+      <Filter>Source Files\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="src\graphics\renderables\label.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\graphics\renderables\sprite.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\graphics\renderables\staticsprite.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\graphics\renderers\batchrenderer2d.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\graphics\renderers\simplerenderer2d.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -182,37 +188,37 @@
     <ClInclude Include="src\graphics\layers\group.h">
       <Filter>Header Files\graphics\layers</Filter>
     </ClInclude>
-    <ClInclude Include="src\graphics\sprite.h">
-      <Filter>Header Files\graphics\renderables</Filter>
-    </ClInclude>
-    <ClInclude Include="src\graphics\staticsprite.h">
-      <Filter>Header Files\graphics\renderables</Filter>
-    </ClInclude>
-    <ClInclude Include="src\graphics\label.h">
-      <Filter>Header Files\graphics\renderables</Filter>
-    </ClInclude>
-    <ClInclude Include="src\graphics\renderable2d.h">
-      <Filter>Header Files\graphics\renderables</Filter>
-    </ClInclude>
-    <ClInclude Include="src\graphics\simplerenderer2d.h">
-      <Filter>Header Files\graphics\renderers</Filter>
-    </ClInclude>
-    <ClInclude Include="src\graphics\batchrenderer2d.h">
-      <Filter>Header Files\graphics\renderers</Filter>
-    </ClInclude>
-    <ClInclude Include="src\graphics\renderer2d.h">
-      <Filter>Header Files\graphics\renderers</Filter>
-    </ClInclude>
     <ClInclude Include="src\graphics\font.h">
       <Filter>Header Files\graphics</Filter>
     </ClInclude>
-    <ClInclude Include="src\graphics\fontmanager.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\audio\soundmanager.h">
+      <Filter>Header Files\audio</Filter>
     </ClInclude>
     <ClInclude Include="src\audio\sound.h">
+      <Filter>Header Files\audio</Filter>
+    </ClInclude>
+    <ClInclude Include="src\graphics\fontmanager.h">
+      <Filter>Header Files\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="src\graphics\renderables\label.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\audio\soundmanager.h">
+    <ClInclude Include="src\graphics\renderables\renderable2d.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\graphics\renderables\sprite.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\graphics\renderables\staticsprite.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\graphics\renderers\batchrenderer2d.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\graphics\renderers\renderer2d.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\graphics\renderers\simplerenderer2d.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

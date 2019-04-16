@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../renderer2d.h"
-#include "../renderable2d.h"
+#include "graphics/renderers/renderer2d.h"
+#include "graphics/renderables/renderable2d.h"
 
 namespace pixel {
 	namespace graphics {

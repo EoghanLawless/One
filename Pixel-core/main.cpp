@@ -1,18 +1,18 @@
 
-#include "src/maths/maths.h"
-#include "src/utils/timer.h"
+#include "graphics/window.h"
+#include "graphics/shader.h"
+#include "graphics/texture.h"
+#include "graphics/renderers/batchrenderer2d.h"
+#include "graphics/layers/flatlayer.h"
+#include "graphics/layers/group.h"
+#include "graphics/renderables/label.h"
+#include "graphics/renderables/sprite.h"
 
-#include "src/graphics/batchrenderer2d.h"
-#include "src/graphics/label.h"
-#include "src/graphics/shader.h"
-#include "src/graphics/sprite.h"
-#include "src/graphics/texture.h"
-#include "src/graphics/window.h"
-#include "src/graphics/layers/flatlayer.h"
-#include "src/graphics/layers/group.h"
+#include "graphics/fontmanager.h"
+#include "audio/soundmanager.h"
 
-#include "src/graphics/fontmanager.h"
-#include "src/audio/soundmanager.h"
+#include "maths/maths.h"
+#include "utils/timer.h"
 
 
 int main() {

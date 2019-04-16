@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../renderable2d.h"
+#include "graphics/renderables/renderable2d.h"
 
 namespace pixel {
 	namespace graphics {

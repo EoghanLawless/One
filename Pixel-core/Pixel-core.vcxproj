@@ -70,13 +70,13 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>$(SolutionDir)Dependencies\GLFW\include;$(SolutionDir)Dependencies\GLEW\include;$(SolutionDir)Dependencies\FreeImage\include;$(SolutionDir)Dependencies\FreeType\include;$(SolutionDir)Dependencies\FreeType-GL\include;$(SolutionDir)Dependencies\Cute-Sound\include;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)Dependencies\GLFW\include;$(SolutionDir)Dependencies\GLEW\include;$(SolutionDir)Dependencies\FreeImage\include;$(SolutionDir)Dependencies\FreeType\include;$(SolutionDir)Dependencies\FreeType-GL\include;$(SolutionDir)Dependencies\Cute-Sound\include;$(ProjectDir)src;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)Dependencies\GLFW\lib-vc2015;$(SolutionDir)Dependencies\GLEW\lib;$(SolutionDir)Dependencies\FreeImage\lib;$(SolutionDir)Dependencies\FreeType\lib;$(SolutionDir)Dependencies\FreeType-GL\lib;$(LibraryPath)</LibraryPath>
     <OutDir>$(SolutionDir)bin\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)bin\$(Configuration)\Intermidiates\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IncludePath>$(SolutionDir)Dependencies\GLFW\include;$(SolutionDir)Dependencies\GLEW\include;$(SolutionDir)Dependencies\FreeImage\include;$(SolutionDir)Dependencies\FreeType\include;$(SolutionDir)Dependencies\FreeType-GL\include;$(SolutionDir)Dependencies\Cute-Sound\include;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)Dependencies\GLFW\include;$(SolutionDir)Dependencies\GLEW\include;$(SolutionDir)Dependencies\FreeImage\include;$(SolutionDir)Dependencies\FreeType\include;$(SolutionDir)Dependencies\FreeType-GL\include;$(SolutionDir)Dependencies\Cute-Sound\include;$(ProjectDir)src;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)Dependencies\GLFW\lib-vc2015;$(SolutionDir)Dependencies\GLEW\lib;$(SolutionDir)Dependencies\FreeImage\lib;$(SolutionDir)Dependencies\FreeType\lib;$(SolutionDir)Dependencies\FreeType-GL\lib;$(LibraryPath)</LibraryPath>
     <OutDir>$(SolutionDir)bin\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)bin\$(Configuration)\Intermidiates\</IntDir>
@@ -181,19 +181,19 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="src\audio\sound.cpp" />
     <ClCompile Include="src\audio\soundmanager.cpp" />
-    <ClCompile Include="src\graphics\batchrenderer2d.cpp" />
     <ClCompile Include="src\graphics\buffers\buffer.cpp" />
     <ClCompile Include="src\graphics\buffers\indexbuffer.cpp" />
     <ClCompile Include="src\graphics\buffers\vertexarray.cpp" />
     <ClCompile Include="src\graphics\fontmanager.cpp" />
-    <ClCompile Include="src\graphics\label.cpp" />
     <ClCompile Include="src\graphics\layers\flatlayer.cpp" />
     <ClCompile Include="src\graphics\layers\group.cpp" />
     <ClCompile Include="src\graphics\layers\layer.cpp" />
-    <ClCompile Include="src\graphics\simplerenderer2d.cpp" />
+    <ClCompile Include="src\graphics\renderables\label.cpp" />
+    <ClCompile Include="src\graphics\renderables\sprite.cpp" />
+    <ClCompile Include="src\graphics\renderables\staticsprite.cpp" />
+    <ClCompile Include="src\graphics\renderers\batchrenderer2d.cpp" />
+    <ClCompile Include="src\graphics\renderers\simplerenderer2d.cpp" />
     <ClCompile Include="src\graphics\shader.cpp" />
-    <ClCompile Include="src\graphics\sprite.cpp" />
-    <ClCompile Include="src\graphics\staticsprite.cpp" />
     <ClCompile Include="src\graphics\window.cpp" />
     <ClCompile Include="src\maths\mat4.cpp" />
     <ClCompile Include="src\maths\maths.cpp" />
@@ -206,21 +206,21 @@
   <ItemGroup>
     <ClInclude Include="src\audio\sound.h" />
     <ClInclude Include="src\audio\soundmanager.h" />
-    <ClInclude Include="src\graphics\batchrenderer2d.h" />
     <ClInclude Include="src\graphics\buffers\buffer.h" />
     <ClInclude Include="src\graphics\buffers\indexbuffer.h" />
     <ClInclude Include="src\graphics\buffers\vertexarray.h" />
     <ClInclude Include="src\graphics\fontmanager.h" />
-    <ClInclude Include="src\graphics\label.h" />
     <ClInclude Include="src\graphics\layers\flatlayer.h" />
     <ClInclude Include="src\graphics\layers\group.h" />
     <ClInclude Include="src\graphics\layers\layer.h" />
-    <ClInclude Include="src\graphics\renderable2d.h" />
-    <ClInclude Include="src\graphics\renderer2d.h" />
+    <ClInclude Include="src\graphics\renderables\label.h" />
+    <ClInclude Include="src\graphics\renderables\renderable2d.h" />
+    <ClInclude Include="src\graphics\renderables\sprite.h" />
+    <ClInclude Include="src\graphics\renderables\staticsprite.h" />
+    <ClInclude Include="src\graphics\renderers\batchrenderer2d.h" />
+    <ClInclude Include="src\graphics\renderers\renderer2d.h" />
+    <ClInclude Include="src\graphics\renderers\simplerenderer2d.h" />
     <ClInclude Include="src\graphics\shader.h" />
-    <ClInclude Include="src\graphics\simplerenderer2d.h" />
-    <ClInclude Include="src\graphics\sprite.h" />
-    <ClInclude Include="src\graphics\staticsprite.h" />
     <ClInclude Include="src\graphics\window.h" />
     <ClInclude Include="src\maths\mat4.h" />
     <ClInclude Include="src\maths\maths.h" />
