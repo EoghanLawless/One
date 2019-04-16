@@ -28,7 +28,7 @@ namespace pixel {
 				_mouseClicked[button] = false;
 			}
 
-			FontManager::add(new Font("Courier New", "Courier.ttf", 16));
+			FontManager::add(new Font("Courier New", "res/fonts/Courier.ttf", 16));
 		}
 		Window::~Window() {
 			FontManager::clean();

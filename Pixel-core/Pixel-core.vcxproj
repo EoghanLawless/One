@@ -239,11 +239,6 @@
     <None Include="src\shaders\lighting.fs" />
     <None Include="src\shaders\lighting.vs" />
   </ItemGroup>
-  <ItemGroup>
-    <Image Include="portrait1.png" />
-    <Image Include="portrait_silhouette.png" />
-    <Image Include="test.png" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

@@ -32,19 +32,19 @@ int main() {
 
 
 	SoundManager sm(window.getHWND(), 44100, 15, 5, 7);
-	sm.add(new Sound("Wilson", "wilson16.wav"));
-	sm.add(new Sound("Jump", "jump.wav"));
+	sm.add(new Sound("Wilson", "res/sounds/wilson16.wav"));
+	sm.add(new Sound("Jump", "res/sounds/jump.wav"));
 
 
-	Shader* shader = new Shader("src/shaders/lighting.vs", "src/shaders/lighting.fs");
+	Shader* shader = new Shader("res/shaders/lighting.vs", "res/shaders/lighting.fs");
 	FlatLayer layer(shader);
 
 	Texture* textures[] = {
-		new Texture("test.png"),
-		new Texture("test_white.png"),
-		new Texture("test_red.png"),
-		new Texture("test_green.png"),
-		new Texture("test_blue.png")
+		new Texture("res/textures/test.png"),
+		new Texture("res/textures/test_white.png"),
+		new Texture("res/textures/test_red.png"),
+		new Texture("res/textures/test_green.png"),
+		new Texture("res/textures/test_blue.png")
 	};
 
 	float pad = 2.0f;
@@ -67,7 +67,7 @@ int main() {
 	shader->setUniformMat4("pr_matrix", mat4::orthographic(-16.0f, 16.0f, -9.0f, 9.0f, -1.0f, 1.0f));
 
 
-	FontManager::add(new Font("Raleway", "Raleway-Medium.ttf", 32));
+	FontManager::add(new Font("Raleway", "res/fonts/Raleway-Medium.ttf", 32));
 	Group* textGroup = new Group(maths::mat4::translation(vec3f(-16.0f, 9.0f, 0.0f)));
 	Label* fps = new Label("000", 0.5f, -0.62f, "Courier New", 16, 0xFF00FF00);
 	textGroup->add(new Sprite(0.0f, 0.0f, 2.0f, -1.0f, 0xFF888888));

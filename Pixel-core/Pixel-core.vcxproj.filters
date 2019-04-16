@@ -232,15 +232,4 @@
     <None Include="src\shaders\lighting.fs" />
     <None Include="src\shaders\lighting.vs" />
   </ItemGroup>
-  <ItemGroup>
-    <Image Include="portrait_silhouette.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="test.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="portrait1.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-  </ItemGroup>
 </Project>
