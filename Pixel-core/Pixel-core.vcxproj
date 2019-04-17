@@ -204,7 +204,6 @@
     <ClCompile Include="src\graphics\font.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="pixel.h" />
     <ClInclude Include="src\audio\sound.h" />
     <ClInclude Include="src\audio\soundmanager.h" />
     <ClInclude Include="src\graphics\buffers\buffer.h" />
@@ -230,6 +229,7 @@
     <ClInclude Include="src\maths\vec4f.h" />
     <ClInclude Include="src\graphics\texture.h" />
     <ClInclude Include="src\graphics\font.h" />
+    <ClInclude Include="src\pixel.h" />
     <ClInclude Include="src\utils\fileutils.h" />
     <ClInclude Include="src\utils\imageload.h" />
     <ClInclude Include="src\utils\timer.h" />

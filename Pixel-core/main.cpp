@@ -120,6 +120,7 @@ int main() {
 		frames++;
 		if (timer.elapsedSeconds() >= 1.0f) {
 			fps->text = std::to_string(frames) + "";
+			std::cout << frames << " fps" << std::endl;
 			frames = 0;
 			timer.restart();
 		}

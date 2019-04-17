@@ -10,8 +10,6 @@ namespace pixel {
 		public:
 			Font* font;
 			std::string text;
-			maths::vec3f& position;
-			float x, y;
 
 			Label(std::string text, float x, float y, unsigned int colour);
 			Label(std::string text, float x, float y, Font* font, unsigned int colour);

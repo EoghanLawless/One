@@ -22,8 +22,9 @@ namespace pixel {
 			delete _renderer;
 			delete _shader;
 
-			for (int i = 0; i < _renderables.size(); i++) {
-				delete _renderables[i];
+			while (!_renderables.empty()) {
+				delete _renderables.back();
+				_renderables.pop_back();
 			}
 		}
 

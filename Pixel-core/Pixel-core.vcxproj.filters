@@ -221,7 +221,7 @@
     <ClInclude Include="src\graphics\renderers\batchrenderer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="pixel.h">
+    <ClInclude Include="src\pixel.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

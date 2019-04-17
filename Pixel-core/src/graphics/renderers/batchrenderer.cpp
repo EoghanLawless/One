@@ -58,9 +58,10 @@ namespace pixel {
 		}
 
 		void BatchRenderer::submit(const Renderable* renderable) {
-			const maths::vec3f& position = renderable->getPosition();
-			const maths::vec2f& size = renderable->getSize();
-			const unsigned int colour = renderable->getColour();
+
+			const maths::vec3f& position = renderable->position;
+			const maths::vec2f& size = renderable->size;
+			const unsigned int colour = renderable->colour;
 			const std::vector<maths::vec2f>& textureCoord = renderable->getTextureCoord();
 			const GLuint textureId = renderable->getTextureId();
 
@@ -83,6 +84,8 @@ namespace pixel {
 						end();
 						flush();
 						begin();
+
+						_textures.clear();
 					}
 
 					_textures.push_back(textureId);
@@ -137,6 +140,8 @@ namespace pixel {
 					end();
 					flush();
 					begin();
+
+					_textures.clear();
 				}
 
 				_textures.push_back(font.getId());
@@ -221,7 +226,6 @@ namespace pixel {
 			glBindVertexArray(0);
 
 			_indexCount = 0;
-			_textures.clear();
 		}
 
 	}

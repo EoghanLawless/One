@@ -4,32 +4,20 @@
 namespace pixel {
 	namespace graphics {
 
-		Label::Label(std::string text, float x, float y, unsigned int colour) : Renderable(), text(text), position(_position), font(FontManager::get("Courier New", 16)) {
-			_position = maths::vec3f(x, y, 0.0f);
-			_colour = colour;
-		}
+		Label::Label(std::string text, float x, float y, unsigned int colour) : Renderable(maths::vec3f(x, y, 0.0f), maths::vec2f(0.0f, 0.0f), colour), text(text), font(FontManager::get()) { }
 
-		Label::Label(std::string text, float x, float y, Font* font, unsigned int colour) : Renderable(), text(text), position(_position), font(font) {
-			_position = maths::vec3f(x, y, 0.0f);
-			_colour = colour;
-		}
+		Label::Label(std::string text, float x, float y, Font* font, unsigned int colour) : Renderable(maths::vec3f(x, y, 0.0f), maths::vec2f(0.0f, 0.0f), colour), text(text), font(font) { }
 
-		Label::Label(std::string text, float x, float y, const std::string& font, unsigned int colour) : Renderable(), text(text), position(_position), font(FontManager::get(font)) {
-			_position = maths::vec3f(x, y, 0.0f);
-			_colour = colour;
-
+		Label::Label(std::string text, float x, float y, const std::string& font, unsigned int colour) : Renderable(maths::vec3f(x, y, 0.0f), maths::vec2f(0.0f, 0.0f), colour), text(text), font(FontManager::get(font)) {
 			validateFont(font, -1);
 		}
 
-		Label::Label(std::string text, float x, float y, const std::string& font, unsigned int size, unsigned int colour) : Renderable(), text(text), position(_position), font(FontManager::get(font, size)) {
-			_position = maths::vec3f(x, y, 0.0f);
-			_colour = colour;
-
+		Label::Label(std::string text, float x, float y, const std::string& font, unsigned int size, unsigned int colour) : Renderable(maths::vec3f(x, y, 0.0f), maths::vec2f(0.0f, 0.0f), colour), text(text), font(FontManager::get(font, size)) {
 			validateFont(font, size);
 		}
 
 		void Label::submit(Renderer* renderer) const {
-			renderer->drawString(text, position, *font, _colour);
+			renderer->drawString(text, position, *font, colour);
 		}
 
 		void Label::validateFont(std::string alias, unsigned int size) {

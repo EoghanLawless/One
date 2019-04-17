@@ -15,7 +15,7 @@ namespace pixel {
 				sprite->getVertexArray()->bind();
 				sprite->getIndexBuffer()->bind();
 
-				sprite->getShader().setUniformMat4("ml_matrix", maths::mat4::translation(sprite->getPosition()));
+				sprite->getShader().setUniformMat4("ml_matrix", maths::mat4::translation(sprite->position));
 				glDrawElements(GL_TRIANGLES, sprite->getIndexBuffer()->getCount(), GL_UNSIGNED_SHORT, 0);
 
 				sprite->getIndexBuffer()->unbind();
