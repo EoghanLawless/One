@@ -60,11 +60,6 @@ int main() {
 	}
 	std::cout << layer.count() << std::endl;
 
-	GLint textureIds[] = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
-
-	shader->enable();
-	shader->setUniform1iv("textures", textureIds, 10);
-
 
 	FontManager::add(new Font("Raleway", "res/fonts/Raleway-Medium.ttf", 32));
 	FontManager::get()->setScale(width / 32.0f, height / 18.0f);
