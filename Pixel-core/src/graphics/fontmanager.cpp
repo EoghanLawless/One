@@ -11,6 +11,9 @@ namespace pixel {
 			_fonts.push_back(font);
 		}
 
+		Font* FontManager::get() {
+			return _fonts[0];
+		}
 		Font* FontManager::get(const std::string& alias) {
 			for (Font* font : _fonts)
 				if (font->getAlias() == alias)
@@ -18,7 +21,6 @@ namespace pixel {
 
 			return nullptr;
 		}
-
 		Font* FontManager::get(const std::string& alias, unsigned int size) {
 			for (Font* font : _fonts)
 				if (font->getSize() == size && font->getAlias() == alias)

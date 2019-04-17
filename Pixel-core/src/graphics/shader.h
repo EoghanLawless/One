@@ -4,8 +4,8 @@
 #include <vector>
 #include <GL/glew.h>
 
-#include "../maths/maths.h"
-#include "../utils/fileutils.h"
+#include "maths/maths.h"
+#include "utils/fileutils.h"
 
 namespace pixel {
 	namespace graphics {

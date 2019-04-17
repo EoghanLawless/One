@@ -23,7 +23,7 @@ int main() {
 
 	float ratio = 16.0f / 9.0f;
 
-	int width = 1200;
+	int width = 960;
 	int height = width / ratio;
 
 	Window window("Pixel", width, height);
@@ -64,10 +64,10 @@ int main() {
 
 	shader->enable();
 	shader->setUniform1iv("textures", textureIds, 10);
-	shader->setUniformMat4("pr_matrix", mat4::orthographic(-16.0f, 16.0f, -9.0f, 9.0f, -1.0f, 1.0f));
 
 
 	FontManager::add(new Font("Raleway", "res/fonts/Raleway-Medium.ttf", 32));
+	FontManager::get()->setScale(width / 32.0f, height / 18.0f);
 	Group* textGroup = new Group(maths::mat4::translation(vec3f(-16.0f, 9.0f, 0.0f)));
 	Label* fps = new Label("000", 0.5f, -0.62f, "Courier New", 16, 0xFF00FF00);
 	textGroup->add(new Sprite(0.0f, 0.0f, 2.0f, -1.0f, 0xFF888888));
@@ -77,13 +77,11 @@ int main() {
 
 	double mx, my;
 
-	Timer time;
-	float timer = 0;
 	unsigned int frames = 0;
+	Timer timer = Timer().start();
 
-	cs_playing_sound_t* sound = nullptr;
-	 
 	while (!window.closed()) {
+
 		window.clear();
 		window.getMousePos(mx, my);
 
@@ -125,11 +123,10 @@ int main() {
 		}
 
 		frames++;
-		if (time.elapsed() - timer > 1.0f) {
-			timer += 1.0f;
+		if (timer.elapsedSeconds() >= 1.0f) {
 			fps->text = std::to_string(frames) + "";
-			printf("%d fps\n", frames);
 			frames = 0;
+			timer.restart();
 		}
 	}
 

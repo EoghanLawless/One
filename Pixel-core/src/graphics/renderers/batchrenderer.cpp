@@ -143,8 +143,7 @@ namespace pixel {
 				samplerIndex = (float)_textures.size();
 			}
 
-			float scalex = 960.0f / 32.0f;
-			float scaley = 540.0f / 18.0f;
+			const maths::vec2f& scale = font.getScale();
 
 			float x = position.x;
 
@@ -156,13 +155,13 @@ namespace pixel {
 
 					if (i > 0) {
 						float kerning = texture_glyph_get_kerning(glyph, text.at(i - 1));
-						x += kerning / scalex;
+						x += kerning / scale.x;
 					}
 
-					float x0 = x + glyph->offset_x / scalex;
-					float y0 = position.y + glyph->offset_y / scaley;
-					float x1 = x0 + glyph->width / scalex;
-					float y1 = y0 - glyph->height / scaley;
+					float x0 = x + glyph->offset_x / scale.x;
+					float y0 = position.y + glyph->offset_y / scale.y;
+					float x1 = x0 + glyph->width / scale.x;
+					float y1 = y0 - glyph->height / scale.y;
 
 					float s0 = glyph->s0;
 					float t0 = glyph->t0;
@@ -195,7 +194,7 @@ namespace pixel {
 
 					_indexCount += 6;
 
-					x += glyph->advance_x / scalex;
+					x += glyph->advance_x / scale.x;
 				}
 			}
 		}

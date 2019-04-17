@@ -1,31 +1,47 @@
 #pragma once
 
-#include <Windows.h>
+#include <iostream>
+#include <chrono>
+#include <ctime>
+#include <cmath>
 
-namespace pixel {
+class Timer {
+private:
+	std::chrono::time_point<std::chrono::system_clock> _start;
+	std::chrono::time_point<std::chrono::system_clock> _end;
+	bool _running = false;
 
-	class Timer {
-	private:
-		LARGE_INTEGER _start;
-		double _frequency;
+public:
+	Timer& start() {
+		if (!_running)
+			_start = std::chrono::system_clock::now();
 
-	public:
-		Timer() {
-			LARGE_INTEGER frequency;
-			QueryPerformanceFrequency(&frequency);
-			_frequency = 1.0 / frequency.QuadPart;
-			QueryPerformanceCounter(&_start);
-		}
+		_running = true;
 
-		void reset() {
-			QueryPerformanceCounter(&_start);
-		}
+		return *this;
+	}
+	void restart() {
+		_start = std::chrono::system_clock::now();
+		_running = true;
+	}
+	void stop() {
+		if(_running)
+			_end = std::chrono::system_clock::now();
 
-		float elapsed() {
-			LARGE_INTEGER current;
-			QueryPerformanceCounter(&current);
-			unsigned __int64 cycles = current.QuadPart - _start.QuadPart;
-			return (float)(cycles * _frequency);
-		}
-	};
-}
+		_running = false;
+	}
+
+	float elapsedMilliseconds() {
+		std::chrono::time_point<std::chrono::system_clock> end;
+
+		if (_running)
+			end = std::chrono::system_clock::now();
+		else
+			end = _end;
+
+		return std::chrono::duration_cast<std::chrono::milliseconds>(end - _start).count();
+	}
+	float elapsedSeconds() {
+		return elapsedMilliseconds() / 1000.0;
+	}
+};

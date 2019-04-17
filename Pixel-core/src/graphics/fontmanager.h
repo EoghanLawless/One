@@ -15,6 +15,7 @@ namespace pixel {
 
 		public:
 			static void add(Font* font);
+			static Font* get();
 			static Font* get(const std::string& alias);
 			static Font* get(const std::string& alias, unsigned int size);
 			static void clean();

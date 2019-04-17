@@ -204,6 +204,7 @@
     <ClCompile Include="src\graphics\font.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="pixel.h" />
     <ClInclude Include="src\audio\sound.h" />
     <ClInclude Include="src\audio\soundmanager.h" />
     <ClInclude Include="src\graphics\buffers\buffer.h" />

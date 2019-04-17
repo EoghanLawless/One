@@ -221,6 +221,9 @@
     <ClInclude Include="src\graphics\renderers\batchrenderer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="pixel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="src\shaders\basic.fs">

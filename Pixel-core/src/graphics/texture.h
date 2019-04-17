@@ -5,7 +5,7 @@
 #include "FreeImage.h"
 #include "GL/glew.h"
 
-#include "../utils/imageload.h"
+#include "utils/imageload.h"
 
 namespace pixel {
 	namespace graphics {
