@@ -28,7 +28,7 @@ namespace pixel {
 		*height = FreeImage_GetHeight(dib);
 
 		int bits = FreeImage_GetBPP(dib);
-		int size = (*width) * (*height) * bits;
+		int size = (*width) * (*height) * (bits / 8);
 
 		BYTE* result = new BYTE[size];
 		memcpy(result, pixels, size);

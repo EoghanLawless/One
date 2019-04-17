@@ -131,7 +131,7 @@ namespace pixel {
 		}
 
 
-		void windowResizeCallback(GLFWwindow *window, int width, int height) {
+		void windowResizeCallback(GLFWwindow* window, int width, int height) {
 			glViewport(0, 0, width, height);
 			
 			Window* win = (Window*)glfwGetWindowUserPointer(window);

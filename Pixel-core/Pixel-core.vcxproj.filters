@@ -129,10 +129,10 @@
     <ClCompile Include="src\graphics\renderables\staticsprite.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\graphics\renderers\batchrenderer2d.cpp">
+    <ClCompile Include="src\graphics\renderers\batchrenderer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\graphics\renderers\simplerenderer2d.cpp">
+    <ClCompile Include="src\graphics\renderers\simplerenderer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -203,22 +203,22 @@
     <ClInclude Include="src\graphics\renderables\label.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\graphics\renderables\renderable2d.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\graphics\renderables\sprite.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\graphics\renderables\staticsprite.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\graphics\renderers\batchrenderer2d.h">
+    <ClInclude Include="src\graphics\renderers\renderer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\graphics\renderers\renderer2d.h">
+    <ClInclude Include="src\graphics\renderers\simplerenderer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\graphics\renderers\simplerenderer2d.h">
+    <ClInclude Include="src\graphics\renderables\renderable.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\graphics\renderers\batchrenderer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

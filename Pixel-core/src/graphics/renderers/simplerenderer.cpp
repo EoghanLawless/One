@@ -1,14 +1,14 @@
-#include "simplerenderer2d.h"
+#include "simplerenderer.h"
 
-#include "graphics/renderables/renderable2d.h"
+#include "graphics/renderables/renderable.h"
 
 namespace pixel {
 	namespace graphics {
 
-		void SimpleRenderer2D::submit(const Renderable2D* renderable) {
+		void SimpleRenderer::submit(const Renderable* renderable) {
 			_renderQueue.push_back((StaticSprite*) renderable);
 		}
-		void SimpleRenderer2D::flush() {
+		void SimpleRenderer::flush() {
 			while (!_renderQueue.empty()) {
 				const StaticSprite* sprite = _renderQueue.front();
 

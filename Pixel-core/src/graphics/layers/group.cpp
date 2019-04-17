@@ -9,14 +9,14 @@ namespace pixel {
 				delete _renderables[i];
 		}
 
-		void Group::add(Renderable2D* renderable) {
+		void Group::add(Renderable* renderable) {
 			_renderables.push_back(renderable);
 		}
 
-		void Group::submit(Renderer2D* renderer) const {
+		void Group::submit(Renderer* renderer) const {
 			renderer->push(_transformationMatrix);
 
-			for (const Renderable2D* renderable : _renderables)
+			for (const Renderable* renderable : _renderables)
 				renderable->submit(renderer);
 
 			renderer->pop();

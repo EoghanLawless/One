@@ -1,11 +1,11 @@
 #pragma once
 
-#include "renderable2d.h"
+#include "renderable.h"
 
 namespace pixel {
 	namespace graphics {
 
-		class StaticSprite : public Renderable2D {
+		class StaticSprite : public Renderable {
 		private:
 			maths::vec3f _position;
 			maths::vec2f _size;

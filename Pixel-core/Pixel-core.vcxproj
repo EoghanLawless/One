@@ -95,7 +95,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <PreprocessorDefinitions>GLEW_STATIC;CUTE_SOUND_IMPLEMENTATION;_CRT_SECURE_NO_WARNINGS;ENABLE_OPENAL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>GLFW_EXPOSE_NATIVE_WIN32;GLEW_STATIC;CUTE_SOUND_IMPLEMENTATION;_CRT_SECURE_NO_WARNINGS;ENABLE_OPENAL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <FavorSizeOrSpeed>Neither</FavorSizeOrSpeed>
@@ -138,7 +138,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <PreprocessorDefinitions>GLEW_STATIC;CUTE_SOUND_IMPLEMENTATION;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>GLFW_EXPOSE_NATIVE_WIN32;GLEW_STATIC;CUTE_SOUND_IMPLEMENTATION;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
       <FloatingPointModel>Precise</FloatingPointModel>
@@ -191,8 +191,8 @@
     <ClCompile Include="src\graphics\renderables\label.cpp" />
     <ClCompile Include="src\graphics\renderables\sprite.cpp" />
     <ClCompile Include="src\graphics\renderables\staticsprite.cpp" />
-    <ClCompile Include="src\graphics\renderers\batchrenderer2d.cpp" />
-    <ClCompile Include="src\graphics\renderers\simplerenderer2d.cpp" />
+    <ClCompile Include="src\graphics\renderers\batchrenderer.cpp" />
+    <ClCompile Include="src\graphics\renderers\simplerenderer.cpp" />
     <ClCompile Include="src\graphics\shader.cpp" />
     <ClCompile Include="src\graphics\window.cpp" />
     <ClCompile Include="src\maths\mat4.cpp" />
@@ -214,12 +214,12 @@
     <ClInclude Include="src\graphics\layers\group.h" />
     <ClInclude Include="src\graphics\layers\layer.h" />
     <ClInclude Include="src\graphics\renderables\label.h" />
-    <ClInclude Include="src\graphics\renderables\renderable2d.h" />
+    <ClInclude Include="src\graphics\renderables\renderable.h" />
     <ClInclude Include="src\graphics\renderables\sprite.h" />
     <ClInclude Include="src\graphics\renderables\staticsprite.h" />
-    <ClInclude Include="src\graphics\renderers\batchrenderer2d.h" />
-    <ClInclude Include="src\graphics\renderers\renderer2d.h" />
-    <ClInclude Include="src\graphics\renderers\simplerenderer2d.h" />
+    <ClInclude Include="src\graphics\renderers\batchrenderer.h" />
+    <ClInclude Include="src\graphics\renderers\renderer.h" />
+    <ClInclude Include="src\graphics\renderers\simplerenderer.h" />
     <ClInclude Include="src\graphics\shader.h" />
     <ClInclude Include="src\graphics\window.h" />
     <ClInclude Include="src\maths\mat4.h" />

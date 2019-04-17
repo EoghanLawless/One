@@ -1,28 +1,28 @@
 #pragma once
 
-#include "graphics/renderers/renderer2d.h"
-#include "graphics/renderables/renderable2d.h"
+#include "graphics/renderers/renderer.h"
+#include "graphics/renderables/renderable.h"
 
 namespace pixel {
 	namespace graphics {
 
 		class Layer {
 		protected:
-			Layer(Renderer2D* renderer, Shader* shader, maths::mat4 projectionMatrix);
+			Layer(Renderer* renderer, Shader* shader, maths::mat4 projectionMatrix);
 
-			Renderer2D* _renderer;
-			std::vector<Renderable2D*> _renderables;
+			Renderer* _renderer;
+			std::vector<Renderable*> _renderables;
 			Shader* _shader;
 			maths::mat4 _projectionMatrix;
 
 		public:
 			virtual ~Layer();
 
-			virtual void add(Renderable2D* renderable);
+			virtual void add(Renderable* renderable);
 			virtual void render();
 
 			inline int count() const { return _renderables.size(); }
-			inline const std::vector<Renderable2D*>& getRenderables() const { return _renderables; }
+			inline const std::vector<Renderable*>& getRenderables() const { return _renderables; }
 		};
 
 	}

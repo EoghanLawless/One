@@ -2,7 +2,7 @@
 
 #include "layer.h"
 
-#include "graphics/renderers/batchrenderer2d.h"
+#include "graphics/renderers/batchrenderer.h"
 
 namespace pixel {
 	namespace graphics {

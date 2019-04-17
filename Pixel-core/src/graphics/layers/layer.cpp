@@ -3,7 +3,7 @@
 namespace pixel {
 	namespace graphics {
 
-		Layer::Layer(Renderer2D* renderer, Shader* shader, maths::mat4 projectionMatrix)
+		Layer::Layer(Renderer* renderer, Shader* shader, maths::mat4 projectionMatrix)
 		: _renderer(renderer), _shader(shader), _projectionMatrix(projectionMatrix) {
 			_shader->enable();
 
@@ -19,7 +19,7 @@ namespace pixel {
 			}
 		}
 
-		void Layer::add(Renderable2D* renderable) {
+		void Layer::add(Renderable* renderable) {
 			_renderables.push_back(renderable);
 		}
 
@@ -28,7 +28,7 @@ namespace pixel {
 
 			_renderer->begin();
 
-			for (const Renderable2D* renderable : _renderables)
+			for (const Renderable* renderable : _renderables)
 				renderable->submit(_renderer);
 
 			_renderer->end();

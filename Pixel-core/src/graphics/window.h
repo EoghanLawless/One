@@ -3,8 +3,6 @@
 #include <Windows.h>
 #include <iostream>
 
-#define GLFW_EXPOSE_NATIVE_WIN32
-
 #include "GL/glew.h"
 #include "GLFW/glfw3.h"
 #include "GLFW/glfw3native.h"
@@ -35,13 +33,13 @@ namespace pixel {
 
 			bool init();
 
-			friend static void windowResizeCallback(GLFWwindow*, int, int);
-			friend static void keyCallback(GLFWwindow*, int, int, int, int);
-			friend static void mouseButtonCallback(GLFWwindow*, int, int, int);
-			friend static void mousePositionCallback(GLFWwindow*, double, double);
+			friend void windowResizeCallback(GLFWwindow*, int, int);
+			friend void keyCallback(GLFWwindow*, int, int, int, int);
+			friend void mouseButtonCallback(GLFWwindow*, int, int, int);
+			friend void mousePositionCallback(GLFWwindow*, double, double);
 
 		public:
-			Window(const char *title, int width, int height);
+			Window(const char*, int, int);
 			~Window();
 
 			void update();
@@ -51,11 +49,11 @@ namespace pixel {
 			inline int getWidth() const { return _width; }
 			inline int getHeight() const { return _height; }
 
-			bool keyPressed(unsigned int key) const;
-			bool keyTyped(unsigned int key) const;
-			bool mousePressed(unsigned int button) const;
-			bool mouseClicked(unsigned int button) const;
-			void getMousePos(double& xpos, double& ypos);
+			bool keyPressed(unsigned int) const;
+			bool keyTyped(unsigned int) const;
+			bool mousePressed(unsigned int) const;
+			bool mouseClicked(unsigned int) const;
+			void getMousePos(double&, double&);
 
 			HWND getHWND() const;
 		};

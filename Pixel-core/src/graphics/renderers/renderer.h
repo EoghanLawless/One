@@ -11,14 +11,14 @@
 namespace pixel {
 	namespace graphics {
 
-		class Renderable2D;
+		class Renderable;
 
-		class Renderer2D {
+		class Renderer {
 		protected:
 			std::vector<maths::mat4> _transformationStack;
 			const maths::mat4* _currentTransformation;
 
-			Renderer2D() {
+			Renderer() {
 				_transformationStack.push_back(maths::mat4::identity());
 				_currentTransformation = &_transformationStack.back();
 			}
@@ -40,7 +40,7 @@ namespace pixel {
 			}
 
 			virtual void begin() { }
-			virtual void submit(const Renderable2D* renderable) = 0;
+			virtual void submit(const Renderable* renderable) = 0;
 			virtual void drawString(const std::string& text, const maths::vec3f& position, const Font& font, const unsigned int colour) { }
 			virtual void end() { }
 			virtual void flush() = 0;

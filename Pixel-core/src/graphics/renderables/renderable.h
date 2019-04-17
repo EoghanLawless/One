@@ -1,6 +1,6 @@
 #pragma once
 
-#include "graphics/renderers/renderer2d.h"
+#include "graphics/renderers/renderer.h"
 #include "graphics/texture.h"
 #include "graphics/shader.h"
 
@@ -20,7 +20,7 @@ namespace pixel {
 			unsigned int colour;
 		};
 
-		class Renderable2D {
+		class Renderable {
 		private:
 			void setDefaultTextureCoord() {
 				_textureCoord.push_back(maths::vec2f(0, 0));
@@ -36,17 +36,17 @@ namespace pixel {
 			std::vector<maths::vec2f> _textureCoord;
 			Texture* _texture;
 
-			Renderable2D() : _texture(nullptr) {
+			Renderable() : _texture(nullptr) {
 				setDefaultTextureCoord();
 			}
 
 		public:
-			Renderable2D(maths::vec3f position, maths::vec2f size, unsigned int colour) : _position(position), _size(size), _colour(colour), _texture(nullptr) {
+			Renderable(maths::vec3f position, maths::vec2f size, unsigned int colour) : _position(position), _size(size), _colour(colour), _texture(nullptr) {
 				setDefaultTextureCoord();
 			}
-			virtual ~Renderable2D() { }
+			virtual ~Renderable() { }
 
-			virtual void submit(Renderer2D* renderer) const {
+			virtual void submit(Renderer* renderer) const {
 				renderer->submit(this);
 			}
 

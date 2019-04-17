@@ -2,7 +2,7 @@
 #include "graphics/window.h"
 #include "graphics/shader.h"
 #include "graphics/texture.h"
-#include "graphics/renderers/batchrenderer2d.h"
+#include "graphics/renderers/batchrenderer.h"
 #include "graphics/layers/flatlayer.h"
 #include "graphics/layers/group.h"
 #include "graphics/renderables/label.h"
@@ -110,7 +110,6 @@ int main() {
 		if (window.keyTyped(GLFW_KEY_U)) {
 			std::cout << "Increase volume.: ";
 			if (sm.get("Jump")) {
-				sm.setPan("Jump", 1.0f);
 				float volume = sm.get("Jump")->getVolume();
 				sm.setVolume("Jump", volume + 0.5f);
 				std::cout << (volume + 0.5f) << std::endl;

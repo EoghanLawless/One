@@ -3,7 +3,7 @@
 namespace pixel {
 	namespace graphics {
 
-		StaticSprite::StaticSprite(float x, float y, float w, float h, const maths::vec4f& colour, Shader& shader) : Renderable2D(maths::vec3f(x,y,0), maths::vec2f(w,h), 0xFFFF00FF), _shader(shader) {
+		StaticSprite::StaticSprite(float x, float y, float w, float h, const maths::vec4f& colour, Shader& shader) : Renderable(maths::vec3f(x,y,0), maths::vec2f(w,h), 0xFFFF00FF), _shader(shader) {
 			_vertexArray = new VertexArray();
 
 			GLfloat vertices[] = {

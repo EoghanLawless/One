@@ -1,21 +1,21 @@
 #pragma once
 
-#include "graphics/renderables/renderable2d.h"
+#include "graphics/renderables/renderable.h"
 
 namespace pixel {
 	namespace graphics {
 
-		class Group : public Renderable2D {
+		class Group : public Renderable {
 		private:
-			std::vector<Renderable2D*> _renderables;
+			std::vector<Renderable*> _renderables;
 			maths::mat4 _transformationMatrix;
 
 		public:
 			Group(const maths::mat4& matrix);
 			~Group();
 
-			void add(Renderable2D* renderable);
-			void submit(Renderer2D* renderer) const override;
+			void add(Renderable* renderable);
+			void submit(Renderer* renderer) const override;
 		};
 
 	}

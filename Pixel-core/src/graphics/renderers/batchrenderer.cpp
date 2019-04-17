@@ -1,17 +1,17 @@
-#include "batchrenderer2d.h"
+#include "batchrenderer.h"
 
 namespace pixel {
 	namespace graphics {
 
-		BatchRenderer2D::BatchRenderer2D() {
+		BatchRenderer::BatchRenderer() {
 			init();
 		}
-		BatchRenderer2D::~BatchRenderer2D() {
+		BatchRenderer::~BatchRenderer() {
 			delete _indexBuffer;
 			glDeleteBuffers(1, &_buffer);
 		}
 
-		void BatchRenderer2D::init() {
+		void BatchRenderer::init() {
 			glGenVertexArrays(1, &_vertexArray);
 			glGenBuffers(1, &_buffer);
 
@@ -52,12 +52,12 @@ namespace pixel {
 
 		}
 
-		void BatchRenderer2D::begin() {
+		void BatchRenderer::begin() {
 			glBindBuffer(GL_ARRAY_BUFFER, _buffer);
 			_dataBuffer = (VertexData*)glMapBuffer(GL_ARRAY_BUFFER, GL_WRITE_ONLY);
 		}
 
-		void BatchRenderer2D::submit(const Renderable2D* renderable) {
+		void BatchRenderer::submit(const Renderable* renderable) {
 			const maths::vec3f& position = renderable->getPosition();
 			const maths::vec2f& size = renderable->getSize();
 			const unsigned int colour = renderable->getColour();
@@ -79,7 +79,7 @@ namespace pixel {
 				}
 
 				if (!exists) {
-					if (_textures.size() >= 32) {
+					if (_textures.size() >= RENDERER_MAX_TEXTURES) {
 						end();
 						flush();
 						begin();
@@ -119,7 +119,7 @@ namespace pixel {
 			_indexCount += 6;
 		}
 
-		void BatchRenderer2D::drawString(const std::string& text, const maths::vec3f& position, const Font& font, const unsigned int colour) {
+		void BatchRenderer::drawString(const std::string& text, const maths::vec3f& position, const Font& font, const unsigned int colour) {
 
 			float samplerIndex = 0.0f;
 			bool exists = false;
@@ -133,14 +133,14 @@ namespace pixel {
 			}
 
 			if (!exists) {
-				if (_textures.size() >= 32) {
+				if (_textures.size() >= RENDERER_MAX_TEXTURES) {
 					end();
 					flush();
 					begin();
 				}
 
 				_textures.push_back(font.getId());
-				samplerIndex = (float)(_textures.size() - 1);
+				samplerIndex = (float)_textures.size();
 			}
 
 			float scalex = 960.0f / 32.0f;
@@ -201,12 +201,12 @@ namespace pixel {
 		}
 
 
-		void BatchRenderer2D::end() {
+		void BatchRenderer::end() {
 			glUnmapBuffer(GL_ARRAY_BUFFER);
 			glBindBuffer(GL_ARRAY_BUFFER, _buffer);
 		}
 
-		void BatchRenderer2D::flush() {
+		void BatchRenderer::flush() {
 
 			for (int i = 0; i < _textures.size(); i++) {
 				glActiveTexture(GL_TEXTURE0 + i);
@@ -222,6 +222,7 @@ namespace pixel {
 			glBindVertexArray(0);
 
 			_indexCount = 0;
+			_textures.clear();
 		}
 
 	}
