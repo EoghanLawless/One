@@ -1,6 +1,7 @@
 #pragma once
 
 #include <iostream>
+#include <string>
 #include <vector>
 #include <GL/glew.h>
 
@@ -14,14 +15,14 @@ namespace pixel {
 		private:
 			GLuint _shaderId;
 
-			const char* _vertexPath;
-			const char* _fragmentPath;
+			std::string _vertexPath;
+			std::string _fragmentPath;
 
 			GLuint load();
 			GLint getUniformLocation(const GLchar* name);
 
 		public:
-			Shader(const char* vertexPath, const char* fragmentShader);
+			Shader(std::string vertexPath, std::string fragmentShader);
 			~Shader();
 
 			void setUniform1f(const GLchar* name, float value);

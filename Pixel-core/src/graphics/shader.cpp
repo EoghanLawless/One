@@ -3,7 +3,7 @@
 namespace pixel {
 	namespace graphics {
 
-		Shader::Shader(const char* vertexPath, const char* fragmentPath) : _vertexPath(vertexPath), _fragmentPath(fragmentPath) {
+		Shader::Shader(std::string vertexPath, std::string fragmentPath) : _vertexPath(vertexPath), _fragmentPath(fragmentPath) {
 			_shaderId = load();
 		}
 
@@ -16,8 +16,8 @@ namespace pixel {
 			GLuint vertex = glCreateShader(GL_VERTEX_SHADER);
 			GLuint fragment = glCreateShader(GL_FRAGMENT_SHADER);
 
-			std::string vertexSourceCode = read_file(_vertexPath);
-			std::string fragmentSourceCode = read_file(_fragmentPath);
+			std::string vertexSourceCode = read_file(_vertexPath.c_str());
+			std::string fragmentSourceCode = read_file(_fragmentPath.c_str());
 
 			const char* vertexSource = vertexSourceCode.c_str();
 			const char* fragmentSource = fragmentSourceCode.c_str();

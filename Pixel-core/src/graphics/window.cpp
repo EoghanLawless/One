@@ -28,9 +28,11 @@ namespace pixel {
 				_mouseClicked[button] = false;
 			}
 
+			FreeImage_Initialise();
 			FontManager::add(new Font("Courier New", "res/fonts/Courier.ttf", 16));
 		}
 		Window::~Window() {
+			FreeImage_DeInitialise();
 			FontManager::clean();
 
 			glfwTerminate();

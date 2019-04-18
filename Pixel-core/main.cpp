@@ -89,6 +89,7 @@
 //		layer.render();
 //
 //		window.update();
+//		window.poll();
 //
 //
 //		if (window.keyTyped(GLFW_KEY_W)) {

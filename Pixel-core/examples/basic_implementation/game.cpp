@@ -1,5 +1,7 @@
 #include "pixel.h"
 
+#define DEBUG 0
+
 using namespace pixel;
 using namespace graphics;
 using namespace audio;
@@ -20,8 +22,15 @@ private:
 	Label* fps;
 	Sprite* sprite;
 
+	std::string _resource_dir;
+
 public:
-	Game() { }
+	Game() {
+		if (DEBUG)
+			_resource_dir = "examples/basic_implementation/res";
+		else
+			_resource_dir = "res";
+	}
 	~Game() {
 		delete shader_basic;
 		delete shader_greyscale;
@@ -38,11 +47,11 @@ public:
 
 
 		sounds = new SoundManager(window->getHWND(), 44100, 15, 5, 8);
-		sounds->add(new Sound("Jump", "examples/basic_implementation/res/sounds/jump.wav"));
+		sounds->add(new Sound("Jump", _resource_dir + "/sounds/jump.wav"));
 
 
-		shader_greyscale = new Shader("examples/basic_implementation/res/shaders/greyscale.vs", "examples/basic_implementation/res/shaders/greyscale.fs");
-		shader_basic = new Shader("examples/basic_implementation/res/shaders/basic.vs", "examples/basic_implementation/res/shaders/basic.fs");
+		shader_greyscale = new Shader(_resource_dir + "/shaders/greyscale.vs", _resource_dir + "/shaders/greyscale.fs");
+		shader_basic = new Shader(_resource_dir + "/shaders/basic.vs", _resource_dir + "/shaders/basic.fs");
 
 		background = new Layer(new BatchRenderer(), shader_greyscale, maths::mat4::orthographic(-16.0f, 16.0f, -9.0f, 9.0f, -1.0f, 1.0f));
 		player = new Layer(new BatchRenderer(), shader_basic, maths::mat4::orthographic(-16.0f, 16.0f, -9.0f, 9.0f, -1.0f, 1.0f));
@@ -50,11 +59,11 @@ public:
 
 
 		Texture* textures[] = {
-			new Texture("examples/basic_implementation/res/textures/test.png"),
-			new Texture("examples/basic_implementation/res/textures/test_white.png"),
-			new Texture("examples/basic_implementation/res/textures/test_red.png"),
-			new Texture("examples/basic_implementation/res/textures/test_green.png"),
-			new Texture("examples/basic_implementation/res/textures/test_blue.png")
+			new Texture(_resource_dir + "/textures/test.png"),
+			new Texture(_resource_dir + "/textures/test_white.png"),
+			new Texture(_resource_dir + "/textures/test_red.png"),
+			new Texture(_resource_dir + "/textures/test_green.png"),
+			new Texture(_resource_dir + "/textures/test_blue.png")
 		};
 		unsigned int colours[] = {
 			0xFF999999,
@@ -76,7 +85,7 @@ public:
 		}
 		
 
-		sprite = new Sprite(-1.5f, -1.5f, 3, 3, new Texture("examples/basic_implementation/res/textures/blue_ball.png"));
+		sprite = new Sprite(-1.5f, -1.5f, 3, 3, new Texture(_resource_dir + "/textures/blue_ball.png"));
 		player->add(sprite);
 
 		FontManager::get()->setScale(window->getWidth() / 32.0f, window->getHeight() / 18.0f);
