@@ -71,21 +71,23 @@ namespace pixel {
 		
 
 		void Window::update() {
-			for (int key = 0; key < NUM_KEYS; key++)
-				_keyTyped[key] = _keys[key] && !_keyState[key];
-			memcpy(_keyState, _keys, NUM_KEYS);
-
-			for (int button = 0; button < NUM_BUTTONS; button++)
-				_mouseClicked[button] = _mouseButtons[button] && !_mouseState[button];
-			memcpy(_mouseState, _mouseButtons, NUM_BUTTONS);
-
 			GLenum error = glGetError();
 			if (error != GL_NO_ERROR) {
 				std::cout << "OpenGL error: " << error << std::endl;
 			}
 
-			glfwPollEvents();
 			glfwSwapBuffers(_window);
+			glfwPollEvents();
+		}
+		void Window::poll() {
+			for (int key = 0; key < NUM_KEYS; key++)
+				_keyTyped[key] = _keys[key] && !_keyState[key];
+
+			for (int button = 0; button < NUM_BUTTONS; button++)
+				_mouseClicked[button] = _mouseButtons[button] && !_mouseState[button];
+
+			memcpy(_keyState, _keys, NUM_KEYS);
+			memcpy(_mouseState, _mouseButtons, NUM_BUTTONS);
 		}
 		void Window::clear() const {
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -93,7 +95,6 @@ namespace pixel {
 		bool Window::closed() const {
 			return glfwWindowShouldClose(_window);
 		}
-
 
 
 		bool Window::keyPressed(unsigned int key) const {
@@ -107,7 +108,6 @@ namespace pixel {
 				return false;
 
 			return _keyTyped[key];
-
 		}
 		bool Window::mousePressed(unsigned int button) const {
 			if (button >= NUM_BUTTONS)

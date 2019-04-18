@@ -40,6 +40,7 @@ namespace pixel {
 
 				if (_timer->elapsedMilliseconds() - last_update > UPDATE_INTERVAL) {
 					update();
+					_window->poll();
 
 					update_counter++;
 					last_update += UPDATE_INTERVAL;

@@ -8,6 +8,7 @@ class Game : public Pixel {
 
 private:
 	Window* window;
+	SoundManager* sounds;
 
 	Shader* shader_greyscale;
 	Shader* shader_basic;
@@ -34,6 +35,10 @@ public:
 	void init() override {
 		window = createWindow("Basic Implementation", 960, 540);
 		glClearColor(0.2f, 0.2f, 0.3f, 1.0f);
+
+
+		sounds = new SoundManager(window->getHWND(), 44100, 15, 5, 8);
+		sounds->add(new Sound("Jump", "examples/basic_implementation/res/sounds/jump.wav"));
 
 
 		shader_greyscale = new Shader("examples/basic_implementation/res/shaders/greyscale.vs", "examples/basic_implementation/res/shaders/greyscale.fs");
@@ -87,6 +92,13 @@ public:
 	void update() override {
 
 		float speed = 0.25f;
+
+		if (window->keyTyped(GLFW_KEY_SPACE)) {
+			sounds->play("Jump");
+		}
+		if (window->mouseClicked(GLFW_MOUSE_BUTTON_1)) {
+			sounds->play("Jump");
+		}
 
 		if (window->keyPressed(GLFW_KEY_UP))
 			sprite->position.y += speed;

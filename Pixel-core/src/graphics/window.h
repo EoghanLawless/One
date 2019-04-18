@@ -43,6 +43,7 @@ namespace pixel {
 			~Window();
 
 			void update();
+			void poll();
 			void clear() const;
 			bool closed() const;
 
