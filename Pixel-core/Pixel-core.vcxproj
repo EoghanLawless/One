@@ -239,6 +239,7 @@
     <ClInclude Include="src\utils\utils.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="examples\basic_implementation\res\shaders\greyscale.fs" />
     <None Include="src\shaders\basic.fs" />
     <None Include="src\shaders\basic.vs" />
     <None Include="src\shaders\lighting.fs" />

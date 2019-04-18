@@ -20,7 +20,6 @@ namespace pixel {
 
 		Layer::~Layer() {
 			delete _renderer;
-			delete _shader;
 
 			while (!_renderables.empty()) {
 				delete _renderables.back();
