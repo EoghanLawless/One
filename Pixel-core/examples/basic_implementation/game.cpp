@@ -1,5 +1,7 @@
 #include "pixel.h"
 
+#include "res/layers/dynamiclayer.h"
+
 #define DEBUG 1
 
 using namespace pixel;
@@ -18,10 +20,10 @@ private:
 	Layer* background_layer;
 	Layer* character_layer;
 	Layer* hud_layer;
+	DynamicLayer* projectiles_layer;
 
 	Label* fps;
 	Sprite* player;
-	std::vector<Sprite*> projectiles;
 
 	Texture* projectile;
 
@@ -64,6 +66,7 @@ public:
 		background_layer = new Layer(new BatchRenderer(), shader_greyscale, maths::mat4::orthographic(-16.0f, 16.0f, -9.0f, 9.0f, -1.0f, 1.0f));
 		character_layer = new Layer(new BatchRenderer(), shader_basic, maths::mat4::orthographic(-16.0f, 16.0f, -9.0f, 9.0f, -1.0f, 1.0f));
 		hud_layer = new Layer(new BatchRenderer(), shader_basic, maths::mat4::orthographic(-16.0f, 16.0f, -9.0f, 9.0f, -1.0f, 1.0f));
+		projectiles_layer = new DynamicLayer(new BatchRenderer(), shader_basic, maths::mat4::orthographic(-16.0f, 16.0f, -9.0f, 9.0f, -1.0f, 1.0f));
 
 
 		Texture* textures[] = {
@@ -93,7 +96,6 @@ public:
 		}
 
 
-
 		player = new Sprite(-1.5f, -1.5f, 3, 3, new Texture(_resource_dir + "/textures/blue_ball.png"));
 		character_layer->add(player);
 
@@ -104,24 +106,21 @@ public:
 
 	void tick() override {
 		fps->text = std::to_string(getFrames()) + " fps";
-		std::cout << getUpdates() << " ups, " << getFrames() << " fps" << std::endl;
+		std::cout << getUpdates() << " ups, " << getFrames() << " fps, " << (background_layer->count() + character_layer->count() + projectiles_layer->count() + hud_layer->count()) << " sprites" << std::endl;
 	}
 
 	void update() override {
 
 		float speed = 0.25f;
 
-		if (window->keyTyped(GLFW_KEY_SPACE)) {
-			sounds->play("Jump");
-			Sprite* s = new Sprite(player->position.x + 1.0f, player->position.y + 1.0f, 1.0f, 1.0f, projectile);
-			projectiles.push_back(s);
-			character_layer->add(s);
+		if (window->keyPressed(GLFW_KEY_SPACE)) {
+			Sprite* s = new Sprite(player->position.x + 1.2f, player->position.y + 1.2f, 0.6f, 0.6f, 0xFFFF0000);
+			projectiles_layer->add(s);
 		}
 		if (window->mouseClicked(GLFW_MOUSE_BUTTON_1)) {
 			sounds->play("Jump");
 			Sprite* s = new Sprite(player->position.x + 1.0f, player->position.y + 1.0f, 1.0f, 1.0f, projectile);
-			projectiles.push_back(s);
-			character_layer->add(s);
+			projectiles_layer->add(s);
 		}
 
 		if (window->keyPressed(GLFW_KEY_W))
@@ -135,15 +134,11 @@ public:
 			player->position.x += speed;
 
 
+		for (int index = 0; index < projectiles_layer->count(); index++) {
+			projectiles_layer->get(index)->position.y += 0.3f;
 
-		auto iterator = projectiles.begin();
-		while(iterator != projectiles.end()) {
-			(*iterator)->position.y += 0.3f;
-			if ((*iterator)->position.y > 16.0f) {
-				iterator = projectiles.erase(iterator);
-			}
-			else
-				++iterator;
+			if (projectiles_layer->get(index)->position.y >= 9.0f)
+				projectiles_layer->remove(projectiles_layer->get(index));
 		}
 
 
@@ -155,6 +150,7 @@ public:
 	void render() override {
 		background_layer->render();
 		character_layer->render();
+		projectiles_layer->render();
 		hud_layer->render();
 	}
 };

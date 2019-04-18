@@ -138,6 +138,9 @@
     <ClCompile Include="examples\basic_implementation\game.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="examples\basic_implementation\res\layers\dynamiclayer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\graphics\window.h">
@@ -234,6 +237,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\audio\audio.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="examples\basic_implementation\res\layers\dynamiclayer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

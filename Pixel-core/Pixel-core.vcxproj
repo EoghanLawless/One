@@ -181,6 +181,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="examples\basic_implementation\game.cpp" />
+    <ClCompile Include="examples\basic_implementation\res\layers\dynamiclayer.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="src\audio\sound.cpp" />
     <ClCompile Include="src\audio\soundmanager.cpp" />
@@ -207,6 +208,7 @@
     <ClCompile Include="src\graphics\font.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="examples\basic_implementation\res\layers\dynamiclayer.h" />
     <ClInclude Include="src\audio\audio.h" />
     <ClInclude Include="src\audio\sound.h" />
     <ClInclude Include="src\audio\soundmanager.h" />

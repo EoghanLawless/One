@@ -3,8 +3,7 @@
 namespace pixel {
 	namespace graphics {
 
-		Layer::Layer(Renderer* renderer, Shader* shader, maths::mat4 projectionMatrix)
-		: _renderer(renderer), _shader(shader), _projectionMatrix(projectionMatrix) {
+		Layer::Layer(Renderer* renderer, Shader* shader, maths::mat4 projectionMatrix) : _renderer(renderer), _shader(shader), _projectionMatrix(projectionMatrix) {
 			_shader->enable();
 			_shader->setUniformMat4("pr_matrix", projectionMatrix);
 
@@ -14,7 +13,7 @@ namespace pixel {
 				16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31
 			};
 			_shader->setUniform1iv("textures", textureIds, 32);
-
+			
 			_shader->disable();
 		}
 
