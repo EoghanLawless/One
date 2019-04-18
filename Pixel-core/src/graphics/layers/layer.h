@@ -8,14 +8,13 @@ namespace pixel {
 
 		class Layer {
 		protected:
-			Layer(Renderer* renderer, Shader* shader, maths::mat4 projectionMatrix);
-
 			Renderer* _renderer;
 			std::vector<Renderable*> _renderables;
 			Shader* _shader;
 			maths::mat4 _projectionMatrix;
 
 		public:
+			Layer(Renderer* renderer, Shader* shader, maths::mat4 projectionMatrix);
 			virtual ~Layer();
 
 			virtual void add(Renderable* renderable);

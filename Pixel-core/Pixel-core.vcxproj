@@ -178,6 +178,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="examples\basic_implementation\game.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="src\audio\sound.cpp" />
     <ClCompile Include="src\audio\soundmanager.cpp" />
@@ -204,12 +205,14 @@
     <ClCompile Include="src\graphics\font.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\audio\audio.h" />
     <ClInclude Include="src\audio\sound.h" />
     <ClInclude Include="src\audio\soundmanager.h" />
     <ClInclude Include="src\graphics\buffers\buffer.h" />
     <ClInclude Include="src\graphics\buffers\indexbuffer.h" />
     <ClInclude Include="src\graphics\buffers\vertexarray.h" />
     <ClInclude Include="src\graphics\fontmanager.h" />
+    <ClInclude Include="src\graphics\graphics.h" />
     <ClInclude Include="src\graphics\layers\flatlayer.h" />
     <ClInclude Include="src\graphics\layers\group.h" />
     <ClInclude Include="src\graphics\layers\layer.h" />
@@ -233,6 +236,7 @@
     <ClInclude Include="src\utils\fileutils.h" />
     <ClInclude Include="src\utils\imageload.h" />
     <ClInclude Include="src\utils\timer.h" />
+    <ClInclude Include="src\utils\utils.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="src\shaders\basic.fs" />

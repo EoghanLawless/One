@@ -12,7 +12,7 @@
 namespace pixel {
 	namespace graphics {
 
-#define NUM_KEYS 104
+#define NUM_KEYS 348
 #define NUM_BUTTONS 16
 
 		class Window {
