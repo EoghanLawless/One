@@ -252,6 +252,5 @@
     </None>
     <None Include="src\shaders\lighting.fs" />
     <None Include="src\shaders\lighting.vs" />
-    <None Include="examples\basic_implementation\res\shaders\greyscale.fs" />
   </ItemGroup>
 </Project>

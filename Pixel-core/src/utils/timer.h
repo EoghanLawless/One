@@ -9,9 +9,13 @@ class Timer {
 private:
 	std::chrono::time_point<std::chrono::system_clock> _start;
 	std::chrono::time_point<std::chrono::system_clock> _end;
-	bool _running = false;
+	bool _running;
 
 public:
+	Timer() {
+		_running = false;
+	}
+
 	Timer& start() {
 		if (!_running)
 			_start = std::chrono::system_clock::now();

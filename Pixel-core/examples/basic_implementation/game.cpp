@@ -14,8 +14,9 @@ private:
 	Window* window;
 	SoundManager* sounds;
 
-	Shader* shader_greyscale;
 	Shader* shader_basic;
+	Shader* shader_greyscale;
+	Shader* shader_lighting;
 
 	Layer* background_layer;
 	Layer* character_layer;
@@ -26,6 +27,10 @@ private:
 	Sprite* player;
 
 	Texture* projectile;
+
+	Timer* timer;
+
+	maths::mat4 mat;
 
 	std::string _resource_dir;
 
@@ -50,7 +55,7 @@ public:
 
 	void init() override {
 		window = createWindow("Basic Implementation", 960, 540);
-		glClearColor(0.2f, 0.2f, 0.3f, 1.0f);
+		glClearColor(0.05f, 0.05f, 0.1f, 1.0f);
 
 
 		projectile = new Texture(_resource_dir + "/textures/red_ball.png");
@@ -58,23 +63,24 @@ public:
 
 		sounds = new SoundManager(window->getHWND(), 44100, 15, 5, 8);
 		sounds->add(new Sound("Jump", _resource_dir + "/sounds/jump.wav"));
+		
 
-
-		shader_greyscale = new Shader(_resource_dir + "/shaders/greyscale.vs", _resource_dir + "/shaders/greyscale.fs");
 		shader_basic = new Shader(_resource_dir + "/shaders/basic.vs", _resource_dir + "/shaders/basic.fs");
+		shader_greyscale = new Shader(_resource_dir + "/shaders/greyscale.vs", _resource_dir + "/shaders/greyscale.fs");
+		shader_lighting = new Shader(_resource_dir + "/shaders/lighting.vs", _resource_dir + "/shaders/lighting.fs");
 
-		background_layer = new Layer(new BatchRenderer(), shader_greyscale, maths::mat4::orthographic(-16.0f, 16.0f, -9.0f, 9.0f, -1.0f, 1.0f));
+		background_layer = new Layer(new BatchRenderer(), shader_lighting, maths::mat4::orthographic(-16.0f, 16.0f, -9.0f, 9.0f, -1.0f, 1.0f));
 		character_layer = new Layer(new BatchRenderer(), shader_basic, maths::mat4::orthographic(-16.0f, 16.0f, -9.0f, 9.0f, -1.0f, 1.0f));
 		hud_layer = new Layer(new BatchRenderer(), shader_basic, maths::mat4::orthographic(-16.0f, 16.0f, -9.0f, 9.0f, -1.0f, 1.0f));
 		projectiles_layer = new DynamicLayer(new BatchRenderer(), shader_basic, maths::mat4::orthographic(-16.0f, 16.0f, -9.0f, 9.0f, -1.0f, 1.0f));
 
 
 		Texture* textures[] = {
-			new Texture(_resource_dir + "/textures/test.png"),
-			new Texture(_resource_dir + "/textures/test_white.png"),
-			new Texture(_resource_dir + "/textures/test_red.png"),
-			new Texture(_resource_dir + "/textures/test_green.png"),
-			new Texture(_resource_dir + "/textures/test_blue.png")
+			new Texture(_resource_dir + "/textures/brick_1.png"),
+			new Texture(_resource_dir + "/textures/brick_2.png"),
+			new Texture(_resource_dir + "/textures/brick_3.png"),
+			new Texture(_resource_dir + "/textures/brick_4.png"),
+			new Texture(_resource_dir + "/textures/brick_1.png")
 		};
 		unsigned int colours[] = {
 			0xFF999999,
@@ -84,14 +90,14 @@ public:
 			0xFF9999FF
 		};
 
-		float pad = 2.0f;
-		float size = 0.8f;
+		float pad = 0.0f;
+		float size = 2.0f;
 		float gap = 0.0f;
 		
 		for (float y = -9.0f + pad; y < 9.0f - pad; y += size) {
 			for (float x = -16.0f + pad; x < 16.0f - pad; x += size) {
-				background_layer->add(new Sprite(x, y, size - gap, size - gap, colours[rand() % 5]));
-				//background->add(new Sprite(x, y, size - gap, size - gap, textures[rand() % 5]));
+				//background_layer->add(new Sprite(x, y, size - gap, size - gap, colours[rand() % 5]));
+				background_layer->add(new Sprite(x, y, size - gap, size - gap, textures[rand() % 5]));
 			}
 		}
 
@@ -102,6 +108,10 @@ public:
 		FontManager::get()->setScale(window->getWidth() / 32.0f, window->getHeight() / 18.0f);
 		fps = new Label("000 fps", -15.5f, 8.1f, 0xFF00FF00);
 		hud_layer->add(fps);
+
+
+		//timer = new Timer();
+		//timer->start();
 	}
 
 	void tick() override {
@@ -140,6 +150,16 @@ public:
 			if (projectiles_layer->get(index)->position.y >= 9.0f)
 				projectiles_layer->remove(projectiles_layer->get(index));
 		}
+
+
+		shader_lighting->enable();
+		shader_lighting->setUniform2f("light_pos", maths::vec2f(player->position.x + 1.5f, player->position.y + 1.5f));
+
+
+		//mat = maths::mat4::rotation(timer->elapsedMilliseconds() / 100.0f, maths::vec3f(0, 0, 1));
+
+		//shader_greyscale->enable();
+		//shader_greyscale->setUniformMat4("ml_matrix", mat);
 
 
 		//double x, y;
