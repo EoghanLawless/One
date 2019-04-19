@@ -3,7 +3,7 @@
 #include <vector>
 #include <GL/glew.h>
 
-#include "graphics/font.h"
+#include "graphics/fonts/font.h"
 
 #include "maths/maths.h"
 

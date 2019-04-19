@@ -8,7 +8,7 @@
 #include "GLFW/glfw3native.h"
 #include "FreeImage.h"
 
-#include "fontmanager.h"
+#include "fonts/fontmanager.h"
 
 namespace pixel {
 	namespace graphics {

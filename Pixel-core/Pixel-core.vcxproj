@@ -70,13 +70,13 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>$(SolutionDir)Dependencies\GLFW\include;$(SolutionDir)Dependencies\GLEW\include;$(SolutionDir)Dependencies\FreeImage\include;$(SolutionDir)Dependencies\FreeType\include;$(SolutionDir)Dependencies\FreeType-GL\include;$(SolutionDir)Dependencies\Cute-Sound\include;$(ProjectDir)src;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)Dependencies\GLFW\include;$(SolutionDir)Dependencies\GLEW\include;$(SolutionDir)Dependencies\FreeImage\include;$(SolutionDir)Dependencies\FreeType\include;$(SolutionDir)Dependencies\FreeType-GL\include;$(SolutionDir)Dependencies\Cute-Sound\include;$(ProjectDir)src;$(ProjectDir)ext;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)Dependencies\GLFW\lib-vc2015;$(SolutionDir)Dependencies\GLEW\lib;$(SolutionDir)Dependencies\FreeImage\lib;$(SolutionDir)Dependencies\FreeType\lib;$(SolutionDir)Dependencies\FreeType-GL\lib;$(LibraryPath)</LibraryPath>
     <OutDir>$(SolutionDir)bin\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)bin\$(Configuration)\Intermidiates\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IncludePath>$(SolutionDir)Dependencies\GLFW\include;$(SolutionDir)Dependencies\GLEW\include;$(SolutionDir)Dependencies\FreeImage\include;$(SolutionDir)Dependencies\FreeType\include;$(SolutionDir)Dependencies\FreeType-GL\include;$(SolutionDir)Dependencies\Cute-Sound\include;$(ProjectDir)src;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)Dependencies\GLFW\include;$(SolutionDir)Dependencies\GLEW\include;$(SolutionDir)Dependencies\FreeImage\include;$(SolutionDir)Dependencies\FreeType\include;$(SolutionDir)Dependencies\FreeType-GL\include;$(SolutionDir)Dependencies\Cute-Sound\include;$(ProjectDir)src;$(ProjectDir)ext;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)Dependencies\GLFW\lib-vc2015;$(SolutionDir)Dependencies\GLEW\lib;$(SolutionDir)Dependencies\FreeImage\lib;$(SolutionDir)Dependencies\FreeType\lib;$(SolutionDir)Dependencies\FreeType-GL\lib;$(LibraryPath)</LibraryPath>
     <OutDir>$(SolutionDir)bin\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)bin\$(Configuration)\Intermidiates\</IntDir>
@@ -188,10 +188,11 @@
     <ClCompile Include="src\graphics\buffers\buffer.cpp" />
     <ClCompile Include="src\graphics\buffers\indexbuffer.cpp" />
     <ClCompile Include="src\graphics\buffers\vertexarray.cpp" />
-    <ClCompile Include="src\graphics\fontmanager.cpp" />
+    <ClCompile Include="src\graphics\fonts\fontmanager.cpp" />
     <ClCompile Include="src\graphics\layers\flatlayer.cpp" />
     <ClCompile Include="src\graphics\layers\group.cpp" />
     <ClCompile Include="src\graphics\layers\layer.cpp" />
+    <ClCompile Include="src\graphics\renderables\dynamicsprite.cpp" />
     <ClCompile Include="src\graphics\renderables\label.cpp" />
     <ClCompile Include="src\graphics\renderables\sprite.cpp" />
     <ClCompile Include="src\graphics\renderables\staticsprite.cpp" />
@@ -205,7 +206,53 @@
     <ClCompile Include="src\maths\vec3f.cpp" />
     <ClCompile Include="src\maths\vec4f.cpp" />
     <ClCompile Include="src\graphics\texture.cpp" />
-    <ClCompile Include="src\graphics\font.cpp" />
+    <ClCompile Include="src\graphics\fonts\font.cpp" />
+    <ClCompile Include="ext\Box2D\Collision\b2BroadPhase.cpp" />
+    <ClCompile Include="ext\Box2D\Collision\b2CollideCircle.cpp" />
+    <ClCompile Include="ext\Box2D\Collision\b2CollideEdge.cpp" />
+    <ClCompile Include="ext\Box2D\Collision\b2CollidePolygon.cpp" />
+    <ClCompile Include="ext\Box2D\Collision\b2Collision.cpp" />
+    <ClCompile Include="ext\Box2D\Collision\b2Distance.cpp" />
+    <ClCompile Include="ext\Box2D\Collision\b2DynamicTree.cpp" />
+    <ClCompile Include="ext\Box2D\Collision\b2TimeOfImpact.cpp" />
+    <ClCompile Include="ext\Box2D\Collision\Shapes\b2ChainShape.cpp" />
+    <ClCompile Include="ext\Box2D\Collision\Shapes\b2CircleShape.cpp" />
+    <ClCompile Include="ext\Box2D\Collision\Shapes\b2EdgeShape.cpp" />
+    <ClCompile Include="ext\Box2D\Collision\Shapes\b2PolygonShape.cpp" />
+    <ClCompile Include="ext\Box2D\Common\b2BlockAllocator.cpp" />
+    <ClCompile Include="ext\Box2D\Common\b2Draw.cpp" />
+    <ClCompile Include="ext\Box2D\Common\b2Math.cpp" />
+    <ClCompile Include="ext\Box2D\Common\b2Settings.cpp" />
+    <ClCompile Include="ext\Box2D\Common\b2StackAllocator.cpp" />
+    <ClCompile Include="ext\Box2D\Common\b2Timer.cpp" />
+    <ClCompile Include="ext\Box2D\Dynamics\b2Body.cpp" />
+    <ClCompile Include="ext\Box2D\Dynamics\b2ContactManager.cpp" />
+    <ClCompile Include="ext\Box2D\Dynamics\b2Fixture.cpp" />
+    <ClCompile Include="ext\Box2D\Dynamics\b2Island.cpp" />
+    <ClCompile Include="ext\Box2D\Dynamics\b2World.cpp" />
+    <ClCompile Include="ext\Box2D\Dynamics\b2WorldCallbacks.cpp" />
+    <ClCompile Include="ext\Box2D\Dynamics\Contacts\b2ChainAndCircleContact.cpp" />
+    <ClCompile Include="ext\Box2D\Dynamics\Contacts\b2ChainAndPolygonContact.cpp" />
+    <ClCompile Include="ext\Box2D\Dynamics\Contacts\b2CircleContact.cpp" />
+    <ClCompile Include="ext\Box2D\Dynamics\Contacts\b2Contact.cpp" />
+    <ClCompile Include="ext\Box2D\Dynamics\Contacts\b2ContactSolver.cpp" />
+    <ClCompile Include="ext\Box2D\Dynamics\Contacts\b2EdgeAndCircleContact.cpp" />
+    <ClCompile Include="ext\Box2D\Dynamics\Contacts\b2EdgeAndPolygonContact.cpp" />
+    <ClCompile Include="ext\Box2D\Dynamics\Contacts\b2PolygonAndCircleContact.cpp" />
+    <ClCompile Include="ext\Box2D\Dynamics\Contacts\b2PolygonContact.cpp" />
+    <ClCompile Include="ext\Box2D\Dynamics\Joints\b2DistanceJoint.cpp" />
+    <ClCompile Include="ext\Box2D\Dynamics\Joints\b2FrictionJoint.cpp" />
+    <ClCompile Include="ext\Box2D\Dynamics\Joints\b2GearJoint.cpp" />
+    <ClCompile Include="ext\Box2D\Dynamics\Joints\b2Joint.cpp" />
+    <ClCompile Include="ext\Box2D\Dynamics\Joints\b2MotorJoint.cpp" />
+    <ClCompile Include="ext\Box2D\Dynamics\Joints\b2MouseJoint.cpp" />
+    <ClCompile Include="ext\Box2D\Dynamics\Joints\b2PrismaticJoint.cpp" />
+    <ClCompile Include="ext\Box2D\Dynamics\Joints\b2PulleyJoint.cpp" />
+    <ClCompile Include="ext\Box2D\Dynamics\Joints\b2RevoluteJoint.cpp" />
+    <ClCompile Include="ext\Box2D\Dynamics\Joints\b2RopeJoint.cpp" />
+    <ClCompile Include="ext\Box2D\Dynamics\Joints\b2WeldJoint.cpp" />
+    <ClCompile Include="ext\Box2D\Dynamics\Joints\b2WheelJoint.cpp" />
+    <ClCompile Include="ext\Box2D\Rope\b2Rope.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="examples\basic_implementation\res\layers\dynamiclayer.h" />
@@ -215,11 +262,12 @@
     <ClInclude Include="src\graphics\buffers\buffer.h" />
     <ClInclude Include="src\graphics\buffers\indexbuffer.h" />
     <ClInclude Include="src\graphics\buffers\vertexarray.h" />
-    <ClInclude Include="src\graphics\fontmanager.h" />
+    <ClInclude Include="src\graphics\fonts\fontmanager.h" />
     <ClInclude Include="src\graphics\graphics.h" />
     <ClInclude Include="src\graphics\layers\flatlayer.h" />
     <ClInclude Include="src\graphics\layers\group.h" />
     <ClInclude Include="src\graphics\layers\layer.h" />
+    <ClInclude Include="src\graphics\renderables\dynamicsprite.h" />
     <ClInclude Include="src\graphics\renderables\label.h" />
     <ClInclude Include="src\graphics\renderables\renderable.h" />
     <ClInclude Include="src\graphics\renderables\sprite.h" />
@@ -235,7 +283,54 @@
     <ClInclude Include="src\maths\vec3f.h" />
     <ClInclude Include="src\maths\vec4f.h" />
     <ClInclude Include="src\graphics\texture.h" />
-    <ClInclude Include="src\graphics\font.h" />
+    <ClInclude Include="src\graphics\fonts\font.h" />
+    <ClInclude Include="ext\Box2D\Box2D.h" />
+    <ClInclude Include="ext\Box2D\Collision\b2BroadPhase.h" />
+    <ClInclude Include="ext\Box2D\Collision\b2Collision.h" />
+    <ClInclude Include="ext\Box2D\Collision\b2Distance.h" />
+    <ClInclude Include="ext\Box2D\Collision\b2DynamicTree.h" />
+    <ClInclude Include="ext\Box2D\Collision\b2TimeOfImpact.h" />
+    <ClInclude Include="ext\Box2D\Collision\Shapes\b2ChainShape.h" />
+    <ClInclude Include="ext\Box2D\Collision\Shapes\b2CircleShape.h" />
+    <ClInclude Include="ext\Box2D\Collision\Shapes\b2EdgeShape.h" />
+    <ClInclude Include="ext\Box2D\Collision\Shapes\b2PolygonShape.h" />
+    <ClInclude Include="ext\Box2D\Collision\Shapes\b2Shape.h" />
+    <ClInclude Include="ext\Box2D\Common\b2BlockAllocator.h" />
+    <ClInclude Include="ext\Box2D\Common\b2Draw.h" />
+    <ClInclude Include="ext\Box2D\Common\b2GrowableStack.h" />
+    <ClInclude Include="ext\Box2D\Common\b2Math.h" />
+    <ClInclude Include="ext\Box2D\Common\b2Settings.h" />
+    <ClInclude Include="ext\Box2D\Common\b2StackAllocator.h" />
+    <ClInclude Include="ext\Box2D\Common\b2Timer.h" />
+    <ClInclude Include="ext\Box2D\Dynamics\b2Body.h" />
+    <ClInclude Include="ext\Box2D\Dynamics\b2ContactManager.h" />
+    <ClInclude Include="ext\Box2D\Dynamics\b2Fixture.h" />
+    <ClInclude Include="ext\Box2D\Dynamics\b2Island.h" />
+    <ClInclude Include="ext\Box2D\Dynamics\b2TimeStep.h" />
+    <ClInclude Include="ext\Box2D\Dynamics\b2World.h" />
+    <ClInclude Include="ext\Box2D\Dynamics\b2WorldCallbacks.h" />
+    <ClInclude Include="ext\Box2D\Dynamics\Contacts\b2ChainAndCircleContact.h" />
+    <ClInclude Include="ext\Box2D\Dynamics\Contacts\b2ChainAndPolygonContact.h" />
+    <ClInclude Include="ext\Box2D\Dynamics\Contacts\b2CircleContact.h" />
+    <ClInclude Include="ext\Box2D\Dynamics\Contacts\b2Contact.h" />
+    <ClInclude Include="ext\Box2D\Dynamics\Contacts\b2ContactSolver.h" />
+    <ClInclude Include="ext\Box2D\Dynamics\Contacts\b2EdgeAndCircleContact.h" />
+    <ClInclude Include="ext\Box2D\Dynamics\Contacts\b2EdgeAndPolygonContact.h" />
+    <ClInclude Include="ext\Box2D\Dynamics\Contacts\b2PolygonAndCircleContact.h" />
+    <ClInclude Include="ext\Box2D\Dynamics\Contacts\b2PolygonContact.h" />
+    <ClInclude Include="ext\Box2D\Dynamics\Joints\b2DistanceJoint.h" />
+    <ClInclude Include="ext\Box2D\Dynamics\Joints\b2FrictionJoint.h" />
+    <ClInclude Include="ext\Box2D\Dynamics\Joints\b2GearJoint.h" />
+    <ClInclude Include="ext\Box2D\Dynamics\Joints\b2Joint.h" />
+    <ClInclude Include="ext\Box2D\Dynamics\Joints\b2MotorJoint.h" />
+    <ClInclude Include="ext\Box2D\Dynamics\Joints\b2MouseJoint.h" />
+    <ClInclude Include="ext\Box2D\Dynamics\Joints\b2PrismaticJoint.h" />
+    <ClInclude Include="ext\Box2D\Dynamics\Joints\b2PulleyJoint.h" />
+    <ClInclude Include="ext\Box2D\Dynamics\Joints\b2RevoluteJoint.h" />
+    <ClInclude Include="ext\Box2D\Dynamics\Joints\b2RopeJoint.h" />
+    <ClInclude Include="ext\Box2D\Dynamics\Joints\b2WeldJoint.h" />
+    <ClInclude Include="ext\Box2D\Dynamics\Joints\b2WheelJoint.h" />
+    <ClInclude Include="ext\Box2D\Rope\b2Rope.h" />
     <ClInclude Include="src\pixel.h" />
     <ClInclude Include="src\utils\fileutils.h" />
     <ClInclude Include="src\utils\imageload.h" />

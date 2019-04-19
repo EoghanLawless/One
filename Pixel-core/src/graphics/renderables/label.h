@@ -1,7 +1,7 @@
 #pragma once
 
 #include "renderable.h"
-#include "graphics/fontmanager.h"
+#include "graphics/fonts/fontmanager.h"
 
 namespace pixel {
 	namespace graphics {
