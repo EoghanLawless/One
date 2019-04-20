@@ -11,6 +11,9 @@ namespace pixel {
 			vec2f();
 			vec2f(const float& x, const float& y);
 
+			vec2f& set(const float x, const float y);
+			vec2f& set(const vec2f v);
+
 			vec2f& add(const vec2f& other);
 			vec2f& sub(const vec2f& other);
 			vec2f& mult(const vec2f& other);

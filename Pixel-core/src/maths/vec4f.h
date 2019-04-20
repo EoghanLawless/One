@@ -8,8 +8,11 @@ namespace pixel {
 		struct vec4f {
 			float x, y, z, w;
 
-			vec4f() = default;
+			vec4f();
 			vec4f(const float& x, const float& y, const float& z, const float& w);
+
+			vec4f& set(const float x, const float y, const float z, const float w);
+			vec4f& set(const vec4f v);
 
 			vec4f& add(const vec4f& other);
 			vec4f& sub(const vec4f& other);

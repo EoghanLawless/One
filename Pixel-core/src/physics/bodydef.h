@@ -15,17 +15,15 @@ namespace pixel {
 
 		struct BodyDef {
 		private:
-			b2BodyDef* _bodyDef;
-
-			void defaults();
+			b2BodyDef _bodyDef;
 
 		public:
-			BodyDef();
+			BodyDef() = default;
 			BodyDef(float x, float y);
 			BodyDef(const maths::vec2f& pos);
 			~BodyDef();
 
-			BodyType type;
+			b2BodyType type;
 			maths::vec2f position;
 			maths::vec2f linearVelocity;
 			float32 linearDamping;
@@ -37,7 +35,7 @@ namespace pixel {
 			float32 gravityScale;
 
 			b2BodyDef* set();
-			b2BodyDef* get();
+			const b2BodyDef* get();
 		};
 
 	}

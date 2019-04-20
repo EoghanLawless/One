@@ -6,89 +6,164 @@
 
 #include "Box2D/Box2D.h"
 
+#include "pixel.h"
+#include "src/physics/body.h"
+#include "src/physics/bodydef.h"
+#include "src/physics/world.h"
 
-// This is a simple example of building and running a simulation
-// using Box2D. Here we create a large ground box and a small dynamic
-// box.
-// There are no graphics for this example. Box2D is meant to be used
-// with your rendering engine in your game engine.
-int main(int argc, char** argv)
-{
-	B2_NOT_USED(argc);
-	B2_NOT_USED(argv);
 
-	// Define the gravity vector.
-	b2Vec2 gravity(0.0f, -10.0f);
+using namespace pixel;
+using namespace graphics;
+using namespace physics;
+using namespace maths;
 
-	// Construct a world object, which will hold and simulate the rigid bodies.
-	b2World world(gravity);
 
-	// Define the ground body.
-	b2BodyDef groundBodyDef;
-	groundBodyDef.position.Set(0.0f, -10.0f);
+int main(int argc, char** argv) {
 
-	// Call the body factory which allocates memory for the ground body
-	// from a pool and creates the ground box shape (also from a pool).
-	// The body is also added to the world.
-	b2Body* groundBody = world.CreateBody(&groundBodyDef);
+	//double floor_x = 0.0f;
+	//double floor_y = -8.0f;
+	//double floor_w = 20.0f;
+	//double floor_h = 2.0f;
 
-	// Define the ground box shape.
-	b2PolygonShape groundBox;
 
-	// The extents are the half-widths of the box.
-	groundBox.SetAsBox(50.0f, 10.0f);
 
-	// Add the ground fixture to the ground body.
-	groundBody->CreateFixture(&groundBox, 0.0f);
+	//Window window("Title", 800, 450);
+	//glClearColor(0.9f, 0.9f, 0.9f, 1.0f);
 
-	// Define the dynamic body. We set its position and call the body factory.
-	b2BodyDef bodyDef;
-	bodyDef.type = b2_dynamicBody;
-	bodyDef.position.Set(0.0f, 4.0f);
-	b2Body* body = world.CreateBody(&bodyDef);
+	//Shader shader("res/shaders/basic.vs", "res/shaders/basic.fs");
+	//Layer layer(new BatchRenderer(), &shader, mat4::orthographic(-32.0f, 32.0f, -18.0f, 18.0f, -1.0f, 1.0f));
 
-	// Define another box shape for our dynamic body.
-	b2PolygonShape dynamicBox;
-	dynamicBox.SetAsBox(1.0f, 1.0f);
+	//DynamicSprite* s = new DynamicSprite(0, 0, 4, 4, 0xAA00FF00);
+	//layer.add(s);
 
-	// Define the dynamic body fixture.
-	b2FixtureDef fixtureDef;
-	fixtureDef.shape = &dynamicBox;
+	//Sprite* floor = new Sprite(-floor_w / 2, floor_y, floor_w, floor_h, 0xAA0000FF);
+	//layer.add(floor);
 
-	// Set the box density to be non-zero, so it will be dynamic.
-	fixtureDef.density = 1.0f;
 
-	// Override the default friction.
-	fixtureDef.friction = 0.3f;
+	//B2_NOT_USED(argc);
+	//B2_NOT_USED(argv);
 
-	// Add the shape to the body.
-	body->CreateFixture(&fixtureDef);
+	//int i = 0;
 
-	// Prepare for simulation. Typically we use a time step of 1/60 of a
-	// second (60Hz) and 10 iterations. This provides a high quality simulation
-	// in most game scenarios.
+	//World world(vec2f(0.0f, 9.8f));
+	//std::cout << i++ << " " << world.getGravity() << std::endl; // 0
+
+	//BodyDef groundDef;
+	//groundDef.position.set(floor_x, floor_y);
+	//groundDef.set();
+	//std::cout << i++ << " " << world.getB2World().IsLocked() << std::endl; // 1
+
+	//Body* groundBody = world.createBody(&groundDef);
+	////std::cout << i++ << " " << world.getB2World().IsLocked() << std::endl; // 2
+
+	//b2PolygonShape groundBox;
+	//groundBox.SetAsBox(floor_w / 2, floor_h / 2);
+	//groundBody->createFixture(&groundBox, 0.0f);
+	//std::cout << i++ << " " << world.getB2World().IsLocked() << std::endl; // 3
+
+
+	//BodyDef bodyDef;
+	//bodyDef.type = b2_dynamicBody;
+	//bodyDef.position.set(0.0f, 1.0f);
+	//bodyDef.set();
+
+	//Body* body = world.createBody(&bodyDef);
+
+	//b2PolygonShape dynamicBox;
+	//dynamicBox.SetAsBox(1.0f, 1.0f);
+
+	//b2FixtureDef fixtureDef;
+	//fixtureDef.shape = &dynamicBox;
+	//fixtureDef.density = 1.0f;
+	//fixtureDef.friction = 0.3f;
+
+	//body->createFixture(&fixtureDef);
+
+
+	//float32 timeStep = 1.0f / 240.0f;
+	//int32 velocityIterations = 8;
+	//int32 positionIterations = 8;
+
+	//double x, y;
+
+	//while (!window.closed()) {
+	//	window.clear();
+
+	//	window.getMousePos(x, y);
+	//	projectPixelCoords(x, y, 800, 450, 64.0f, 36.0f);
+
+	//	world.step(timeStep, velocityIterations, positionIterations);
+
+	//	vec2f position = body->getPosition();
+	//	float32 angle = body->getAngle();
+
+	//	s->position = vec3f(position.x, position.y, 0.0f);
+
+	//	layer.render();
+
+	//	if (window.mouseClicked(GLFW_MOUSE_BUTTON_1)) {
+	//		layer.add(new Sprite(x - 0.5f, y - 0.5f, 1.0f, 1.0f, 0xFF00FF00));
+	//		std::cout << x << ", " << y << std::endl;
+	//	}
+
+	//	window.update();
+	//	window.poll();
+
+	//}
+
+
+	World world(vec2f(0, 9));
+	//b2World world(b2Vec2(0, 9));
+
+	BodyDef def;
+	def.type = b2_dynamicBody;
+	def.position.set(1, 4);
+
+	Body* body = world.createBody(&def);
+	//b2Body body = world.CreateBody(def.get());
+
+	b2PolygonShape shape;
+	shape.SetAsBox(10, 3);
+
+	b2FixtureDef fixture;
+	fixture.shape = &shape;
+	fixture.density = 1.0f;
+	fixture.friction = 0.3f;
+
+	body->createFixture(&fixture);
+
 	float32 timeStep = 1.0f / 60.0f;
 	int32 velocityIterations = 6;
 	int32 positionIterations = 2;
 
-	// This is our little game loop.
-	for (int32 i = 0; i < 60; ++i)
-	{
-		// Instruct the world to perform a single step of simulation.
-		// It is generally best to keep the time step and iterations fixed.
-		world.Step(timeStep, velocityIterations, positionIterations);
 
-		// Now print the position and angle of the body.
-		b2Vec2 position = body->GetPosition();
-		float32 angle = body->GetAngle();
+	for (int32 i = 0; i < 60; ++i) {
+		world.step(timeStep, velocityIterations, positionIterations);
+
+		//if (body->get()->GetWorld() == &world.getB2World()) {
+		//	//std::cout << "TRUE" << std::endl;
+		//}
+		//if (body->get() == &world.getB2World().GetBodyList()[0]) {
+		//	std::cout << "TRUE" << std::endl;
+		//} else {
+		//	std::cout << body->get() << std::endl;
+		//	std::cout << &world.getB2World().GetBodyList()[0] << std::endl;
+		//}
+
+		vec2f position = body->getPosition();
+		float32 angle = body->getAngle();
+
+		//b2Vec2 position = world.getB2World().GetBodyList()[0].GetPosition();
+		//float32 angle = body->getAngle();
 
 		printf("%4.2f %4.2f %4.2f\n", position.x, position.y, angle);
 	}
 
-	// When the world destructor is called, all bodies and joints are freed. This can
-	// create orphaned pointers, so be careful about your world management.
+	world.destroyBody(body);
+
 
 	system("PAUSE");
+
 
 	return 0;
 }

@@ -8,11 +8,25 @@ namespace pixel {
 			y = 0.0f;
 			z = 0.0f;
 		}
-
 		vec3f::vec3f(const float& x, const float& y, const float& z) {
 			this->x = x;
 			this->y = y;
 			this->z = z;
+		}
+
+		vec3f& vec3f::set(const float x, const float y, const float z) {
+			this->x = x;
+			this->y = y;
+			this->z = z;
+
+			return *this;
+		}
+		vec3f& vec3f::set(const vec3f v) {
+			x = v.x;
+			y = v.y;
+			z = v.z;
+
+			return *this;
 		}
 
 		vec3f& vec3f::add(const vec3f& other) {

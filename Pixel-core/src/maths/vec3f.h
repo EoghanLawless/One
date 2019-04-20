@@ -11,6 +11,9 @@ namespace pixel {
 			vec3f();
 			vec3f(const float& x, const float& y, const float& z);
 
+			vec3f& set(const float x, const float y, const float z);
+			vec3f& set(const vec3f v);
+
 			vec3f& add(const vec3f& other);
 			vec3f& sub(const vec3f& other);
 			vec3f& mult(const vec3f& other);

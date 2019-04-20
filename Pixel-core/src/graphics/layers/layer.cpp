@@ -16,7 +16,6 @@ namespace pixel {
 			
 			_shader->disable();
 		}
-
 		Layer::~Layer() {
 			delete _renderer;
 

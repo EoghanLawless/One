@@ -9,6 +9,7 @@
 
 #include "renderables/label.h"
 #include "renderables/sprite.h"
+#include "renderables/dynamicsprite.h"
 
 #include "layers/group.h"
 #include "layers/layer.h"

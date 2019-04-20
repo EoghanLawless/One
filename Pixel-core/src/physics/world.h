@@ -12,17 +12,32 @@ namespace pixel {
 
 		class World {
 		private:
-			maths::vec3f _gravity;
-
 			b2World* _world;
 
-			World();
-
 		public:
-			World(maths::vec2f gravity);
+			World(maths::vec2f);
 			~World();
 
-			Body* createBody(BodyDef* def);
+			b2World& getB2World();
+
+			void step(const double, const unsigned int, const unsigned int);
+			void shiftOrigin(maths::vec2f);
+
+			maths::vec2f getGravity();
+			void setGravity(maths::vec2f);
+
+			Body* createBody(BodyDef*);
+			void destroyBody(Body*);
+
+			//TODO add joints
+			//Joint* createJoint(const JointDef*);
+			//void destroyJoint(Joint*);
+			//Joint* getJoints();
+
+			static b2Vec2 convertVector(maths::vec2f);
+			static b2Vec3 convertVector(maths::vec3f);
+			static maths::vec2f convertVector(b2Vec2);
+			static maths::vec3f convertVector(b2Vec3);
 		};
 
 	}

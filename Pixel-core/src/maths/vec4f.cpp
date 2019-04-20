@@ -3,11 +3,34 @@
 namespace pixel {
 	namespace maths {
 
+		vec4f::vec4f() {
+			x = 0.0f;
+			y = 0.0f;
+			z = 0.0f;
+			w = 0.0f;
+		}
 		vec4f::vec4f(const float& x, const float& y, const float& z, const float& w) {
 			this->x = x;
 			this->y = y;
 			this->z = z;
 			this->w = w;
+		}
+
+		vec4f& vec4f::set(const float x, const float y, const float z, const float w) {
+			this->x = x;
+			this->y = y;
+			this->z = z;
+			this->w = w;
+
+			return *this;
+		}
+		vec4f& vec4f::set(const vec4f v) {
+			x = v.x;
+			y = v.y;
+			z = v.z;
+			w = v.w;
+
+			return *this;
 		}
 
 		vec4f& vec4f::add(const vec4f& other) {

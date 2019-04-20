@@ -43,7 +43,7 @@ class b2World
 public:
 	/// Construct a world object.
 	/// @param gravity the world gravity vector.
-	b2World(const b2Vec2& gravity);
+	b2World(const b2Vec2& gravity = b2Vec2(0.0f, 9.8f));
 
 	/// Destruct the world. All physics entities are destroyed and all heap memory is released.
 	~b2World();

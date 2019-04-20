@@ -128,6 +128,9 @@ struct b2BodyDef
 class b2Body
 {
 public:
+	b2Body() = default;
+	b2Body(const b2BodyDef* bd, b2World* world);
+	~b2Body();
 	/// Creates a fixture and attach it to this body. Use this function if you need
 	/// to set some fixture parameters, like friction. Otherwise you can create the
 	/// fixture directly from a shape.
@@ -420,9 +423,6 @@ private:
 		e_activeFlag		= 0x0020,
 		e_toiFlag			= 0x0040
 	};
-
-	b2Body(const b2BodyDef* bd, b2World* world);
-	~b2Body();
 
 	void SynchronizeFixtures();
 	void SynchronizeTransform();

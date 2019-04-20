@@ -253,6 +253,9 @@
     <ClCompile Include="ext\Box2D\Dynamics\Joints\b2WeldJoint.cpp" />
     <ClCompile Include="ext\Box2D\Dynamics\Joints\b2WheelJoint.cpp" />
     <ClCompile Include="ext\Box2D\Rope\b2Rope.cpp" />
+    <ClCompile Include="src\physics\body.cpp" />
+    <ClCompile Include="src\physics\bodydef.cpp" />
+    <ClCompile Include="src\physics\world.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="examples\basic_implementation\res\layers\dynamiclayer.h" />
@@ -331,6 +334,9 @@
     <ClInclude Include="ext\Box2D\Dynamics\Joints\b2WeldJoint.h" />
     <ClInclude Include="ext\Box2D\Dynamics\Joints\b2WheelJoint.h" />
     <ClInclude Include="ext\Box2D\Rope\b2Rope.h" />
+    <ClInclude Include="src\physics\body.h" />
+    <ClInclude Include="src\physics\bodydef.h" />
+    <ClInclude Include="src\physics\world.h" />
     <ClInclude Include="src\pixel.h" />
     <ClInclude Include="src\utils\fileutils.h" />
     <ClInclude Include="src\utils\imageload.h" />

@@ -9,14 +9,19 @@ namespace pixel {
 
 		class Body {
 		private:
-			maths::vec3f _position;
-			maths::vec2f _size;
-
-			b2Body _body;
+			b2Body* _body;
 
 		public:
-			Body(b2Body* body);
+			Body(b2Body*);
 			~Body();
+
+			b2Fixture* createFixture(const b2FixtureDef*);
+			b2Fixture* createFixture(const b2Shape*, float);
+
+			maths::vec2f getPosition() const;
+			float getAngle() const;
+
+			b2Body* get();
 		};
 
 	}

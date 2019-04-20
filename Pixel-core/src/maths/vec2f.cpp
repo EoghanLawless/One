@@ -7,10 +7,22 @@ namespace pixel {
 			x = 0.0f;
 			y = 0.0f;
 		}
-
 		vec2f::vec2f(const float& x, const float& y) {
 			this->x = x;
 			this->y = y;
+		}
+
+		vec2f& vec2f::set(const float x, const float y) {
+			this->x = x;
+			this->y = y;
+
+			return *this;
+		}
+		vec2f& vec2f::set(const vec2f v) {
+			x = v.x;
+			y = v.y;
+
+			return *this;
 		}
 
 		vec2f& vec2f::add(const vec2f& other) {
