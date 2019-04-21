@@ -10,8 +10,8 @@ namespace pixel {
 		}
 		Body::~Body() { }
 
-		b2Fixture* Body::createFixture(const b2FixtureDef* def) {
-			return _body->CreateFixture(def);
+		b2Fixture* Body::createFixture(FixtureDef* def) {
+			return _body->CreateFixture(def->get());
 		}
 		b2Fixture* Body::createFixture(const b2Shape* shape, float density) {
 			return _body->CreateFixture(shape, density);

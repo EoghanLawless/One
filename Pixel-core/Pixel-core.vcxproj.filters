@@ -285,10 +285,16 @@
     <ClCompile Include="src\physics\world.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\physics\bodydef.cpp">
+    <ClCompile Include="src\physics\body.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\physics\body.cpp">
+    <ClCompile Include="src\physics\fixture.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="examples\basic_physics\res\layers\dynamiclayer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="examples\basic_physics\game.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -539,10 +545,16 @@
     <ClInclude Include="src\physics\world.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\physics\bodydef.h">
+    <ClInclude Include="src\physics\body.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\physics\body.h">
+    <ClInclude Include="src\physics\physics.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\physics\fixture.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="examples\basic_physics\res\layers\dynamiclayer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

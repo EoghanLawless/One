@@ -1,5 +1,5 @@
 
-
+#if 0
 #include <iostream>
 #include <stdio.h>
 
@@ -7,9 +7,9 @@
 #include "Box2D/Box2D.h"
 
 #include "pixel.h"
-#include "src/physics/body.h"
-#include "src/physics/bodydef.h"
-#include "src/physics/world.h"
+#include "physics/body.h"
+#include "physics/fixture.h"
+#include "physics/world.h"
 
 
 using namespace pixel;
@@ -27,14 +27,7 @@ int main(int argc, char** argv) {
 
 
 
-	//Window window("Title", 800, 450);
-	//glClearColor(0.9f, 0.9f, 0.9f, 1.0f);
 
-	//Shader shader("res/shaders/basic.vs", "res/shaders/basic.fs");
-	//Layer layer(new BatchRenderer(), &shader, mat4::orthographic(-32.0f, 32.0f, -18.0f, 18.0f, -1.0f, 1.0f));
-
-	//DynamicSprite* s = new DynamicSprite(0, 0, 4, 4, 0xAA00FF00);
-	//layer.add(s);
 
 	//Sprite* floor = new Sprite(-floor_w / 2, floor_y, floor_w, floor_h, 0xAA0000FF);
 	//layer.add(floor);
@@ -84,48 +77,30 @@ int main(int argc, char** argv) {
 	//int32 velocityIterations = 8;
 	//int32 positionIterations = 8;
 
-	//double x, y;
-
-	//while (!window.closed()) {
-	//	window.clear();
-
-	//	window.getMousePos(x, y);
-	//	projectPixelCoords(x, y, 800, 450, 64.0f, 36.0f);
-
-	//	world.step(timeStep, velocityIterations, positionIterations);
-
-	//	vec2f position = body->getPosition();
-	//	float32 angle = body->getAngle();
-
-	//	s->position = vec3f(position.x, position.y, 0.0f);
-
-	//	layer.render();
-
-	//	if (window.mouseClicked(GLFW_MOUSE_BUTTON_1)) {
-	//		layer.add(new Sprite(x - 0.5f, y - 0.5f, 1.0f, 1.0f, 0xFF00FF00));
-	//		std::cout << x << ", " << y << std::endl;
-	//	}
-
-	//	window.update();
-	//	window.poll();
-
-	//}
 
 
-	World world(vec2f(0, 9));
-	//b2World world(b2Vec2(0, 9));
+	Window window("Title", 800, 450);
+	glClearColor(0.9f, 0.9f, 0.9f, 1.0f);
+
+	Shader shader("res/shaders/basic.vs", "res/shaders/basic.fs");
+	Layer layer(new BatchRenderer(), &shader, mat4::orthographic(-32.0f, 32.0f, -18.0f, 18.0f, -1.0f, 1.0f));
+
+	DynamicSprite* s = new DynamicSprite(0, 0, 4, 4, 0xAA00FF00);
+	layer.add(s);
+
+
+
+	World world(vec2f(0.0f, 10.0f));
 
 	BodyDef def;
-	def.type = b2_dynamicBody;
-	def.position.set(1, 4);
+	def.type = DYNAMIC;
 
 	Body* body = world.createBody(&def);
-	//b2Body body = world.CreateBody(def.get());
 
 	b2PolygonShape shape;
 	shape.SetAsBox(10, 3);
 
-	b2FixtureDef fixture;
+	FixtureDef fixture;
 	fixture.shape = &shape;
 	fixture.density = 1.0f;
 	fixture.friction = 0.3f;
@@ -136,40 +111,40 @@ int main(int argc, char** argv) {
 	int32 velocityIterations = 6;
 	int32 positionIterations = 2;
 
+	double x, y;
 
-	for (int32 i = 0; i < 60; ++i) {
+	while (!window.closed()) {
+		window.clear();
+
+		window.getMousePos(x, y);
+		projectPixelCoords(x, y, 800, 450, 64.0f, 36.0f);
+
 		world.step(timeStep, velocityIterations, positionIterations);
-
-		//if (body->get()->GetWorld() == &world.getB2World()) {
-		//	//std::cout << "TRUE" << std::endl;
-		//}
-		//if (body->get() == &world.getB2World().GetBodyList()[0]) {
-		//	std::cout << "TRUE" << std::endl;
-		//} else {
-		//	std::cout << body->get() << std::endl;
-		//	std::cout << &world.getB2World().GetBodyList()[0] << std::endl;
-		//}
 
 		vec2f position = body->getPosition();
 		float32 angle = body->getAngle();
 
-		//b2Vec2 position = world.getB2World().GetBodyList()[0].GetPosition();
-		//float32 angle = body->getAngle();
+		s->position = vec3f(position.x, position.y, 0.0f);
 
-		printf("%4.2f %4.2f %4.2f\n", position.x, position.y, angle);
+		layer.render();
+
+		if (window.mouseClicked(GLFW_MOUSE_BUTTON_1)) {
+			layer.add(new Sprite(x - 0.5f, y - 0.5f, 1.0f, 1.0f, 0xFF00FF00));
+			std::cout << x << ", " << y << std::endl;
+		}
+
+		window.update();
+		window.poll();
+
 	}
 
 	world.destroyBody(body);
-
-
-	system("PAUSE");
-
 
 	return 0;
 }
 
 
-#if 0
+#elif 0
 
 #include "graphics/window.h"
 #include "graphics/shader.h"

@@ -1,10 +1,8 @@
-#pragma once
-
 #include "world.h"
 
 namespace pixel {
 	namespace physics {
-
+		
 		World::World(maths::vec2f gravity = maths::vec2f(0.0f, 9.8f)) {
 			_world = new b2World(convertVector(gravity));
 		}
