@@ -14,6 +14,8 @@ class Game : public Pixel {
 
 private:
 	float width, height;
+	int pixel_w, pixel_h;
+	double mouse_x, mouse_y;
 
 	Window* window;
 	SoundManager* sounds;
@@ -23,9 +25,8 @@ private:
 	Shader* shader_lighting;
 
 	Layer* background_layer;
-	Layer* character_layer;
 	Layer* hud_layer;
-	DynamicLayer* projectiles_layer;
+	DynamicLayer* dynamic_layer;
 
 	Label* fps;
 	DynamicSprite* player;
@@ -33,6 +34,8 @@ private:
 	Texture* projectile;
 
 	World* world;
+
+	std::vector<DynamicSprite*> dynamic_sprites;
 
 	std::string _resource_dir;
 
@@ -48,7 +51,6 @@ public:
 		delete shader_greyscale;
 
 		delete background_layer;
-		delete character_layer;
 		delete hud_layer;
 
 		delete projectile;
@@ -59,18 +61,17 @@ public:
 		width = 32.0f;
 		height = 18.0f;
 
-		int pixel_w = 1200;
-		int pixel_h = pixel_w / (width / height);
+		pixel_w = 1200;
+		pixel_h = pixel_w / (width / height);
 		window = createWindow("Basic Physics", pixel_w, pixel_h);
 
 		shader_basic = new Shader(_resource_dir + "/shaders/basic.vs", _resource_dir + "/shaders/basic.fs");
 		shader_greyscale = new Shader(_resource_dir + "/shaders/greyscale.vs", _resource_dir + "/shaders/greyscale.fs");
 		shader_lighting = new Shader(_resource_dir + "/shaders/lighting.vs", _resource_dir + "/shaders/lighting.fs");
 
-		background_layer = new Layer(new BatchRenderer(), shader_lighting, mat4::orthographic(-16.0f, 16.0f, -9.0f, 9.0f, -1.0f, 1.0f));
-		character_layer = new Layer(new BatchRenderer(), shader_basic, mat4::orthographic(-16.0f, 16.0f, -9.0f, 9.0f, -1.0f, 1.0f));
-		hud_layer = new Layer(new BatchRenderer(), shader_basic, mat4::orthographic(-16.0f, 16.0f, -9.0f, 9.0f, -1.0f, 1.0f));
-		projectiles_layer = new DynamicLayer(new BatchRenderer(), shader_basic, mat4::orthographic(-16.0f, 16.0f, -9.0f, 9.0f, -1.0f, 1.0f));
+		background_layer = new Layer(new BatchRenderer(), shader_lighting, mat4::orthographic(-(width / 2), (width / 2), -(height / 2), (height / 2), -1.0f, 1.0f));
+		hud_layer = new Layer(new BatchRenderer(), shader_basic, mat4::orthographic(-(width / 2), (width / 2), -(height / 2), (height / 2), -1.0f, 1.0f));
+		dynamic_layer = new DynamicLayer(new BatchRenderer(), shader_basic, mat4::orthographic(-(width / 2), (width / 2), -(height / 2), (height / 2), -1.0f, 1.0f));
 
 		sounds = new SoundManager(window->getHWND(), 44100, 15, 5, 8);
 		sounds->add(new Sound("Jump", _resource_dir + "/sounds/jump.wav"));
@@ -122,7 +123,8 @@ public:
 					DynamicSprite* s = new DynamicSprite((tile_w * col) - width / 2, (tile_h * row) - height / 2, tile_w, tile_h, 0xBB000000);
 					s->createBody(*world);
 					s->createFixture();
-					background_layer->add(s);
+					dynamic_layer->add(s);
+					dynamic_sprites.push_back(s);
 				}
 			}
 		}
@@ -136,7 +138,8 @@ public:
 		player->fixture_definition.friction = 0.1f;
 		player->fixture_definition.restitution = 0.0f;
 		player->createFixture(&player->fixture_definition);
-		character_layer->add(player);
+		dynamic_layer->add(player);
+		dynamic_sprites.push_back(player);
 
 
 		FontManager::get()->setScale(window->getWidth() / 32.0f, window->getHeight() / 18.0f);
@@ -146,19 +149,42 @@ public:
 
 	void tick() override {
 		fps->text = std::to_string(getFrames()) + " fps";
-		std::cout << getUpdates() << " ups, " << getFrames() << " fps, " << (background_layer->count() + character_layer->count() + projectiles_layer->count() + hud_layer->count()) << " sprites" << std::endl;
+		std::cout << getUpdates() << " ups, " << getFrames() << " fps, " << (background_layer->count() + dynamic_layer->count() + hud_layer->count()) << " sprites" << std::endl;
 	}
 
 	void update() override {
+		window->getMousePos(mouse_x, mouse_y);
+		projectPixelCoords(mouse_x, mouse_y, pixel_w, pixel_h, width, height);
 
-		if (window->mouseClicked(GLFW_MOUSE_BUTTON_1)) {
-			DynamicSprite* s = (DynamicSprite*)(background_layer->getRenderables().at(1));
-			std::cout << s->fixture_definition.restitution << std::endl;
+		if (window->mousePressed(GLFW_MOUSE_BUTTON_1)) {
+			DynamicSprite* s = new DynamicSprite(mouse_x - 0.125f, mouse_y - 0.125f, 0.25f, 0.25f, 0xBBFFAA88);
+			s->body_definition.type = DYNAMIC;
+			s->body_definition.linearDamping = 0.3f;
+			s->createBody(*world);
+
+			b2CircleShape circle;
+			circle.m_radius = 0.125f;
+			s->fixture_definition.shape = &circle;
+			s->fixture_definition.density = 1.0f;
+			s->fixture_definition.friction = 0.1f;
+			s->fixture_definition.restitution = 0.1f;
+			s->createFixture(&s->fixture_definition);
+			background_layer->add(s);
+			dynamic_sprites.push_back(s);
 		}
 
 		if (window->keyTyped(GLFW_KEY_W)) {
-			Sprite* s = new Sprite(player->position.x + 1.0f, player->position.y + 1.0f, 1.0f, 1.0f, projectile);
-			projectiles_layer->add(s);
+			DynamicSprite* s = new DynamicSprite(player->position.x + 0.65f, player->position.y + 1.8f, 0.5f, 0.5f, projectile);
+			s->body_definition.type = DYNAMIC;
+			s->body_definition.linearVelocity = vec2f(0.0f, 30.0f);
+			s->body_definition.linearDamping = 0.3f;
+			s->createBody(*world);
+			s->fixture_definition.density = 1.0f;
+			s->fixture_definition.friction = 0.1f;
+			s->fixture_definition.restitution = 0.0f;
+			s->createFixture(&s->fixture_definition);
+			dynamic_layer->add(s);
+			dynamic_sprites.push_back(s);
 		}
 
 		if (window->keyTyped(GLFW_KEY_SPACE)) {
@@ -173,13 +199,12 @@ public:
 			player->applyForce(vec2f(speed, 0.0f));
 
 
-		for (int index = 0; index < projectiles_layer->count(); index++) {
-			projectiles_layer->get(index)->position.y += 0.3f;
+		//for (int index = 0; index < dynamic_layer->count(); index++) {
+		//	dynamic_layer->get(index)->position.y += 0.3f;
 
-			if (projectiles_layer->get(index)->position.y >= 9.0f)
-				projectiles_layer->remove(projectiles_layer->get(index));
-		}
-
+		//	if (dynamic_layer->get(index)->position.y >= 9.0f)
+		//		dynamic_layer->remove(dynamic_layer->get(index));
+		//}
 
 
 		shader_lighting->enable();
@@ -187,11 +212,11 @@ public:
 
 
 		world->step(TICK_INTERVAL / 10.0f, 16, 12);
-		player->update();
 
-		//vec2f p = World::convertVector(body->GetPosition());
-		//player->position.set(p.x, p.y, 0.0f);
 
+		for (DynamicSprite* s : dynamic_sprites) {
+			s->update();
+		}
 
 
 		//shader_greyscale->enable();
@@ -201,8 +226,7 @@ public:
 
 	void render() override {
 		background_layer->render();
-		character_layer->render();
-		projectiles_layer->render();
+		dynamic_layer->render();
 		hud_layer->render();
 	}
 };
