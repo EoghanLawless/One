@@ -19,6 +19,10 @@ namespace pixel {
 			define(pos.x, pos.y, size.x, size.y);
 		}
 
+		DynamicSprite::~DynamicSprite() {
+			_body->~Body();
+		}
+
 		void DynamicSprite::createBody(physics::World& world) {
 			_body = world.createBody(&body_definition);
 		}

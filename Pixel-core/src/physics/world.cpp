@@ -6,7 +6,9 @@ namespace pixel {
 		World::World(maths::vec2f gravity = maths::vec2f(0.0f, 9.8f)) {
 			_world = new b2World(convertVector(gravity));
 		}
-		World::~World() { }
+		World::~World() {
+			_world->~b2World();
+		}
 
 		b2World& World::getB2World() {
 			return *_world;

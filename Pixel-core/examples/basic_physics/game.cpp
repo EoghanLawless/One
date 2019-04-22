@@ -134,6 +134,7 @@ public:
 		player->body_definition.type = DYNAMIC;
 		player->body_definition.linearDamping = 0.3f;
 		player->createBody(*world);
+
 		player->fixture_definition.density = 1.0f;
 		player->fixture_definition.friction = 0.1f;
 		player->fixture_definition.restitution = 0.0f;
@@ -148,7 +149,7 @@ public:
 		fires.push_back(new Texture(_resource_dir + "/textures/fire_3.png"));
 		fires.push_back(new Texture(_resource_dir + "/textures/fire_4.png"));
 
-		fire = new Sprite((tile_w * 2) - width / 2, (tile_h * 6) - height / 2, tile_w, tile_h, fires);
+		fire = new Sprite((tile_w * 14) - width / 2, (tile_h * 1) - height / 2, tile_w, tile_h, fires);
 		background_layer->add(fire);
 
 
@@ -166,18 +167,19 @@ public:
 		window->getMousePos(mouse_x, mouse_y);
 		projectPixelCoords(mouse_x, mouse_y, pixel_w, pixel_h, width, height);
 
-		if (window->mousePressed(GLFW_MOUSE_BUTTON_1)) {
+		if (window->mousePressed(GLFW_MOUSE_BUTTON_1) && dynamic_sprites.size() < 400) {
 			DynamicSprite* s = new DynamicSprite(mouse_x - 0.125f, mouse_y - 0.125f, 0.25f, 0.25f, 0xBBFFAA88);
 			s->body_definition.type = DYNAMIC;
 			s->body_definition.linearDamping = 0.3f;
+			s->body_definition.gravityScale = 0.3f;
 			s->createBody(*world);
 
 			b2CircleShape circle;
 			circle.m_radius = 0.125f;
 			s->fixture_definition.shape = &circle;
-			s->fixture_definition.density = 1.0f;
-			s->fixture_definition.friction = 0.1f;
-			s->fixture_definition.restitution = 0.1f;
+			s->fixture_definition.density = 0.7f;
+			s->fixture_definition.friction = 0.0f;
+			s->fixture_definition.restitution = 0.5f;
 			s->createFixture(&s->fixture_definition);
 			background_layer->add(s);
 			dynamic_sprites.push_back(s);
@@ -188,12 +190,17 @@ public:
 			s->body_definition.type = DYNAMIC;
 			s->body_definition.linearVelocity = vec2f(0.0f, 30.0f);
 			s->body_definition.linearDamping = 0.3f;
+			s->body_definition.gravityScale = 0.7f;
 			s->createBody(*world);
+
+			b2CircleShape circle;
+			circle.m_radius = 0.25f;
+			s->fixture_definition.shape = &circle;
 			s->fixture_definition.density = 1.0f;
 			s->fixture_definition.friction = 0.1f;
-			s->fixture_definition.restitution = 0.0f;
+			s->fixture_definition.restitution = 0.2f;
 			s->createFixture(&s->fixture_definition);
-			dynamic_layer->add(s);
+			background_layer->add(s);
 			dynamic_sprites.push_back(s);
 		}
 

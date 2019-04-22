@@ -21,6 +21,8 @@ namespace pixel {
 			DynamicSprite(float, float, float, float, Texture*);
 			DynamicSprite(maths::vec2f, maths::vec2f, Texture*);
 
+			~DynamicSprite();
+
 			physics::BodyDef body_definition;
 			physics::FixtureDef fixture_definition;
 			b2PolygonShape shape;
