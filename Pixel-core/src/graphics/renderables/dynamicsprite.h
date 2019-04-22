@@ -17,11 +17,9 @@ namespace pixel {
 		public:
 			DynamicSprite(float, float, float, float, const unsigned int);
 			DynamicSprite(maths::vec2f, maths::vec2f, const unsigned int);
-			DynamicSprite(maths::vec4f, const unsigned int);
 
 			DynamicSprite(float, float, float, float, Texture*);
 			DynamicSprite(maths::vec2f, maths::vec2f, Texture*);
-			DynamicSprite(maths::vec4f, Texture*);
 
 			physics::BodyDef body_definition;
 			physics::FixtureDef fixture_definition;

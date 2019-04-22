@@ -9,9 +9,6 @@ namespace pixel {
 		DynamicSprite::DynamicSprite(maths::vec2f pos, maths::vec2f size, const unsigned int colour) : Renderable(maths::vec3f(pos.x, pos.y, 0), maths::vec2f(size.x, size.y), colour), _w(size.x), _h(size.y) {
 			define(pos.x, pos.y, size.x, size.y);
 		}
-		DynamicSprite::DynamicSprite(maths::vec4f xywh, const unsigned int colour) : Renderable(maths::vec3f(xywh.x, xywh.y, 0), maths::vec2f(xywh.z, xywh.w), colour), _w(xywh.z), _h(xywh.w) {
-			define(xywh.x, xywh.y, xywh.z, xywh.w);
-		}
 		
 		DynamicSprite::DynamicSprite(float x, float y, float w, float h, Texture* texture) : Renderable(maths::vec3f(x, y, 0), maths::vec2f(w, h), 0xFFFFFFFF), _w(w), _h(h) {
 			_texture = texture;
@@ -20,10 +17,6 @@ namespace pixel {
 		DynamicSprite::DynamicSprite(maths::vec2f pos, maths::vec2f size, Texture* texture) : Renderable(maths::vec3f(pos.x, pos.y, 0), maths::vec2f(size.x, size.y), 0xFFFFFFFF), _w(size.x), _h(size.y) {
 			_texture = texture;
 			define(pos.x, pos.y, size.x, size.y);
-		}
-		DynamicSprite::DynamicSprite(maths::vec4f xywh, Texture* texture) : Renderable(maths::vec3f(xywh.x, xywh.y, 0), maths::vec2f(xywh.z, xywh.w), 0xFFFFFFFF), _w(xywh.z), _h(xywh.w) {
-			_texture = texture;
-			define(xywh.x, xywh.y, xywh.z, xywh.w);
 		}
 
 		void DynamicSprite::createBody(physics::World& world) {

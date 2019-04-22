@@ -29,6 +29,7 @@ private:
 	DynamicLayer* dynamic_layer;
 
 	Label* fps;
+	Sprite* fire;
 	DynamicSprite* player;
 
 	Texture* projectile;
@@ -42,7 +43,7 @@ private:
 public:
 	Game() {
 		if (DEBUG)
-			_resource_dir = "examples/basic_implementation/res";
+			_resource_dir = "examples/basic_physics/res";
 		else
 			_resource_dir = "res";
 	}
@@ -78,14 +79,13 @@ public:
 
 		projectile = new Texture(_resource_dir + "/textures/red_ball.png");
 
-		Texture* textures[] = {
+		Texture* bricks[] = {
 			new Texture(_resource_dir + "/textures/brick_1.png"),
 			new Texture(_resource_dir + "/textures/brick_2.png"),
 			new Texture(_resource_dir + "/textures/brick_3.png"),
 			new Texture(_resource_dir + "/textures/brick_4.png"),
 			new Texture(_resource_dir + "/textures/brick_1.png")
 		};
-
 
 		int map[18][32] = {
 			{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
@@ -117,7 +117,7 @@ public:
 		float tile_h = height / rows;
 		for (int row = 0; row < rows; row++) {
 			for (int col = 0; col < cols; col++) {
-				background_layer->add(new Sprite((tile_w * col) - width / 2, (tile_h * row) - height / 2, tile_w, tile_h, textures[rand() % 5]));
+				background_layer->add(new Sprite((tile_w * col) - width / 2, (tile_h * row) - height / 2, tile_w, tile_h, bricks[rand() % 5]));
 
 				if (map[rows - (row + 1)][col] == 1) {
 					DynamicSprite* s = new DynamicSprite((tile_w * col) - width / 2, (tile_h * row) - height / 2, tile_w, tile_h, 0xBB000000);
@@ -140,6 +140,16 @@ public:
 		player->createFixture(&player->fixture_definition);
 		dynamic_layer->add(player);
 		dynamic_sprites.push_back(player);
+
+
+		std::vector<Texture*> fires;
+		fires.push_back(new Texture(_resource_dir + "/textures/fire_1.png"));
+		fires.push_back(new Texture(_resource_dir + "/textures/fire_2.png"));
+		fires.push_back(new Texture(_resource_dir + "/textures/fire_3.png"));
+		fires.push_back(new Texture(_resource_dir + "/textures/fire_4.png"));
+
+		fire = new Sprite((tile_w * 2) - width / 2, (tile_h * 6) - height / 2, tile_w, tile_h, fires);
+		background_layer->add(fire);
 
 
 		FontManager::get()->setScale(window->getWidth() / 32.0f, window->getHeight() / 18.0f);
@@ -199,24 +209,18 @@ public:
 			player->applyForce(vec2f(speed, 0.0f));
 
 
-		//for (int index = 0; index < dynamic_layer->count(); index++) {
-		//	dynamic_layer->get(index)->position.y += 0.3f;
-
-		//	if (dynamic_layer->get(index)->position.y >= 9.0f)
-		//		dynamic_layer->remove(dynamic_layer->get(index));
-		//}
-
-
-		shader_lighting->enable();
-		shader_lighting->setUniform2f("light_pos", vec2f(player->position.x + 1.5f, player->position.y + 1.5f));
-
-
 		world->step(TICK_INTERVAL / 10.0f, 16, 12);
-
 
 		for (DynamicSprite* s : dynamic_sprites) {
 			s->update();
 		}
+
+
+		fire->animate(10);
+
+
+		shader_lighting->enable();
+		shader_lighting->setUniform2f("light_pos", vec2f(player->position.x + 1.5f, player->position.y + 1.5f));
 
 
 		//shader_greyscale->enable();
