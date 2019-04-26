@@ -184,6 +184,7 @@
     <ClCompile Include="examples\basic_implementation\res\layers\dynamiclayer.cpp" />
     <ClCompile Include="examples\basic_physics\game.cpp" />
     <ClCompile Include="examples\basic_physics\res\layers\dynamiclayer.cpp" />
+    <ClCompile Include="examples\performance_test\game.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="src\audio\sound.cpp" />
     <ClCompile Include="src\audio\soundmanager.cpp" />
