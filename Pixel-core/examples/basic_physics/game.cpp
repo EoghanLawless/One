@@ -62,9 +62,11 @@
 //		width = 32.0f;
 //		height = 18.0f;
 //
-//		pixel_w = 1200;
+//		pixel_w = 1920;
 //		pixel_h = pixel_w / (width / height);
 //		window = createWindow("Basic Physics", pixel_w, pixel_h);
+//
+//		std::cout << pixel_h << std::endl;
 //
 //		shader_basic = new Shader(_resource_dir + "/shaders/basic.vs", _resource_dir + "/shaders/basic.fs");
 //		shader_greyscale = new Shader(_resource_dir + "/shaders/greyscale.vs", _resource_dir + "/shaders/greyscale.fs");
@@ -97,13 +99,13 @@
 //			{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
 //			{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
 //			{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+//			{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1},
 //			{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
 //			{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+//			{1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+//			{1,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,1},
 //			{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-//			{1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
 //			{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-//			{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-//			{1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
 //			{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
 //			{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
 //		};
@@ -153,7 +155,7 @@
 //		fires.push_back(new Texture(_resource_dir + "/textures/fire_3.png"));
 //		fires.push_back(new Texture(_resource_dir + "/textures/fire_4.png"));
 //
-//		fire = new Sprite((tile_w * 14) - width / 2, (tile_h * 1) - height / 2, tile_w, tile_h, fires);
+//		fire = new Sprite((tile_w * 13) - width / 2, (tile_h * 5) - height / 2, tile_w, tile_h, fires);
 //		background_layer->add(fire);
 //
 //
@@ -189,7 +191,7 @@
 //			dynamic_sprites.push_back(s);
 //		}
 //
-//		if (window->keyTyped(GLFW_KEY_W)) {
+//		if (window->keyTyped(GLFW_KEY_I)) {
 //			DynamicSprite* s = new DynamicSprite(player->position.x + 0.65f, player->position.y + 1.8f, 0.5f, 0.5f, projectile);
 //			s->body_definition.type = DYNAMIC;
 //			s->body_definition.linearVelocity = vec2f(0.0f, 30.0f);
@@ -221,6 +223,7 @@
 //
 //
 //		world->step(TICK_INTERVAL / 10.0f, 16, 12);
+//
 //
 //		for (DynamicSprite* s : dynamic_sprites) {
 //			s->update();

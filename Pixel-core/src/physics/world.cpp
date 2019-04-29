@@ -35,6 +35,10 @@ namespace pixel {
 			_world->DestroyBody(body->get());
 		}
 
+		void World::setContactListener(b2ContactListener* listener) {
+			_world->SetContactListener(listener);
+		}
+
 		//TODO add joints
 		//Joint* World::createJoint(const JointDef* def) {}
 		//void World::destroyJoint(Joint* joint) {}

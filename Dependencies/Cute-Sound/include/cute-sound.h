@@ -785,7 +785,7 @@ inline void cs_sleep(int milliseconds)
 	Sleep(milliseconds);
 }
 
-inline struct cs_context_t
+struct cs_context_t
 {
 	unsigned latency_samples;
 	unsigned running_index;

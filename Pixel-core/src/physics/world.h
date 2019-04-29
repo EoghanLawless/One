@@ -5,7 +5,6 @@
 #include "maths/maths.h"
 
 #include "body.h"
-#include "bodydef.h"
 
 namespace pixel {
 	namespace physics {
@@ -28,6 +27,8 @@ namespace pixel {
 
 			Body* createBody(BodyDef*);
 			void destroyBody(Body*);
+
+			void setContactListener(b2ContactListener*);
 
 			//TODO add joints
 			//Joint* createJoint(const JointDef*);

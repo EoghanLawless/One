@@ -24,6 +24,13 @@ namespace pixel {
 			return _body->GetAngle();
 		}
 
+		void Body::setUserData(void* data) {
+			_body->SetUserData(data);
+		}
+		void* Body::getUserData() const {
+			return _body->GetUserData();
+		}
+
 		b2Body* Body::get() {
 			return _body;
 		}

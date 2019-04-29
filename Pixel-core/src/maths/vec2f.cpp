@@ -31,9 +31,21 @@ namespace pixel {
 
 			return *this;
 		}
+		vec2f& vec2f::add(const float value) {
+			x += value;
+			y += value;
+
+			return *this;
+		}
 		vec2f& vec2f::sub(const vec2f& other) {
 			x -= other.x;
 			y -= other.y;
+
+			return *this;
+		}
+		vec2f& vec2f::sub(const float value) {
+			x -= value;
+			y -= value;
 
 			return *this;
 		}
@@ -43,14 +55,32 @@ namespace pixel {
 
 			return *this;
 		}
+		vec2f& vec2f::mult(const float multiplier) {
+			x *= multiplier;
+			y *= multiplier;
+
+			return *this;
+		}
 		vec2f& vec2f::div(const vec2f& other) {
 			x /= other.x;
 			y /= other.y;
 
 			return *this;
 		}
+		vec2f& vec2f::div(const float divisor) {
+			x /= divisor;
+			y /= divisor;
+
+			return *this;
+		}
 		bool vec2f::equals(const vec2f& other) {
 			return (x == other.x && y == other.y);
+		}
+
+		vec2f& vec2f::normalise() {
+			float mag = sqrt((x*x) + (y*y));
+			this->div(mag);
+			return *this;
 		}
 
 		vec2f& operator+(vec2f& left, const vec2f& right) {

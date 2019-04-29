@@ -185,6 +185,11 @@
     <ClCompile Include="examples\basic_physics\game.cpp" />
     <ClCompile Include="examples\basic_physics\res\layers\dynamiclayer.cpp" />
     <ClCompile Include="examples\performance_test\game.cpp" />
+    <ClCompile Include="examples\pixel_art\game.cpp" />
+    <ClCompile Include="examples\pixel_art\res\layers\dynamiclayer.cpp" />
+    <ClCompile Include="examples\pixel_shooter\game.cpp" />
+    <ClCompile Include="examples\pixel_shooter\player.cpp" />
+    <ClCompile Include="examples\pixel_shooter\res\layers\dynamiclayer.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="src\audio\sound.cpp" />
     <ClCompile Include="src\audio\soundmanager.cpp" />
@@ -257,12 +262,20 @@
     <ClCompile Include="ext\Box2D\Dynamics\Joints\b2WheelJoint.cpp" />
     <ClCompile Include="ext\Box2D\Rope\b2Rope.cpp" />
     <ClCompile Include="src\physics\body.cpp" />
-    <ClCompile Include="src\physics\fixture.cpp" />
     <ClCompile Include="src\physics\world.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="examples\basic_implementation\res\layers\dynamiclayer.h" />
     <ClInclude Include="examples\basic_physics\res\layers\dynamiclayer.h" />
+    <ClInclude Include="examples\pixel_art\res\layers\dynamiclayer.h" />
+    <ClInclude Include="examples\pixel_shooter\contactlistener.h" />
+    <ClInclude Include="examples\pixel_shooter\enemy.h" />
+    <ClInclude Include="examples\pixel_shooter\enemymanager.h" />
+    <ClInclude Include="examples\pixel_shooter\filter.h" />
+    <ClInclude Include="examples\pixel_shooter\player.h" />
+    <ClInclude Include="examples\pixel_shooter\projectile.h" />
+    <ClInclude Include="examples\pixel_shooter\res\layers\dynamiclayer.h" />
+    <ClInclude Include="examples\pixel_shooter\res\player.h" />
     <ClInclude Include="src\audio\audio.h" />
     <ClInclude Include="src\audio\sound.h" />
     <ClInclude Include="src\audio\soundmanager.h" />

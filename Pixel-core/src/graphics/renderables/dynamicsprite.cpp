@@ -55,8 +55,6 @@ namespace pixel {
 			shape.SetAsBox(w / 2, h / 2);
 			body_definition.position.set(x + w / 2, y + h / 2);
 			fixture_definition.shape = &shape;
-
-			//std::cout << shape.m_vertices[0].x << std::endl;
 		}
 
 	}

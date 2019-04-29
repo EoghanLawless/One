@@ -77,6 +77,9 @@ namespace pixel {
 			maths::vec2f getPosition() const;
 			float getAngle() const;
 
+			void setUserData(void*);
+			void* getUserData() const;
+
 			b2Body* get();
 		};
 

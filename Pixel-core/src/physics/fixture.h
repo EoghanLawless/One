@@ -31,7 +31,7 @@ namespace pixel {
 
 				return &_fixtureDef;
 			}
-			const b2FixtureDef* get() {
+			b2FixtureDef* get() {
 				return set();
 			}
 

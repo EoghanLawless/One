@@ -25,5 +25,5 @@ void main() {
 		textureColour = fs_in.colour * texture(textures[textureIndex], fs_in.textureCoord);
 	}
 
-	colour = textureColour * intensity;
+	colour = vec4(1.8f, 1.8f, 1.8f, 1.0f) * textureColour * intensity;
 }
