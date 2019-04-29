@@ -16,8 +16,6 @@ private:
 
 	float _speed;
 
-	boolean _alive;
-
 public:
 	Enemy(float x, float y, pixel::graphics::Layer* layer, pixel::physics::World* world, Player* player) {
 		_layer = layer;
@@ -25,8 +23,6 @@ public:
 		_player = player;
 
 		_speed = 1.5f;
-
-		_alive = true;
 
 		_sprite = new pixel::graphics::DynamicSprite(x, y, 1.0f, 1.0f, 0xFF2244BB);
 		_sprite->body_definition.type = pixel::physics::DYNAMIC;
@@ -46,23 +42,18 @@ public:
 
 		_layer->add(_sprite);
 	}
-	~Enemy() {
-		_sprite->colour = 0x00FFFFFF;
-		_alive = false;
-	}
 
 	void update() {
-		if (_alive) {
-			pixel::maths::vec2f vector = getVector(_player->getPosition().x, _player->getPosition().y).normalise().mult(_speed);
+		pixel::maths::vec2f vector = getVector(_player->getPosition().x, _player->getPosition().y).normalise().mult(_speed);
 
-			_sprite->applyForce(vector);
-			_sprite->update();
-		}
+		_sprite->applyForce(vector);
+		_sprite->update();
 	}
 	void contact() {
-		//std::vector<Enemy*>::iterator iterator = _enemies->begin();
-		//_enemies->erase(iterator + findElement(*_enemies, this));
-		//_alive = false;
+		_sprite->colour = 0x77222222;
+	}
+	void reset() {
+		_sprite->colour = 0xFF2244BB;
 	}
 
 	void setSpeed(float speed) {

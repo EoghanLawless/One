@@ -19,33 +19,24 @@ class ContactListener : public b2ContactListener {
 		void* user_data_b = contact->GetFixtureB()->GetBody()->GetUserData();
 
 		if (user_data_a && user_data_b) {
-			if ((filter_a.categoryBits == PLAYER || filter_a.categoryBits == ENEMY) &&
-				(filter_b.categoryBits == PLAYER || filter_b.categoryBits == ENEMY)) {
 
-				//std::cout << "PLAYER DEAD" << std::endl;
+			if (filter_a.categoryBits == PLAYER && filter_b.categoryBits == ENEMY) {
+				static_cast<Player*>(user_data_a)->contact();
+			} else if (filter_a.categoryBits == ENEMY && filter_b.categoryBits == PLAYER) {
+				static_cast<Player*>(user_data_b)->contact();
 			}
 
 			if (filter_a.categoryBits == ENEMY && filter_b.categoryBits == PROJECTILE) {
-				killEnemy(*static_cast<Enemy*>(user_data_a));
-				static_cast<Projectile*>(user_data_b)->~Projectile();
-				std::cout << "PLAYER DEAD" << std::endl;
+				static_cast<Enemy*>(user_data_a)->contact();
 			} else if (filter_a.categoryBits == PROJECTILE && filter_b.categoryBits == ENEMY) {
-				static_cast<Projectile*>(user_data_a)->~Projectile();
-				killEnemy(*static_cast<Enemy*>(user_data_b));
-				std::cout << "PLAYER DEAD" << std::endl;
+				static_cast<Enemy*>(user_data_b)->contact();
 			}
 
 
-			//if (filter_a.categoryBits == PROJECTILE || filter_b.categoryBits == PROJECTILE)
-			//	std::cout << "PROJECTILE DEAD" << std::endl;
+			if (filter_a.categoryBits == PROJECTILE)
+				static_cast<Projectile*>(user_data_a)->contact();
+			if (filter_b.categoryBits == PROJECTILE)
+				static_cast<Projectile*>(user_data_b)->contact();
 		}
-
-		//if(user_data_a)
-		//	if (filter_a.categoryBits == PROJECTILE)
-		//		std::cout << "A: PROJECTILE" << std::endl;
-
-		//if(user_data_b)
-		//	if (filter_b.categoryBits == PROJECTILE)
-		//		std::cout << "B: PROJECTILE" << std::endl;
 	}
 };

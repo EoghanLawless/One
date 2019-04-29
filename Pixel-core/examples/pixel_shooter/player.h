@@ -2,6 +2,8 @@
 
 #include "pixel.h"
 
+#include "projectile.h"
+
 class Player {
 private:
 	pixel::graphics::Window* _window;
@@ -9,7 +11,7 @@ private:
 	pixel::physics::World* _world;
 
 	pixel::graphics::DynamicSprite* _sprite;
-	std::vector<pixel::graphics::DynamicSprite*> _projectiles;
+	std::vector<Projectile*> _projectiles;
 
 	pixel::maths::vec2f _position;
 	float _speed;
@@ -20,6 +22,7 @@ public:
 	void update();
 	void shoot(unsigned int);
 	void contact();
+	void reset();
 
 	void setSpeed(float speed);
 	pixel::maths::vec2f getPosition() const;

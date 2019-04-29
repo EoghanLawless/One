@@ -123,10 +123,13 @@ public:
 	}
 
 	void tick() override {
-		EnemyManager::enemies.push_back(new Enemy(-15.0f, 7.0f, dynamic_layer, world, player));
-		EnemyManager::enemies.push_back(new Enemy(14.0f, 7.0f, dynamic_layer, world, player));
-		EnemyManager::enemies.push_back(new Enemy(14.0f, -8.0f, dynamic_layer, world, player));
-		EnemyManager::enemies.push_back(new Enemy(-15.0f, -8.0f, dynamic_layer, world, player));
+		static int count = 0;
+		if (count++ < 3) {
+			EnemyManager::enemies.push_back(new Enemy(-15.0f, 7.0f, dynamic_layer, world, player));
+			EnemyManager::enemies.push_back(new Enemy(14.0f, 7.0f, dynamic_layer, world, player));
+			EnemyManager::enemies.push_back(new Enemy(14.0f, -8.0f, dynamic_layer, world, player));
+			EnemyManager::enemies.push_back(new Enemy(-15.0f, -8.0f, dynamic_layer, world, player));
+		}
 
 		fps->text = std::to_string(getFrames()) + " fps";
 		std::cout << getUpdates() << " ups, " << getFrames() << " fps, " << (background_layer->count() + dynamic_layer->count() + hud_layer->count()) << " sprites" << std::endl;
@@ -135,44 +138,14 @@ public:
 	void update() override {
 		window->getMousePos(mouse_x, mouse_y);
 		projectPixelCoords(mouse_x, mouse_y, pixel_w, pixel_h, width, height);
+		
 
-		//if (window->mousePressed(GLFW_MOUSE_BUTTON_1)) {
-		//	DynamicSprite* s = new DynamicSprite(mouse_x - 0.125f, mouse_y - 0.125f, 0.25f, 0.25f, 0xFF88FFFF);
-		//	s->body_definition.type = DYNAMIC;
-		//	s->body_definition.linearDamping = 0.3f;
-		//	s->body_definition.gravityScale = 0.3f;
-		//	s->createBody(*world);
+		if (window->keyTyped(GLFW_KEY_SPACE)) {
+			player->reset();
 
-		//	b2CircleShape circle;
-		//	circle.m_radius = 0.125f;
-		//	s->fixture_definition.shape = &circle;
-		//	s->fixture_definition.density = 0.7f;
-		//	s->fixture_definition.friction = 0.0f;
-		//	s->fixture_definition.restitution = 0.5f;
-		//	s->createFixture(&s->fixture_definition);
-		//	background_layer->add(s);
-		//	dynamic_sprites.push_back(s);
-		//}
-
-		//if (window->keyTyped(GLFW_KEY_I)) {
-		//	DynamicSprite* s = new DynamicSprite(player->position.x + 0.65f, player->position.y + 1.8f, 0.5f, 0.5f, projectile);
-		//	s->body_definition.type = DYNAMIC;
-		//	s->body_definition.linearVelocity = vec2f(0.0f, 30.0f);
-		//	s->body_definition.linearDamping = 0.3f;
-		//	s->body_definition.gravityScale = 0.7f;
-		//	s->createBody(*world);
-
-		//	b2CircleShape circle;
-		//	circle.m_radius = 0.25f;
-		//	s->fixture_definition.shape = &circle;
-		//	s->fixture_definition.density = 1.0f;
-		//	s->fixture_definition.friction = 0.1f;
-		//	s->fixture_definition.restitution = 0.2f;
-		//	s->createFixture(&s->fixture_definition);
-		//	background_layer->add(s);
-		//	dynamic_sprites.push_back(s);
-		//}
-
+			for (Enemy* enemy : EnemyManager::enemies)
+				enemy->reset();
+		}
 
 		world->step(TICK_INTERVAL / 10.0f, 16, 12);
 

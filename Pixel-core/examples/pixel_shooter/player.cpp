@@ -1,7 +1,6 @@
 #include "player.h"
 
 #include "filter.h"
-#include "projectile.h"
 
 Player::Player(float x, float y, pixel::graphics::Window* window, pixel::graphics::Layer* layer, pixel::physics::World* world) {
 	_window = window;
@@ -29,7 +28,7 @@ void Player::update() {
 
 	_sprite->update();
 
-	for (pixel::graphics::DynamicSprite* projectile : _projectiles) {
+	for (Projectile* projectile : _projectiles) {
 		projectile->update();
 	}
 }
@@ -48,14 +47,20 @@ void Player::shoot(unsigned int fire_rate) {
 			Projectile* projectile = new Projectile(pixel::maths::vec2f(0.5f + _sprite->position.x + vector.x, 0.5f + _sprite->position.y + vector.y), vector, _world);
 
 			_layer->add(projectile->getSprite());
-			_projectiles.push_back(projectile->getSprite());
+			_projectiles.push_back(projectile);
 
 			updates = 0;
 		} else updates++;
 	}
 }
 void Player::contact() {
-	std::cout << "PLAYER" << std::endl;
+	_sprite->colour = 0xBB0000FF;
+}
+void Player::reset() {
+	_sprite->colour = 0xFFAA8822;
+
+	for (Projectile* projectile : _projectiles)
+		projectile->reset();
 }
 
 void Player::setSpeed(float speed) {
